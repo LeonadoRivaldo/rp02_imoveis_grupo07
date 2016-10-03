@@ -11,10 +11,10 @@ import java.util.UUID;
  *
  * @author junio
  */
-public class Imovel {
+
     
     
-    abstract class Imoveis implements Serializable {
+    public abstract class Imovel implements Serializable {
         protected String codigo;
         protected String logradouro;
         protected int numero;
@@ -24,7 +24,7 @@ public class Imovel {
         protected double areaTotal;
         protected double valor;
 
-        public Imoveis(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
             this.codigo = UUID.randomUUID().toString();
             this.logradouro = logradouro;
             this.numero = numero;
@@ -105,4 +105,4 @@ public class Imovel {
 
     
     
-}
+

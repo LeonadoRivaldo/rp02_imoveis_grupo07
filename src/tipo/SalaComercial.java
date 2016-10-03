@@ -21,14 +21,11 @@ public class SalaComercial extends Imovel{
     private int nroSala;
     private double valorCondominio;
 
-    public SalaComercial(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor,int nroBanheiros, String nomeEdificio, int andar, int nroSala, double valorCondominio) {
-        super();
-        this.nroBanheiros = nroBanheiros;
-        this.nomeEdificio = nomeEdificio;
-        this.andar = andar;
-        this.nroSala = nroSala;
-        this.valorCondominio = valorCondominio;
+    public SalaComercial(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
     }
+
+    
 
     public int getNroBanheiros() {
         return nroBanheiros;
