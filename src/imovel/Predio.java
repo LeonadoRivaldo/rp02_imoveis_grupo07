@@ -5,7 +5,7 @@
  */
 package imovel;
 
-import imovel.Imovel;
+
 
 /**
  *
@@ -16,12 +16,16 @@ public class Predio extends Imovel{
     protected int andar;    
     protected double valorCondominio;    
 
-    public Predio(String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public Predio(String nomeEdificio, int andar, double valorCondominio, 
+            int codigo, String logradouro, int numero, String bairro, 
+            String cidade, String descricao, double areaTotal, double valor) {
+        super(codigo, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.nomeEdificio = nomeEdificio;
         this.andar = andar;
         this.valorCondominio = valorCondominio;
     }
+
+    
 
     /**
      * @return the nomeEdificio

@@ -15,7 +15,8 @@ import java.util.UUID;
     
     
     public abstract class Imovel {
-        protected String codigo;
+        protected static int codigoClasse = 0001;
+        protected int codigoObj;
         protected String logradouro;
         protected int numero;
         protected String bairro;
@@ -24,8 +25,9 @@ import java.util.UUID;
         protected double areaTotal;
         protected double valor;
 
-        public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-            this.codigo = UUID.randomUUID().toString();
+        public Imovel(int codigo,String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+            codigoObj = codigo;
+            getCodigoClasse();
             this.logradouro = logradouro;
             this.numero = numero;
             this.bairro = bairro;
@@ -39,8 +41,11 @@ import java.util.UUID;
             return valor;
         }
 
-        public String getCodigo() {
-            return codigo;
+        public static int getCodigoClasse() {
+            return codigoClasse++;
+        }
+        public int getCodigoObj() {
+            return codigoObj;
         }
 
         public void setValor(double valor) {
@@ -97,7 +102,7 @@ import java.util.UUID;
 
         @Override
         public String toString() {
-            return "Imoveis{" + "codigo=" + codigo + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", descricao=" + descricao + ", areaTotal=" + areaTotal + ", valor=" + valor + '}';
+            return "Imoveis{" + "codigo=" + codigoObj + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", descricao=" + descricao + ", areaTotal=" + areaTotal + ", valor=" + valor + '}';
         }
         
     }

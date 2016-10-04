@@ -8,7 +8,7 @@ package cruds;
 import imovel.Imovel;
 import java.util.ArrayList;
 import java.util.List;
-import persistenciaDados.ObjectCrud;
+
 
 /**
  *

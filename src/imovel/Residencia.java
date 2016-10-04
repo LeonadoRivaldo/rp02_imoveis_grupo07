@@ -5,7 +5,7 @@
  */
 package imovel;
 
-import imovel.Imovel;
+
 
 /**
  *
@@ -16,9 +16,14 @@ public class Residencia extends Imovel{
     private int nroQuartos;
     private float areaConstruida;
 
-    public Residencia(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public Residencia(int anoConstrucao, int nroQuartos, float areaConstruida, int codigo, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(codigo, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.anoConstrucao = anoConstrucao;
+        this.nroQuartos = nroQuartos;
+        this.areaConstruida = areaConstruida;
     }
+
+    
 
     /**
      * @return the anoConstrucao
