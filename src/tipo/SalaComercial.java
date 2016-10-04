@@ -4,69 +4,48 @@
  * and open the template in the editor.
  */
 package tipo;
-
-import imovel.Imovel;
-
-
-
-
 /**
  *
  * @author Junior
  */
-public class SalaComercial extends Imovel{
-    private int nroBanheiros;
-    private String nomeEdificio;
-    private int andar;
-    private int nroSala;
-    private double valorCondominio;
+public class SalaComercial extends Predio{
+    protected int nroBanheiros;
+    protected int nroSala;
 
-    public SalaComercial(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public SalaComercial(int nroBanheiros, int nroSala, String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.nroBanheiros = nroBanheiros;
+        this.nroSala = nroSala;
     }
 
-    
-
+    /**
+     * @return the nroBanheiros
+     */
     public int getNroBanheiros() {
         return nroBanheiros;
     }
 
+    /**
+     * @param nroBanheiros the nroBanheiros to set
+     */
     public void setNroBanheiros(int nroBanheiros) {
         this.nroBanheiros = nroBanheiros;
     }
 
-    public String getNomeEdificio() {
-        return nomeEdificio;
-    }
-
-    public void setNomeEdificio(String nomeEdificio) {
-        this.nomeEdificio = nomeEdificio;
-    }
-
-    public int getAndar() {
-        return andar;
-    }
-
-    public void setAndar(int andar) {
-        this.andar = andar;
-    }
-
+    /**
+     * @return the nroSala
+     */
     public int getNroSala() {
         return nroSala;
     }
 
+    /**
+     * @param nroSala the nroSala to set
+     */
     public void setNroSala(int nroSala) {
         this.nroSala = nroSala;
     }
+    
 
-    public double getValorCondominio() {
-        return valorCondominio;
-    }
-
-    public void setValorCondominio(double valorCondominio) {
-        this.valorCondominio = valorCondominio;
-    }
-    
-    
-    
+   
 }

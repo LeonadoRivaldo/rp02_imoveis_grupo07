@@ -5,7 +5,7 @@
  */
 package imovel;
 
-import java.io.Serializable;
+
 import java.util.UUID;
 /**
  *
@@ -14,7 +14,7 @@ import java.util.UUID;
 
     
     
-    public abstract class Imovel implements Serializable {
+    public abstract class Imovel {
         protected String codigo;
         protected String logradouro;
         protected int numero;
