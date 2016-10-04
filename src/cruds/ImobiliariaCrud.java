@@ -37,7 +37,6 @@ public class ImobiliariaCrud implements ListaImoveis{
     @Override
     public boolean incluir(Imovel imovel) {
         listaImoveis.add(imovel);
-        ObjectCrud.salvarObjeto(imovel, this.tipoImovel);
         return true;
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipo;
+package imovel;
 /**
  *
  * @author Junior
@@ -12,8 +12,11 @@ public class SalaComercial extends Predio{
     protected int nroBanheiros;
     protected int nroSala;
 
-    public SalaComercial(int nroBanheiros, int nroSala, String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public SalaComercial(int nroBanheiros, int nroSala, String nomeEdificio, 
+            int andar, double valorCondominio, String logradouro, int numero, 
+            String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, 
+                cidade, descricao, areaTotal, valor);
         this.nroBanheiros = nroBanheiros;
         this.nroSala = nroSala;
     }
