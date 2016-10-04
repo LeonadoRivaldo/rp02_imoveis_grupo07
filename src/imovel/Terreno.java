@@ -9,13 +9,13 @@ public class Terreno extends Imovel {
     public double dimensaoFrente;
     public double dimensaoLado;
 
-    public Terreno(double dimensaoFrente, double dimensaoLado, int codigo, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(codigo, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public Terreno(double dimensaoFrente, double dimensaoLado, String logradouro,
+            int numero, String bairro, String cidade, String descricao, 
+            double areaTotal, double valor) {
+        super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.dimensaoFrente = dimensaoFrente;
         this.dimensaoLado = dimensaoLado;
     }
-
-   
  
  
 

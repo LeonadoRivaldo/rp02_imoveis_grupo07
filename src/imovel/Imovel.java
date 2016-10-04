@@ -6,7 +6,6 @@
 package imovel;
 
 
-import java.util.UUID;
 /**
  *
  * @author junio
@@ -25,9 +24,9 @@ import java.util.UUID;
         protected double areaTotal;
         protected double valor;
 
-        public Imovel(int codigo,String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-            codigoObj = codigo;
-            getCodigoClasse();
+        public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+            codigoObj = codigoClasse;
+            codigoClasse++;
             this.logradouro = logradouro;
             this.numero = numero;
             this.bairro = bairro;
@@ -41,9 +40,6 @@ import java.util.UUID;
             return valor;
         }
 
-        public static int getCodigoClasse() {
-            return codigoClasse++;
-        }
         public int getCodigoObj() {
             return codigoObj;
         }

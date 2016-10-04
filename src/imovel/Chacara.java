@@ -12,8 +12,8 @@ package imovel;
 public class Chacara extends Residencia{
     private double distanciaCidade;
 
-    public Chacara(double distanciaCidade, int anoConstrucao, int nroQuartos, float areaConstruida, int codigo, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(anoConstrucao, nroQuartos, areaConstruida, codigo, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public Chacara(double distanciaCidade, int anoConstrucao, int nroQuartos, float areaConstruida, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.distanciaCidade = distanciaCidade;
     }
 
