@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cruds;
+package Imoveis;
 
-import imovel.Imovel;
+import Imoveis.Imovel;
 import java.util.List;
 
 /**

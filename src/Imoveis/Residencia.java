@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package imovel;
+package Imoveis;
 
 
 
@@ -11,7 +11,7 @@ package imovel;
  *
  * @author Juliana Mareco
  */
-public class Residencia extends Imovel{
+public abstract class Residencia extends Imovel{
     private int anoConstrucao;
     private int nroQuartos;
     private float areaConstruida;

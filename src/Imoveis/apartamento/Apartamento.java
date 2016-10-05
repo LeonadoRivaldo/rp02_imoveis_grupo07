@@ -3,15 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package imovel;
+package Imoveis.apartamento;
 
+import Imoveis.Predio;
+import Imoveis.Predio.*;
 /**
  *
  * @author leona_000
  */
 public class Apartamento extends Predio {
     protected int numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
-
+    
+    public Apartamento(){
+        super();
+    }
+    
     public Apartamento(int numeroDeQuartos, int anoDeConstrucao, int numeroDeVagasNaGaragem, int numeroDoApartamento, String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
         super(nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.numeroDeQuartos = numeroDeQuartos;

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package Imoveis.apartamento;
 
-
-import imovel.Apartamento;
-import static main.EntradasTeclado.*;
+import static Imoveis.EntradasTeclado.*;
+import Imoveis.InterfaceSistema;
+import Imoveis.ImobiliariaCrud;
 
 /**
  *
@@ -16,7 +16,7 @@ import static main.EntradasTeclado.*;
 public class InterfaceApartamento extends InterfaceSistema {
     
     private ImobiliariaCrud listaApartamentos = new ImobiliariaCrud();
-    private Apartamento ap;
+    private Apartamento ap = null;
     
     @Override
     public void principal(){
@@ -35,10 +35,8 @@ public class InterfaceApartamento extends InterfaceSistema {
     }
 
     @Override
-    protected Imovel criarImovel() {
-        
-        ap = new Apartamento(null, andar, valorCondominio, null, numero, null, null, null, areaTotal, valor);
-        return ap;
+    protected void criarImovel() {
+        listaApartamentos.incluir(ap);
     }
     
     

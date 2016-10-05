@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package Imoveis;
 
 /**
  *
@@ -11,7 +11,7 @@ package main;
  */
 public abstract class InterfaceSistema {
     
-     protected abstract Imovel criarImovel();
+     protected abstract void criarImovel();
      public abstract void principal();
       
     

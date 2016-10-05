@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package imovel;
+package Imoveis;
 
 
 
@@ -11,11 +11,15 @@ package imovel;
  *
  * @author junio
  */
-public class Predio extends Imovel{
+public abstract class Predio extends Imovel{
     protected String nomeEdificio;
     protected int andar;    
     protected double valorCondominio;    
-
+    
+    public Predio(){
+        super();
+    }
+    
     public Predio(String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
         super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.nomeEdificio = nomeEdificio;

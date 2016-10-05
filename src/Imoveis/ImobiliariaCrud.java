@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cruds;
+package Imoveis;
 
-import imovel.Imovel;
+import Imoveis.Imovel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     private String tipoImovel;
 
     public ImobiliariaCrud() {
-        listaImoveis = new ArrayList();
+        listaImoveis = new ArrayList<>();
     }
 
     public List<Imovel> getListaImoveis() {
