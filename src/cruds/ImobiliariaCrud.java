@@ -9,14 +9,18 @@ import imovel.Imovel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author junio
  */
-public class ImobiliariaCrud implements ListaImoveis{
-    private List<Imovel> listaImoveis = new ArrayList();
+public class ImobiliariaCrud implements ListaImoveis {
+
+    private List<Imovel> listaImoveis;
     private String tipoImovel;
+
+    public ImobiliariaCrud() {
+        listaImoveis = new ArrayList();
+    }
 
     public List<Imovel> getListaImoveis() {
         return listaImoveis;
@@ -29,13 +33,20 @@ public class ImobiliariaCrud implements ListaImoveis{
     public void setTipoImovel(String tipoImovel) {
         this.tipoImovel = tipoImovel;
     }
+
     /**
      * metodo que inclui um objeto na lista geral de imoveis
+     *
      * @param imovel que foi criado na interface
      * @return True caso inclua com sucesso, falso caso contrário
      */
     @Override
     public boolean incluir(Imovel imovel) {
+        for (Imovel i : listaImoveis) {
+            if (imovel.getCodigoObj() == i.getCodigoObj()) {
+                return false;
+            }
+        }
         listaImoveis.add(imovel);
         return true;
     }
