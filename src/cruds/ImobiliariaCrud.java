@@ -53,14 +53,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public Imovel consultar(int codigo) {
-        
-            for (Imovel imovel : listaImoveis) {
-            if (imovel.getCodigoObj()== codigo) {
+        for (Imovel imovel : listaImoveis) {
+            if (imovel.getCodigoObj() == codigo) {
                 return imovel;
             }
         }
-
-       return null;
+        return null;
     }
 
     @Override

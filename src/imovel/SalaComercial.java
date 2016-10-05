@@ -48,7 +48,4 @@ public class SalaComercial extends Predio{
     public void setNroSala(int nroSala) {
         this.nroSala = nroSala;
     }
-    
-
-   
 }
