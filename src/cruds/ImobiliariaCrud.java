@@ -53,7 +53,14 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public Imovel consultar(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+            for (Imovel imovel : listaImoveis) {
+            if (imovel.getCodigoObj()== codigo) {
+                return imovel;
+            }
+        }
+
+       return null;
     }
 
     @Override
