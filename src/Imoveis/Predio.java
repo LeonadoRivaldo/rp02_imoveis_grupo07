@@ -5,21 +5,20 @@
  */
 package Imoveis;
 
-
-
 /**
  *
  * @author junio
  */
-public abstract class Predio extends Imovel{
+public abstract class Predio extends Imovel {
+
     protected String nomeEdificio;
-    protected int andar;    
-    protected double valorCondominio;    
-    
-    public Predio(){
+    protected int andar;
+    protected double valorCondominio;
+
+    public Predio() {
         super();
     }
-    
+
     public Predio(String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
         super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.nomeEdificio = nomeEdificio;
@@ -68,6 +67,15 @@ public abstract class Predio extends Imovel{
     public void setValorCondominio(double valorCondominio) {
         this.valorCondominio = valorCondominio;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += super.toString();
+        str += "\nNome Edificio: " + nomeEdificio;
+        str += "\nAndar: " + andar;
+        str += "\nValor Condominio: R$" + valorCondominio;
+        return str;
+    }
+
 }
