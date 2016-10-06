@@ -14,9 +14,9 @@ package Imoveis;
 public abstract class Residencia extends Imovel{
     private int anoConstrucao;
     private int nroQuartos;
-    private float areaConstruida;
+    private double areaConstruida;
 
-    public Residencia(int anoConstrucao, int nroQuartos, float areaConstruida, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+    public Residencia(int anoConstrucao, int nroQuartos, double areaConstruida, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
         super(logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.anoConstrucao = anoConstrucao;
         this.nroQuartos = nroQuartos;
@@ -56,7 +56,7 @@ public abstract class Residencia extends Imovel{
     /**
      * @return the areaConstruida
      */
-    public float getAreaConstruida() {
+    public double getAreaConstruida() {
         return areaConstruida;
     }
 
