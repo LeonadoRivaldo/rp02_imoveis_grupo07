@@ -32,6 +32,28 @@ public abstract class EntradasTeclado {
         }
         return in;
     }
+    
+        /**
+     * Metodo que exibie uma mensagem recebida por parâmetro para o usuario e
+     * captura o proximo double que será digitado
+     *
+     * @param mensagem Recebe a mensagem que será exibida ao usuário
+     * @return Retorna o double inserido pelo usuário
+     */
+    public static double inDouble(String mensagem) {
+        System.out.println(mensagem);
+        double in;
+        try {
+            in = input.nextDouble();
+            input.nextLine();
+        } catch (Exception e) {
+            System.out.println("Ocorreu algum erro, tente novamente");
+            System.out.println("");
+            input.nextLine();
+            return inDouble(mensagem);
+        }
+        return in;
+    }
 
     /**
      * Metodo que exibie uma mensagem recebida por parâmetro para o usuario e
