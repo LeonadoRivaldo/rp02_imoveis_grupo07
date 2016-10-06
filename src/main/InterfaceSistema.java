@@ -5,6 +5,8 @@
  */
 package main;
 
+import imovel.Imovel;
+
 /**
  *
  * @author leona_000

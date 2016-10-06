@@ -6,6 +6,7 @@
 package main;
 
 
+import cruds.ImobiliariaCrud;
 import imovel.Apartamento;
 import static main.EntradasTeclado.*;
 
