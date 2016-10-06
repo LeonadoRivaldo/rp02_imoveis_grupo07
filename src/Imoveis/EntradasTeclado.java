@@ -1,4 +1,4 @@
-package main;
+package Imoveis;
 
 import java.util.Scanner;
 

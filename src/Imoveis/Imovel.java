@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package imovel;
+package Imoveis;
 
 
 /**
@@ -23,6 +23,9 @@ package imovel;
         protected String descricao;
         protected double areaTotal;
         protected double valor;
+        
+        public Imovel(){
+        }
 
         public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
             codigoObj = codigoClasse;
@@ -98,7 +101,7 @@ package imovel;
 
         @Override
         public String toString() {
-            return "Imoveis{" + "codigo=" + codigoObj + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", descricao=" + descricao + ", areaTotal=" + areaTotal + ", valor=" + valor + '}';
+            return "Imoveis{" + "codigo=" + codigoObj + ", logradouro=" + logradouro + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", descricao=" + descricao + ", areaTotal=" + areaTotal + ", valor=" + valor + "}";
         }
         
     }

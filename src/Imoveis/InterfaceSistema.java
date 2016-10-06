@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
-
-import imovel.Imovel;
+package Imoveis;
 
 /**
  *
@@ -13,7 +11,7 @@ import imovel.Imovel;
  */
 public abstract class InterfaceSistema {
     
-     protected abstract Imovel criarImovel();
+     protected abstract void criarImovel();
      public abstract void principal();
       
     

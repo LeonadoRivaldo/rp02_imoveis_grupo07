@@ -1,5 +1,7 @@
 
-package imovel;
+package Imoveis.terreno;
+
+import Imoveis.Imovel;
 
 
 
