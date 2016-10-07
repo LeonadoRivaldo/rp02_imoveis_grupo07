@@ -40,7 +40,7 @@ public void setDimensaoLado(double dimensaoLado){
 
 public String toString(){
     //colocar ' super.toString() + ' depois do return
-    return "Dimensão da Frente: " + getDimensaoFrente() + "\n Dimensão do Lado: " + getDimensaoLado();
+    return super.toString()+"\nDimensão da Frente: " + getDimensaoFrente() + "\nDimensão do Lado: " + getDimensaoLado();
 }
 
  }
