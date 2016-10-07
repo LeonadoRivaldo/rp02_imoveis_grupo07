@@ -29,6 +29,8 @@ public class InterfaceApartamento extends InterfaceSistema {
             opcao = inInt("Opcao: ");
             
             switch (opcao) {
+                case 0:
+                    break;
                 case 1:
                     criarImovel();
                     break;
