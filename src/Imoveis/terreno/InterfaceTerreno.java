@@ -49,20 +49,16 @@ public class InterfaceTerreno extends InterfaceSistema {
 
     @Override
     protected void criarImovel() {
-        String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
+        String logradouro = inString("----------------------------------------\nDigite o endereço do terreno:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
-        String bairro = inString("----------------------------------------\nDigite o bairro de localizacao do imovel:");
-        String cidade = inString("----------------------------------------\nDigite a cidade de localizacao do imovel:");
-        String descricao = inString("----------------------------------------\nEscreva uma discrição para o imovel:");
-        double areaTotal = inDouble("----------------------------------------\nDigite o tamanho do imovel:");
-        double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
-        String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
-        int andar = inInt("----------------------------------------\nAndar do apartamento:");
-        double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
-        int numeroDeQuartos = inInt("----------------------------------------\nQuantidade de quartos do imovel:");
-        int anoDeConstrucao = inInt("----------------------------------------\nAno de construcao:");
-        int numeroDeVagasNaGaragem = inInt("----------------------------------------\nNumero de vagas de garagem:");
-        int numeroDoApartamento = inInt("----------------------------------------\nNumero do apartamento:");
+        String bairro = inString("----------------------------------------\nDigite o bairro de localizacao do terreno:");
+        String cidade = inString("----------------------------------------\nDigite a cidade de localizacao do terreno:");
+        String descricao = inString("----------------------------------------\nEscreva uma discrição para o terreno:");
+        double areaTotal = inDouble("----------------------------------------\nDigite o tamanho do terreno:");
+        double valor = inDouble("----------------------------------------\nDigite o valor do terreno:");
+        double dimensaoFrente = inDouble("----------------------------------------\nDigite a dimensão da frente:");
+        double dimensaoLado = inDouble("----------------------------------------\nDigite a dimensão do lado:");
+       
         tr = new Terreno(dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaTerrenos.incluir(tr)) {
             this.exibeMensagem("Terreno incluido com sucesso!");
