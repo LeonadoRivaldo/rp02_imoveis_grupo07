@@ -26,7 +26,7 @@ public class InterfaceChacara extends InterfaceSistema {
 
     @Override
     protected void criarImovel() {
-        logradouro = inString("\nDigite o endereço do imovel:");
+        logradouro = inString("\nDigite o endereço do imovel: ");
         numero = inInt("\nInforme o Número do Imovel: ");
         bairro = inString("\nInforme o Bairro: ");
         cidade = inString("\nInforme a Cidade: ");
@@ -39,17 +39,18 @@ public class InterfaceChacara extends InterfaceSistema {
         distanciaCidade = inDouble("\nInforme a Distancia da Cidade: ");
         chac = new Chacara(distanciaCidade, anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaChacaras.incluir(chac)) {
-            this.exibeMensagem("Chacara Incluida com Sucesso!");
+            this.exibeMensagem("\nChacara Incluida com Sucesso!");
         } else {
-            this.exibeMensagem("Ocorreu Algum Erro");
+            this.exibeMensagem("\nOcorreu Algum Erro");
         }
     }
 
     @Override
     public void principal() {
         int opcao;
+        boolean sair = false;
         do {
-            System.out.println("Chacara");
+            System.out.println("\nChacara");
             System.out.println("1. Incluir");
             System.out.println("2. Consultar");
             System.out.println("0. Sair");
@@ -64,11 +65,14 @@ public class InterfaceChacara extends InterfaceSistema {
                     if (chac != null) {
                         System.out.println(chac.toString());
                     } else {
-                        this.exibeMensagem("Chacara Não Encontrada! ");
+                        this.exibeMensagem("\nChacara Não Encontrada! ");
                     }
                     break;
+                    
+                case 0:
+                    break;
                 default:
-                    this.exibeMensagem("Opção invalida!");
+                    this.exibeMensagem("\nOpção invalida!");
             }
 
         } while (opcao != 0);
