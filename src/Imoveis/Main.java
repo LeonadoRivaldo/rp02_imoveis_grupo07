@@ -5,12 +5,13 @@
  */
 package Imoveis;
 
+import Imoveis.apartamento.InterfaceApartamento;
+
 /**
  *
  * @author junio
  */
 public class Main {
     public static void main(String[] args) {
-        
     }
 }

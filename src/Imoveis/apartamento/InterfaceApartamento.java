@@ -8,7 +8,6 @@ package Imoveis.apartamento;
 import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
-import java.util.Scanner;
 
 /**
  *
@@ -23,7 +22,7 @@ public class InterfaceApartamento extends InterfaceSistema {
     public void principal() {
         int opcao = -1;
         do {
-            System.out.println("##########################");
+            System.out.println("#############################################");
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
             System.out.println("0 - sair");
@@ -36,13 +35,37 @@ public class InterfaceApartamento extends InterfaceSistema {
                     criarImovel();
                     break;
                 case 2:
-                    ap = (Apartamento) listaApartamentos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
-                    if (ap != null) {
-                        System.out.println("\n#############################################");
-                        System.out.println(ap.toString());
-                    } else {
-                        this.exibeMensagem("apartamento não encontrado");
+
+                    System.out.println("=======================================");
+                    System.out.println("1 - Pesquisar");
+                    System.out.println("2 - Listar todos");
+                    System.out.println("----------------------------------------");
+                    int o = inInt("Opção:");
+
+                    switch (o) {
+                        case 1:
+                            ap = (Apartamento) listaApartamentos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                            if (ap != null) {
+                                System.out.println("\n#############################################");
+                                System.out.println(ap.toString());
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
+                            break;
+                        case 2:
+                            int imovelCod = this.listaImoveis(listaApartamentos);
+                            ap = (Apartamento) listaApartamentos.consultar(imovelCod);
+                            if (ap != null) {
+                                System.out.println("\n#############################################");
+                                System.out.println(ap.toString());
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
+                            break;
+                        default:
+                            this.exibeMensagem("Opção invalida!");
                     }
+
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
