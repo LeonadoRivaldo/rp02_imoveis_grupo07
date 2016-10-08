@@ -68,7 +68,7 @@ public class InterfaceChacara extends InterfaceSistema {
                     }
                     break;
                 default:
-                    throw new AssertionError();
+                    this.exibeMensagem("Opção invalida!");
             }
 
         } while (opcao != 0);
