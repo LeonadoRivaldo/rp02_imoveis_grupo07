@@ -3,6 +3,7 @@ package Imoveis.terreno;
 import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
+import Imoveis.Imovel;
 import java.util.Scanner;
 
 /**
@@ -70,6 +71,11 @@ public class InterfaceTerreno extends InterfaceSistema {
     public static void main(String[] args) {
         InterfaceTerreno i = new InterfaceTerreno();
         i.principal();
+    }
+
+    @Override
+    protected void editarImovel(int atributo, Imovel imovel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

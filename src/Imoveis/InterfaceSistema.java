@@ -7,6 +7,7 @@ package Imoveis;
 
 import static Imoveis.EntradasTeclado.div;
 import static Imoveis.EntradasTeclado.inInt;
+import Imoveis.apartamento.Apartamento;
 import java.util.List;
 
 /**
@@ -14,6 +15,11 @@ import java.util.List;
  * @author leona_000
  */
 public abstract class InterfaceSistema {
+
+    /**
+     * metodo abstrato somente para definir um padrao nas interfaces.
+     */
+    protected abstract void editarImovel(int atributo, Imovel imovel);
 
     /**
      * metodo abstrato somente para definir um padrao nas interfaces.
@@ -68,7 +74,6 @@ public abstract class InterfaceSistema {
         }
         div();
         atributo = inInt("Escolha o atributo: ");
-        
+        this.editarImovel(atributo, imovel);
     }
-
 }

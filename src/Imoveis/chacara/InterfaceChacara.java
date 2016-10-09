@@ -9,6 +9,7 @@ import static Imoveis.EntradasTeclado.inDouble;
 import static Imoveis.EntradasTeclado.inInt;
 import static Imoveis.EntradasTeclado.inString;
 import Imoveis.ImobiliariaCrud;
+import Imoveis.Imovel;
 import Imoveis.InterfaceSistema;
 
 /**
@@ -68,7 +69,6 @@ public class InterfaceChacara extends InterfaceSistema {
                         this.exibeMensagem("\nChacara Não Encontrada! ");
                     }
                     break;
-
                 case 0:
                     break;
                 default:
@@ -82,6 +82,11 @@ public class InterfaceChacara extends InterfaceSistema {
     public static void main(String[] args) {
         InterfaceChacara i = new InterfaceChacara();
         i.principal();
+    }
+
+    @Override
+    protected void editarImovel(int atributo, Imovel imovel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

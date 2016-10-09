@@ -8,6 +8,7 @@ package Imoveis.apartamento;
 import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
+import Imoveis.Imovel;
 
 /**
  *
@@ -112,6 +113,57 @@ public class InterfaceApartamento extends InterfaceSistema {
     public static void main(String[] args) {
         InterfaceApartamento i = new InterfaceApartamento();
         i.principal();
+    }
+
+    @Override
+    protected void editarImovel(int atributo, Imovel imovel) {
+        switch (atributo) {
+            case 1:
+                System.out.println("implementar");
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+        }
+        /*
+         String bairro = inString("----------------------------------------\nDigite o bairro de localizacao do imovel:");
+         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
+         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
+         String cidade = inString("----------------------------------------\nDigite a cidade de localizacao do imovel:");
+         String descricao = inString("----------------------------------------\nEscreva uma discrição para o imovel:");
+         double areaTotal = inDouble("----------------------------------------\nDigite o tamanho do imovel:");
+         double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
+         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
+         int andar = inInt("----------------------------------------\nAndar do apartamento:");
+         double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
+         int numeroDeQuartos = inInt("----------------------------------------\nQuantidade de quartos do imovel:");
+         int anoDeConstrucao = inInt("----------------------------------------\nAno de construcao:");
+         int numeroDeVagasNaGaragem = inInt("----------------------------------------\nNumero de vagas de garagem:");
+         int numeroDoApartamento = inInt("----------------------------------------\nNumero do apartamento:");
+         */
     }
 
 }
