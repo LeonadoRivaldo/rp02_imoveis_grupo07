@@ -15,8 +15,14 @@ import java.util.List;
  */
 public abstract class InterfaceSistema {
 
+    /**
+     * metodo abstrato somente para definir um padrao nas interfaces.
+     */
     protected abstract void criarImovel();
 
+    /**
+     * metodo abstrato somente para definir um padrao nas interfaces.
+     */
     public abstract void principal();
 
     /**
@@ -35,6 +41,9 @@ public abstract class InterfaceSistema {
      * deve ser passada pro parametro e retorna um inteiro com o codigo do
      * imovel
      *
+     * @param lista o objeto da lista de cada interface, para cada sessao do
+     * sistema
+     * @return retorno é o codigo do imovel para que o imovel seja exibido
      */
     public int listaImoveis(ImobiliariaCrud lista) {
         List<Imovel> list = lista.getListaImoveis();
