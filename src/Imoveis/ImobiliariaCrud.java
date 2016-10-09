@@ -63,26 +63,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public boolean editar(int codigo, Imovel im) {
-        for (Imovel imovel : this.listaImoveis) {
-            if (imovel.getCodigoObj() == codigo) {
-                int indice = this.listaImoveis.indexOf(imovel);
-                this.listaImoveis.set(indice, im);
-                return true;
-            }
-        }
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean excluir(int codigo) {
-        for (Imovel imovel : this.listaImoveis) {
-            if (imovel.getCodigoObj() == codigo) {
-                int indice = this.listaImoveis.indexOf(imovel);
-                this.listaImoveis.remove(indice);
-                return true;
-            }
-        }
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
