@@ -68,7 +68,7 @@ public class InterfaceChacara extends InterfaceSistema {
                         this.exibeMensagem("\nChacara Não Encontrada! ");
                     }
                     break;
-                    
+
                 case 0:
                     break;
                 default:

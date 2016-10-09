@@ -56,4 +56,19 @@ public abstract class InterfaceSistema {
         return inInt("Digite o codigo do imovel: ");
     }
 
+    public void editarImovel(Imovel imovel) {
+        String imovelStr = imovel.toString();
+        String[] vetor = imovelStr.split("\n");
+        int atributo;
+        div();
+        for (int x = 0; x < vetor.length; x++) {
+            if (x != 0) {
+                System.out.println(x + " - " + vetor[x]);
+            }
+        }
+        div();
+        atributo = inInt("Escolha o atributo: ");
+        
+    }
+
 }

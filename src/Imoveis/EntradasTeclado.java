@@ -32,8 +32,8 @@ public abstract class EntradasTeclado {
         }
         return in;
     }
-    
-        /**
+
+    /**
      * Metodo que exibe uma mensagem recebida por parâmetro para o usuario e
      * captura o proximo double que será digitado
      *

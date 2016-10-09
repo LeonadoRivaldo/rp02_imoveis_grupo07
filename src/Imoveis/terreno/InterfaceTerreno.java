@@ -58,7 +58,7 @@ public class InterfaceTerreno extends InterfaceSistema {
         double valor = inDouble("----------------------------------------\nDigite o valor do terreno:");
         double dimensaoFrente = inDouble("----------------------------------------\nDigite a dimensão da frente:");
         double dimensaoLado = inDouble("----------------------------------------\nDigite a dimensão do lado:");
-       
+
         tr = new Terreno(dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaTerrenos.incluir(tr)) {
             this.exibeMensagem("Terreno incluido com sucesso!");
