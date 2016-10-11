@@ -16,7 +16,7 @@ import java.util.List;
 public class ImobiliariaCrud implements ListaImoveis {
 
     private List<Imovel> listaImoveis;
-    private String tipoImovel;
+    //private String tipoImovel;
 
     public ImobiliariaCrud() {
         listaImoveis = new ArrayList<>();
@@ -26,13 +26,13 @@ public class ImobiliariaCrud implements ListaImoveis {
         return listaImoveis;
     }
 
-    public String getTipoImovel() {
+    /*public String getTipoImovel() {
         return tipoImovel;
     }
 
     public void setTipoImovel(String tipoImovel) {
         this.tipoImovel = tipoImovel;
-    }
+    }*/
 
     /**
      * metodo que inclui um objeto na lista geral de imoveis

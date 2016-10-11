@@ -6,6 +6,7 @@
 package Imoveis.salaComercial;
 
 import Imoveis.Predio;
+import Imoveis.Predio.*;
 
 /**
  *
@@ -51,4 +52,11 @@ public class SalaComercial extends Predio{
     public void setNroSala(int nroSala) {
         this.nroSala = nroSala;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nNumero de Banheiros: " + nroBanheiros + "\nNumero da Sala: " + nroSala;
+    }
+    
+    
 }
