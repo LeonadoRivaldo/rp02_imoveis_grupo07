@@ -7,6 +7,7 @@ package Imoveis;
 
 import static Imoveis.EntradasTeclado.div;
 import static Imoveis.EntradasTeclado.inInt;
+import static Imoveis.EntradasTeclado.inString;
 import Imoveis.apartamento.Apartamento;
 import java.util.List;
 
@@ -19,8 +20,7 @@ public abstract class InterfaceSistema {
     /**
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
-    protected abstract void editarImovel(int atributo, Imovel imovel);
-
+  //  protected abstract void editarImovel(String atributo, Imovel imovel);
     /**
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
@@ -65,15 +65,25 @@ public abstract class InterfaceSistema {
     public void editarImovel(Imovel imovel) {
         String imovelStr = imovel.toString();
         String[] vetor = imovelStr.split("\n");
-        int atributo;
+        String atributo;
         div();
         for (int x = 0; x < vetor.length; x++) {
             if (x != 0) {
-                System.out.println(x + " - " + vetor[x]);
+                System.out.println(vetor[x]);
             }
         }
         div();
-        atributo = inInt("Escolha o atributo: ");
-        this.editarImovel(atributo, imovel);
+        atributo = inString("Digite o atributo que voce quer editar: ");
+        
+        if (atributo.equalsIgnoreCase("logradouro")) {
+            System.out.println("Implementar");
+        } else {
+            this.exibeMensagem("Opção invalida");
+            this.editarImovel(imovel);
+        }
+        
+        
+        
+        
     }
 }

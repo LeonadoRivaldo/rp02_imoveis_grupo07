@@ -72,10 +72,4 @@ public class InterfaceTerreno extends InterfaceSistema {
         InterfaceTerreno i = new InterfaceTerreno();
         i.principal();
     }
-
-    @Override
-    protected void editarImovel(int atributo, Imovel imovel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

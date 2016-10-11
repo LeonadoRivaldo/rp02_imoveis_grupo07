@@ -84,9 +84,5 @@ public class InterfaceChacara extends InterfaceSistema {
         i.principal();
     }
 
-    @Override
-    protected void editarImovel(int atributo, Imovel imovel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
