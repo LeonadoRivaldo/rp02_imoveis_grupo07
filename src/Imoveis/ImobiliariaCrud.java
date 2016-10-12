@@ -6,6 +6,11 @@
 package Imoveis;
 
 import Imoveis.Imovel;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +38,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     public void setTipoImovel(String tipoImovel) {
         this.tipoImovel = tipoImovel;
     }*/
-
     /**
      * metodo que inclui um objeto na lista geral de imoveis
      *
@@ -98,7 +102,44 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public boolean escreverArquivo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        FileOutputStream outFile = null;
+        BufferedWriter buff = null;
+        //abre o arquivo para escrita
+        //A estrutura try-catch é usada pois o objeto BufferedWriter exige que as
+        //excessões sejam tratadas
+        try {
+
+            //Criação de um buffer para a escrita em uma stream
+            BufferedWriter StrW = new BufferedWriter(new FileWriter("C:\\ListaImoveis.csv"));
+            //escreve o número de contas na primeira linha do arquivo
+            buff.write(listaImoveis.size() + ",");
+            //escreve as informações de cada conta
+            for (Imovel listaImoveis : listaImoveis) {
+                //escreve o numero e saldo
+                buff.write(listaImoveis.getCodigoObj() + ",");
+                buff.write(listaImoveis.getValor() + ",");
+                buff.write(listaImoveis.getLogradouro() + ",");
+                buff.write(listaImoveis.getNumero() + ",");
+                buff.write(listaImoveis.getBairro() + ",");
+                buff.write(listaImoveis.getCidade() + ",");
+                buff.write(listaImoveis.getDescricao() + ",");
+                buff.write(listaImoveis.getAreaTotal() + ",");
+                //escreve uma linha em branco entre uma conta e a seguinte
+                buff.write("\n");
+            }
+            // fecha o arquivo
+            buff.close();
+            outFile.close();
+            return true;
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

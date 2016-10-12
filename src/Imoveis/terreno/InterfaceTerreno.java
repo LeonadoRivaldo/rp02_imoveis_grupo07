@@ -3,6 +3,7 @@ package Imoveis.terreno;
 import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
+import Imoveis.Imovel;
 import java.util.Scanner;
 
 /**
@@ -58,7 +59,7 @@ public class InterfaceTerreno extends InterfaceSistema {
         double valor = inDouble("----------------------------------------\nDigite o valor do terreno:");
         double dimensaoFrente = inDouble("----------------------------------------\nDigite a dimensão da frente:");
         double dimensaoLado = inDouble("----------------------------------------\nDigite a dimensão do lado:");
-       
+
         tr = new Terreno(dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaTerrenos.incluir(tr)) {
             this.exibeMensagem("Terreno incluido com sucesso!");
@@ -71,5 +72,4 @@ public class InterfaceTerreno extends InterfaceSistema {
         InterfaceTerreno i = new InterfaceTerreno();
         i.principal();
     }
-
 }

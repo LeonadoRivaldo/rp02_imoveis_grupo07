@@ -5,13 +5,12 @@
  */
 package Imoveis;
 
-
-
 /**
  *
  * @author Juliana Mareco
  */
-public abstract class Residencia extends Imovel{
+public abstract class Residencia extends Imovel {
+
     private int anoConstrucao;
     private int nroQuartos;
     private double areaConstruida;
@@ -22,8 +21,6 @@ public abstract class Residencia extends Imovel{
         this.nroQuartos = nroQuartos;
         this.areaConstruida = areaConstruida;
     }
-
-    
 
     /**
      * @return the anoConstrucao
@@ -66,10 +63,10 @@ public abstract class Residencia extends Imovel{
     public void setAreaConstruida(float areaConstruida) {
         this.areaConstruida = areaConstruida;
     }
-    
+
     @Override
     public String toString() {
         return super.toString() + "Area Construida " + this.areaConstruida + "\nNúmero de Quartos: " + this.nroQuartos + "\nAno de Construção: " + this.anoConstrucao;
     }
-    
+
 }
