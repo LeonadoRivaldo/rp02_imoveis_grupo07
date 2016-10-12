@@ -65,7 +65,7 @@ public abstract class InterfaceSistema {
         div();
         return inInt("Digite o codigo do imovel: ");
     }
-    
+
     public void editarImovel(Imovel imovel, ImobiliariaCrud lista) {
         Terreno t = null;
         Apartamento a = null;
@@ -73,7 +73,7 @@ public abstract class InterfaceSistema {
         Chacara ch = null;
         Residencia r = null;
         Predio p = null;
-        
+
         String atributo;
         div();
         System.out.println(imovel.toString());
@@ -191,13 +191,13 @@ public abstract class InterfaceSistema {
             this.exibeMensagem("Opção invalida");
             this.editarImovel(imovel, lista);
         }
-        
+
         div();
-        if (inString("----------------------/nDeseja editar outro atributo??").equalsIgnoreCase("sim")) {
+        if (inString("Deseja editar outro atributo??").equalsIgnoreCase("sim")) {
             this.editarImovel(imovel, lista);
         } else {
             lista.editar(imovel.getCodigoObj(), imovel);
         }
-        
+
     }
 }
