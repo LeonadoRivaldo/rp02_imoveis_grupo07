@@ -15,10 +15,10 @@ import Imoveis.Imovel;
  * @author leona_000
  */
 public class InterfaceApartamento extends InterfaceSistema {
-    
+
     private ImobiliariaCrud listaApartamentos = new ImobiliariaCrud();
     private Apartamento ap = null;
-    
+
     @Override
     public void principal() {
         int opcao = -1;
@@ -29,7 +29,7 @@ public class InterfaceApartamento extends InterfaceSistema {
             System.out.println("3 - editar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
-            
+
             switch (opcao) {
                 case 0:
                     break;
@@ -46,16 +46,16 @@ public class InterfaceApartamento extends InterfaceSistema {
                 case 3:
                     ap = consultar();
                     if (ap != null) {
-                        this.editarImovel(ap);
+                        this.editarImovel(ap, listaApartamentos);
                     }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
         } while (opcao != 0);
-        
+
     }
-    
+
     @Override
     protected void criarImovel() {
         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
@@ -79,7 +79,7 @@ public class InterfaceApartamento extends InterfaceSistema {
             this.exibeMensagem("Ocorreu algum erro");
         }
     }
-    
+
     public Apartamento consultar() {
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
@@ -109,9 +109,9 @@ public class InterfaceApartamento extends InterfaceSistema {
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         InterfaceApartamento i = new InterfaceApartamento();
         i.principal();
-    } 
+    }
 }
