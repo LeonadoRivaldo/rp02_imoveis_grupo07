@@ -198,6 +198,5 @@ public abstract class InterfaceSistema {
         } else {
             lista.editar(imovel.getCodigoObj(), imovel);
         }
-
     }
 }

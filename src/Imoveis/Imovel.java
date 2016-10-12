@@ -99,7 +99,7 @@ public abstract class Imovel {
     @Override
     public String toString() {
         String str = "";
-        str += "\nLogradouro: " + logradouro;
+        str += "Logradouro: " + logradouro;
         str += "\nNumero: " + numero;
         str += "\nBairro: " + bairro;
         str += "\nCidade: " + cidade;
