@@ -83,6 +83,8 @@ public abstract class InterfaceSistema {
          */
 
         //Acrescentar os que faltam
+        
+        //ATRIBUTOS DE IMOVEL
         if (atributo.equalsIgnoreCase("logradouro")) {
             String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
             imovel.setLogradouro(logradouro);
@@ -104,6 +106,7 @@ public abstract class InterfaceSistema {
         } else if (atributo.equalsIgnoreCase("valor")) {
             double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
             imovel.setValor(valor);
+        //ATRIBUTOS DE PREDIO
         } else if (atributo.equalsIgnoreCase("Nome Edificio")) {
             String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
             if (imovel instanceof Predio) {
@@ -122,6 +125,7 @@ public abstract class InterfaceSistema {
                 p = (Predio) imovel;
                 p.setValorCondominio(valorCondominio);
             }
+        //ATRIBUTO DE APARTAMENTO & RESIDENCIA
         } else if (atributo.equalsIgnoreCase("numero de quartos")) {
             int numeroDeQuartos = inInt("----------------------------------------\nQuantidade de quartos do imovel:");
             if (imovel instanceof Apartamento) {
@@ -147,13 +151,15 @@ public abstract class InterfaceSistema {
                 a.setNumeroDeVagasNaGaragem(numeroDeVagasNaGaragem);
             } else if (imovel instanceof Residencia) {
             }
-        } else if (atributo.equalsIgnoreCase("numero do apartamento")) {
+        }//ATRIBUTO DE APARTAMENTO 
+        else if (atributo.equalsIgnoreCase("numero do apartamento")) {
             int numeroDoApartamento = inInt("----------------------------------------\nNumero do apartamento:");
             if (imovel instanceof Apartamento) {
                 a = (Apartamento) imovel;
                 a.setNumeroDoApartamento(numeroDoApartamento);
             }
-        } else if (atributo.equalsIgnoreCase("dimensao frente")) {
+        }//ATRIBUTOS DE TERRENO
+        else if (atributo.equalsIgnoreCase("dimensao frente")) {
             if (imovel instanceof Terreno) {
                 t = (Terreno) imovel;
                 t.setDimensaoFrente(inDouble("----------------------------------------\nDigite a dimensão da frente:"));
@@ -163,19 +169,22 @@ public abstract class InterfaceSistema {
                 t = (Terreno) imovel;
                 t.setDimensaoLado(inDouble("----------------------------------------\nDigite a dimensão do lado:"));
             }
-        } else if (atributo.equalsIgnoreCase("area construida")) {
+        }//ATRIBUTO DE RESIDENCIA
+        else if (atributo.equalsIgnoreCase("area construida")) {
             double areaConstruida = inDouble("----------------------------------------\nInforme a Area Construida do Imovel:");
             if (imovel instanceof Residencia) {
                 r = (Residencia) imovel;
                 r.setAreaConstruida(areaConstruida);
             }
-        } else if (atributo.equalsIgnoreCase("Distancia da Cidade")) {
+        }//ATRIBUTO DE CHACARA
+        else if (atributo.equalsIgnoreCase("Distancia da Cidade")) {
             double distanciaCidade = inDouble("----------------------------------------\nInforme a Distancia da Cidade:");
             if (imovel instanceof Chacara) {
                 ch = (Chacara) imovel;
             }
             ch.setDistanciaCidade(distanciaCidade);
-        } else if (atributo.equalsIgnoreCase("numero banheiros")) {
+        }//ATRIBUTOS DE SALA COMERCIAL
+        else if (atributo.equalsIgnoreCase("numero banheiros")) {
             int nroBanheiros = inInt("----------------------------------------\nInforme o numero de banheiros:");
             if (imovel instanceof SalaComercial) {
                 sc = (SalaComercial) imovel;

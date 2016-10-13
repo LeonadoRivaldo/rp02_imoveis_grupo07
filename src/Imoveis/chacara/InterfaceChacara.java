@@ -11,6 +11,7 @@ import static Imoveis.EntradasTeclado.inString;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.InterfaceSistema;
+import Imoveis.Tipo;
 
 /**
  *
@@ -41,6 +42,9 @@ public class InterfaceChacara extends InterfaceSistema {
         chac = new Chacara(distanciaCidade, anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaChacaras.incluir(chac)) {
             this.exibeMensagem("\nChacara Incluida com Sucesso!");
+            if (!listaChacaras.escreverArquivo()) {
+                this.exibeMensagem("Erro ao escrever o arquivo");
+            }
         } else {
             this.exibeMensagem("\nOcorreu Algum Erro");
         }
@@ -48,6 +52,7 @@ public class InterfaceChacara extends InterfaceSistema {
 
     @Override
     public void principal() {
+        listaChacaras.setTipoImovel(Tipo.CHACARA);
         int opcao;
         boolean sair = false;
         do {
@@ -83,6 +88,5 @@ public class InterfaceChacara extends InterfaceSistema {
         InterfaceChacara i = new InterfaceChacara();
         i.principal();
     }
-
 
 }
