@@ -6,13 +6,16 @@
 package Imoveis;
 
 import Imoveis.Imovel;
+import Imoveis.apartamento.Apartamento;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -21,7 +24,7 @@ import java.util.List;
 public class ImobiliariaCrud implements ListaImoveis {
 
     private List<Imovel> listaImoveis;
-    //private String tipoImovel;
+    private Tipo tipoImovel;
 
     public ImobiliariaCrud() {
         listaImoveis = new ArrayList<>();
@@ -31,13 +34,14 @@ public class ImobiliariaCrud implements ListaImoveis {
         return listaImoveis;
     }
 
-    /*public String getTipoImovel() {
+    public Tipo getTipoImovel() {
         return tipoImovel;
     }
 
-    public void setTipoImovel(String tipoImovel) {
+    public void setTipoImovel(Tipo tipoImovel) {
         this.tipoImovel = tipoImovel;
-    }*/
+    }
+
     /**
      * metodo que inclui um objeto na lista geral de imoveis
      *
@@ -116,21 +120,41 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public boolean escreverArquivo() {
-
+        String dir = null;
+        String fileName = "\\listaImoveis.csv";
         FileOutputStream outFile = null;
         BufferedWriter buff = null;
+        String objProp = null;
+        Imovel im;
         //abre o arquivo para escrita
         //A estrutura try-catch é usada pois o objeto BufferedWriter exige que as
         //excessões sejam tratadas
         try {
 
+            if (tipoImovel.getTipo() == 1) {
+                dir = dirName("apartamento");
+                im = new Apartamento();
+                objProp = objProp(im);
+            }
+
+            File files = new File(dir);
+            if (!files.exists()) {
+                if (files.mkdirs()) {
+                    System.out.println("Multiple directories are created!");
+                } else {
+                    System.out.println("Failed to create multiple directories!");
+                }
+            }
+            outFile = new FileOutputStream(dir + fileName);
             //Criação de um buffer para a escrita em uma stream
-            BufferedWriter StrW = new BufferedWriter(new FileWriter("C:\\ListaImoveis.csv"));
+            buff = new BufferedWriter(new FileWriter(dir + fileName));
             //escreve o número de contas na primeira linha do arquivo
-            buff.write(listaImoveis.size() + ",");
+            //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
+            buff.write("codigo,"+objProp);
             for (Imovel listaImoveis : listaImoveis) {
                 //escreve o numero e saldo
+                buff.write("\n");
                 buff.write(listaImoveis.getCodigoObj() + ",");
                 buff.write(listaImoveis.getValor() + ",");
                 buff.write(listaImoveis.getLogradouro() + ",");
@@ -160,4 +184,26 @@ public class ImobiliariaCrud implements ListaImoveis {
     public boolean lerArquivo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private String dirName(String tipo) {
+        Properties p = System.getProperties();
+        return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
+    }
+
+    public String objProp(Imovel im) {
+        String prop = im.toString();
+        String[] props = prop.split("\n");
+        String propsaux = "";
+        for (int x = 0; x < props.length; x++) {
+            if (x != 0) {
+                propsaux += props[x].split(":")[0];
+            }
+            if (x != props.length - 1 && x != 0) {
+                propsaux += ",";
+            }
+
+        }
+        return propsaux;
+    }
+
 }

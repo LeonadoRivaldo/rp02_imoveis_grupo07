@@ -9,6 +9,7 @@ import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
+import Imoveis.Tipo;
 
 /**
  *
@@ -21,6 +22,8 @@ public class InterfaceApartamento extends InterfaceSistema {
 
     @Override
     public void principal() {
+        listaApartamentos.setTipoImovel(Tipo.APARTAMENTO);
+        System.out.println(listaApartamentos.objProp(new Apartamento()));
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -75,6 +78,7 @@ public class InterfaceApartamento extends InterfaceSistema {
         ap = new Apartamento(numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaApartamentos.incluir(ap)) {
             this.exibeMensagem("Apartamento incluido com sucesso!");
+            listaApartamentos.escreverArquivo();
         } else {
             this.exibeMensagem("Ocorreu algum erro");
         }
