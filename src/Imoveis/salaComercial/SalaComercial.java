@@ -19,6 +19,10 @@ public class SalaComercial extends Predio {
     protected int nroSala;
     protected int tipo;
 
+    public SalaComercial() {
+        super();
+    }
+
     public SalaComercial(int nroBanheiros, int nroSala, String nomeEdificio,
             int andar, double valorCondominio, String logradouro, int numero,
             String bairro, String cidade, String descricao, double areaTotal, double valor, int tipo) {
@@ -61,6 +65,5 @@ public class SalaComercial extends Predio {
     public String toString() {
         return super.toString() + "\nNumero de Banheiros: " + nroBanheiros + "\nNumero da Sala: " + nroSala;
     }
-    
-    
+
 }

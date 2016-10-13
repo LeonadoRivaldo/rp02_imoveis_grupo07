@@ -7,6 +7,9 @@ package Imoveis;
 
 import Imoveis.Imovel;
 import Imoveis.apartamento.Apartamento;
+import Imoveis.chacara.Chacara;
+import Imoveis.salaComercial.SalaComercial;
+import Imoveis.terreno.Terreno;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -135,14 +138,25 @@ public class ImobiliariaCrud implements ListaImoveis {
                 dir = dirName("apartamento");
                 im = new Apartamento();
                 objProp = objProp(im);
+            } else if (tipoImovel.getTipo() == 2) {
+                dir = dirName("chacara");
+                im = new Chacara();
+                objProp = objProp(im);
+            } else if (tipoImovel.getTipo() == 3) {
+                dir = dirName("sala_comercial");
+                im = new SalaComercial();
+                objProp = objProp(im);
+            } else if (tipoImovel.getTipo() == 4) {
+                dir = dirName("terreno");
+                im = new Terreno();
+                objProp = objProp(im);
             }
 
             File files = new File(dir);
             if (!files.exists()) {
                 if (files.mkdirs()) {
-                    System.out.println("Multiple directories are created!");
                 } else {
-                    System.out.println("Failed to create multiple directories!");
+                    return false;
                 }
             }
             outFile = new FileOutputStream(dir + fileName);
@@ -151,18 +165,11 @@ public class ImobiliariaCrud implements ListaImoveis {
             //escreve o número de contas na primeira linha do arquivo
             //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
-            buff.write("codigo,"+objProp);
-            for (Imovel listaImoveis : listaImoveis) {
+            buff.write("codigo," + objProp);
+            for (Imovel imovel : listaImoveis) {
                 //escreve o numero e saldo
                 buff.write("\n");
-                buff.write(listaImoveis.getCodigoObj() + ",");
-                buff.write(listaImoveis.getValor() + ",");
-                buff.write(listaImoveis.getLogradouro() + ",");
-                buff.write(listaImoveis.getNumero() + ",");
-                buff.write(listaImoveis.getBairro() + ",");
-                buff.write(listaImoveis.getCidade() + ",");
-                buff.write(listaImoveis.getDescricao() + ",");
-                buff.write(listaImoveis.getAreaTotal() + ",");
+                buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
                 buff.write("\n");
             }
@@ -190,13 +197,30 @@ public class ImobiliariaCrud implements ListaImoveis {
         return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
     }
 
-    public String objProp(Imovel im) {
+    private String objProp(Imovel im) {
         String prop = im.toString();
         String[] props = prop.split("\n");
         String propsaux = "";
         for (int x = 0; x < props.length; x++) {
             if (x != 0) {
                 propsaux += props[x].split(":")[0];
+            }
+            if (x != props.length - 1 && x != 0) {
+                propsaux += ",";
+            }
+
+        }
+        return propsaux;
+    }
+
+    private String objToString(Imovel im) {
+        String prop = im.toString();
+        String[] props = prop.split("\n");
+        String propsaux = "";
+        propsaux += im.getCodigoObj() + ",";
+        for (int x = 0; x < props.length; x++) {
+            if (x != 0) {
+                propsaux += props[x].split(":")[1];
             }
             if (x != props.length - 1 && x != 0) {
                 propsaux += ",";

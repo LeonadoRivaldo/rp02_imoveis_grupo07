@@ -23,7 +23,6 @@ public class InterfaceApartamento extends InterfaceSistema {
     @Override
     public void principal() {
         listaApartamentos.setTipoImovel(Tipo.APARTAMENTO);
-        System.out.println(listaApartamentos.objProp(new Apartamento()));
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -78,7 +77,9 @@ public class InterfaceApartamento extends InterfaceSistema {
         ap = new Apartamento(numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaApartamentos.incluir(ap)) {
             this.exibeMensagem("Apartamento incluido com sucesso!");
-            listaApartamentos.escreverArquivo();
+            if (!listaApartamentos.escreverArquivo()) {
+                this.exibeMensagem("Erro ao escrever o arquivo");
+            }
         } else {
             this.exibeMensagem("Ocorreu algum erro");
         }

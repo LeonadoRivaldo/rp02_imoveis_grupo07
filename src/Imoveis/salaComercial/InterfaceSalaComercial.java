@@ -10,19 +10,20 @@ import static Imoveis.EntradasTeclado.inInt;
 import Imoveis.InterfaceSistema;
 import static Imoveis.EntradasTeclado.inString;
 import Imoveis.ImobiliariaCrud;
-
+import Imoveis.Tipo;
 
 /**
  *
  * @author junio
  */
-public class InterfaceSalaComercial extends InterfaceSistema{
-    
+public class InterfaceSalaComercial extends InterfaceSistema {
+
     private ImobiliariaCrud listaSalaComercial = new ImobiliariaCrud();
     private SalaComercial sc = null;
-    
+
     @Override
     public void principal() {
+        listaSalaComercial.setTipoImovel(Tipo.SALACOMERCIAL);
         int opcao = -1;
         do {
             System.out.println("Sala Comercial");
@@ -30,7 +31,7 @@ public class InterfaceSalaComercial extends InterfaceSistema{
             System.out.println("2 - Consultar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
-            
+
             switch (opcao) {
                 case 0:
                     break;
@@ -39,25 +40,25 @@ public class InterfaceSalaComercial extends InterfaceSistema{
                     break;
                 case 2:
                     sc = (SalaComercial) listaSalaComercial.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
-                    if( sc != null ){
+                    if (sc != null) {
                         System.out.println(sc.toString());
-                    }else{
+                    } else {
                         this.exibeMensagem("A Sala Comercial Não Foi Encontrada!");
                     }
-                break;
+                    break;
                 default:
                     throw new AssertionError();
             }
-            
-            
+
         } while (opcao != 0);
-        
+
     }
-@Override
+
+    @Override
     protected void criarImovel() {
         int tipo = inInt("----------------------------------------\nDigite o tipo de imovel:\n1.Apartamento;\n2.Chacara;\n3.Sala Comercial;\n4.Terreno;");
         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
-        String logradouro  = inString("----------------------------------------\nDigite o endereço do imovel:");
+        String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
         String bairro = inString("----------------------------------------\nDigite o bairro de localizacao do imovel:");
         String cidade = inString("----------------------------------------\nDigite a cidade de localizacao do imovel:");
@@ -68,10 +69,13 @@ public class InterfaceSalaComercial extends InterfaceSistema{
         String descricao = inString("----------------------------------------\nEscreva uma discrição para o imovel:");
         double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
         double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
-        sc = new SalaComercial(nroBanheiros,nroSala, nomeEdificio, andar, valorCondominio,logradouro, numero, bairro, cidade, descricao, areaTotal, valor, tipo);
-        if( listaSalaComercial.incluir(sc) ){
+        sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor, tipo);
+        if (listaSalaComercial.incluir(sc)) {
             this.exibeMensagem("Sala Comercial incluida com sucesso!");
-        }else{
+            if(!listaSalaComercial.escreverArquivo()){
+                this.exibeMensagem("Erro ao escrever o arquivo");
+            }
+        } else {
             this.exibeMensagem("Ocorreu algum erro");
         }
     }
@@ -80,6 +84,5 @@ public class InterfaceSalaComercial extends InterfaceSistema{
         InterfaceSalaComercial i = new InterfaceSalaComercial();
         i.principal();
     }
-
 
 }

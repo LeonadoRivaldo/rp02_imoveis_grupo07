@@ -4,6 +4,7 @@ import static Imoveis.EntradasTeclado.*;
 import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
+import Imoveis.Tipo;
 import java.util.Scanner;
 
 /**
@@ -17,6 +18,7 @@ public class InterfaceTerreno extends InterfaceSistema {
 
     @Override
     public void principal() {
+        listaTerrenos.setTipoImovel(Tipo.TERRENO);
         int opcao = -1;
         do {
             System.out.println("##########################");
@@ -63,6 +65,9 @@ public class InterfaceTerreno extends InterfaceSistema {
         tr = new Terreno(dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaTerrenos.incluir(tr)) {
             this.exibeMensagem("Terreno incluido com sucesso!");
+            if (!listaTerrenos.escreverArquivo()) {
+                this.exibeMensagem("Erro ao escrever o arquivo");
+            }
         } else {
             this.exibeMensagem("Ocorreu algum erro");
         }

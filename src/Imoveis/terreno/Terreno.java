@@ -7,6 +7,10 @@ public class Terreno extends Imovel {
     public double dimensaoFrente;
     public double dimensaoLado;
 
+    public Terreno() {
+        super();
+    }
+
     public Terreno(double dimensaoFrente, double dimensaoLado, String logradouro,
             int numero, String bairro, String cidade, String descricao,
             double areaTotal, double valor) {
