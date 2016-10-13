@@ -6,6 +6,8 @@
 package Imoveis;
 
 import Imoveis.Imovel;
+import Imoveis.salaComercial.SalaComercial;
+import Imoveis.Predio;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -52,6 +54,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
         listaImoveis.add(imovel);
+        escreverArquivo();
         return true;
     }
 
@@ -131,16 +134,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             //escreve as informações de cada conta
             for (Imovel listaImoveis : listaImoveis) {
                 //escreve o numero e saldo
-                buff.write(listaImoveis.getCodigoObj() + ",");
-                buff.write(listaImoveis.getValor() + ",");
-                buff.write(listaImoveis.getLogradouro() + ",");
-                buff.write(listaImoveis.getNumero() + ",");
-                buff.write(listaImoveis.getBairro() + ",");
-                buff.write(listaImoveis.getCidade() + ",");
-                buff.write(listaImoveis.getDescricao() + ",");
-                buff.write(listaImoveis.getAreaTotal() + ",");
-                //escreve uma linha em branco entre uma conta e a seguinte
-                buff.write("\n");
+                buff.write(listaImoveis.toString() + "\n");
             }
             // fecha o arquivo
             buff.close();

@@ -6,6 +6,8 @@
 package Imoveis;
 
 import Imoveis.Imovel;
+import Imoveis.salaComercial.SalaComercial;
+import Imoveis.Predio;
 import java.util.List;
 
 /**

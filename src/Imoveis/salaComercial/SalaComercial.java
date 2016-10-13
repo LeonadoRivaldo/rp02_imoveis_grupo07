@@ -57,6 +57,10 @@ public class SalaComercial extends Predio {
         this.nroSala = nroSala;
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "\nNumero de Banheiros: " + nroBanheiros + "\nNumero da Sala: " + nroSala;
