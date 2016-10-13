@@ -206,7 +206,7 @@ public class ImobiliariaCrud implements ListaImoveis {
                 propsaux += props[x].split(":")[0];
             }
             if (x != props.length - 1 && x != 0) {
-                propsaux += ",";
+                propsaux += ";";
             }
 
         }
@@ -217,13 +217,13 @@ public class ImobiliariaCrud implements ListaImoveis {
         String prop = im.toString();
         String[] props = prop.split("\n");
         String propsaux = "";
-        propsaux += im.getCodigoObj() + ",";
+        propsaux += im.getCodigoObj() + ";";
         for (int x = 0; x < props.length; x++) {
             if (x != 0) {
                 propsaux += props[x].split(":")[1];
             }
             if (x != props.length - 1 && x != 0) {
-                propsaux += ",";
+                propsaux += ";";
             }
 
         }
