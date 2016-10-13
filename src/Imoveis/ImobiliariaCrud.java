@@ -5,16 +5,11 @@
  */
 package Imoveis;
 
-import Imoveis.Imovel;
-<<<<<<< HEAD
-import Imoveis.salaComercial.SalaComercial;
-import Imoveis.Predio;
-=======
 import Imoveis.apartamento.Apartamento;
 import Imoveis.chacara.Chacara;
 import Imoveis.salaComercial.SalaComercial;
 import Imoveis.terreno.Terreno;
->>>>>>> 692898bd17da30a6c66a64fcc835ffcf25621228
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -173,15 +168,10 @@ public class ImobiliariaCrud implements ListaImoveis {
             //escreve as informações de cada conta
             buff.write("codigo," + objProp);
             for (Imovel imovel : listaImoveis) {
-                //escreve o numero e saldo
-<<<<<<< HEAD
-                buff.write(listaImoveis.toString() + "\n");
-=======
                 buff.write("\n");
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
                 buff.write("\n");
->>>>>>> 692898bd17da30a6c66a64fcc835ffcf25621228
             }
             // fecha o arquivo
             buff.close();

@@ -56,12 +56,6 @@ public class InterfaceSalaComercial extends InterfaceSistema {
 
     @Override
     protected void criarImovel() {
-<<<<<<< HEAD
-        int tipo = inInt("----------------------------------------\nDigite o tipo de imovel:\n1.Apartamento;\n2.Chacara;\n3.Sala Comercial;\n4.Terreno;");
-        Imoveis.Tipo.verificarTipo(tipo);
-=======
-        //int tipo = inInt("----------------------------------------\nDigite o tipo de imovel:\n1.Apartamento;\n2.Chacara;\n3.Sala Comercial;\n4.Terreno;");
->>>>>>> 692898bd17da30a6c66a64fcc835ffcf25621228
         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
