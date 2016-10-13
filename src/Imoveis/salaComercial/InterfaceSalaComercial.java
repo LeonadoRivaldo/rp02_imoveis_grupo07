@@ -56,7 +56,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
 
     @Override
     protected void criarImovel() {
-        int tipo = inInt("----------------------------------------\nDigite o tipo de imovel:\n1.Apartamento;\n2.Chacara;\n3.Sala Comercial;\n4.Terreno;");
+        //int tipo = inInt("----------------------------------------\nDigite o tipo de imovel:\n1.Apartamento;\n2.Chacara;\n3.Sala Comercial;\n4.Terreno;");
         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
@@ -69,7 +69,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         String descricao = inString("----------------------------------------\nEscreva uma discrição para o imovel:");
         double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
         double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
-        sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor, tipo);
+        sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaSalaComercial.incluir(sc)) {
             this.exibeMensagem("Sala Comercial incluida com sucesso!");
             if(!listaSalaComercial.escreverArquivo()){

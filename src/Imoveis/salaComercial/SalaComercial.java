@@ -17,20 +17,18 @@ public class SalaComercial extends Predio {
 
     protected int nroBanheiros;
     protected int nroSala;
-    protected int tipo;
-
+    
     public SalaComercial() {
         super();
     }
 
     public SalaComercial(int nroBanheiros, int nroSala, String nomeEdificio,
             int andar, double valorCondominio, String logradouro, int numero,
-            String bairro, String cidade, String descricao, double areaTotal, double valor, int tipo) {
+            String bairro, String cidade, String descricao, double areaTotal, double valor) {
         super(nomeEdificio, andar, valorCondominio, logradouro, numero, bairro,
                 cidade, descricao, areaTotal, valor);
         this.nroBanheiros = nroBanheiros;
         this.nroSala = nroSala;
-        this.tipo = tipo;
     }
 
     /**
