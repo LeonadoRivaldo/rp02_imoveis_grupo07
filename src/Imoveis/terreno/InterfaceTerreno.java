@@ -48,6 +48,13 @@ public class InterfaceTerreno extends InterfaceSistema {
                         this.editarImovel(tr, listaTerrenos);
                     }
                     break;
+               case 4:
+                    if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                        this.exibeMensagem("Imovel exlcuido com sucesso");
+                    }else{
+                        this.exibeMensagem("erro");
+                    }
+                    break;
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
