@@ -194,7 +194,7 @@ public class ImobiliariaCrud implements ListaImoveis {
         BufferedReader buff;
         String linha, aux;
         Imovel imovel;
-        int nroImoveis, nroBanheiros, nroSala, andar, numero, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
+        int nroImoveis, codigoObj, nroBanheiros, nroSala, andar, numero, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
         String nomeEdificio, logradouro, bairro, cidade, descricao;
         double areaTotal, valor, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade;
         try {
@@ -214,6 +214,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             for (int i = 1; i<nroImoveis;i++){
                 for(int y=0; y<linha.length();y++){
                     String[] objetoLido = new listaStrings[y].split(';');
+                    codigoObj=listaStrings[0];
                         
                 
 >>>>>>> origin/master
