@@ -35,8 +35,13 @@ public class Terreno extends Imovel {
         this.dimensaoLado = dimensaoLado;
     }
 
+    /**
+     * Metodo que trasforma todos os atributos em string
+     *
+     * @return String com todos os atributos
+     */
     public String toString() {
-        //colocar ' super.toString() + ' depois do return
+        
         return super.toString() + "\nDimensão da Frente: " + getDimensaoFrente() + "\nDimensão do Lado: " + getDimensaoLado();
     }
 
