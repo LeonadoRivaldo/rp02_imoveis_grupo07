@@ -70,7 +70,7 @@ public abstract class Residencia extends Imovel {
 
     @Override
     public String toString() {
-        return super.toString() + "Area Construida " + this.areaConstruida + "\nNúmero de Quartos: " + this.nroQuartos + "\nAno de Construção: " + this.anoConstrucao;
+        return super.toString() + "\nArea Construida: " + this.areaConstruida + "\nNúmero de Quartos: " + this.nroQuartos + "\nAno de Construção: " + this.anoConstrucao;
     }
 
 }
