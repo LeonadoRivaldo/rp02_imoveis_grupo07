@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.nashorn.internal.objects.NativeString;
 
 /**
  *
@@ -210,7 +211,9 @@ public class ImobiliariaCrud implements ListaImoveis {
             
             for (int i = 1; i<nroImoveis;i++){
                 for(int y=0; y<linha.length();y++){
-                    if(linha.charAt(y))
+                    String[] objetoLido = new listaStrings[y].split(';');
+                        
+                
                 }
 
                 
