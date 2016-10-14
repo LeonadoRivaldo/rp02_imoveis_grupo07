@@ -65,7 +65,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
         listaImoveis.add(imovel);
-        escreverArquivo();
+        this.escreverArquivo();
         return true;
     }
 
@@ -271,7 +271,12 @@ public class ImobiliariaCrud implements ListaImoveis {
                     } else if (tipoImovel.getTipo() == 2) {
                         ch = new Chacara();
                     } else if (tipoImovel.getTipo() == 3) {
-                        sc = new SalaComercial();
+                        nomeEdificio = conteudo[1];
+                        andar = Integer.parseInt(conteudo[9].trim());                        
+                        valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
+                        nroBanheiros = Integer.parseInt(conteudo[11].trim());
+                        nroSala = Integer.parseInt(conteudo[12].trim());
+                        sc = new SalaComercial(codigoObj, nroSala, nroBanheiros, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
                     } else if (tipoImovel.getTipo() == 4) {
                         t = new Terreno();
                     }

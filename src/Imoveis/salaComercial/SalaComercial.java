@@ -31,6 +31,13 @@ public class SalaComercial extends Predio {
         this.nroSala = nroSala;
     }
 
+    public SalaComercial(int codigo, int nroBanheiros, int nroSala, String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(codigo, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.nroBanheiros = nroBanheiros;
+        this.nroSala = nroSala;
+    }
+    
+
     /**
      * @return the nroBanheiros
      */
