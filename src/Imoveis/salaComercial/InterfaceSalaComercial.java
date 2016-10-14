@@ -55,7 +55,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
     }
 
     @Override
-    protected void criarImovel() {
+    protected void criarImovel(){
         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
