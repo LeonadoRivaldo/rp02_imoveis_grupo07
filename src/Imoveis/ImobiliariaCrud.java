@@ -19,12 +19,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -205,12 +202,21 @@ public class ImobiliariaCrud implements ListaImoveis {
             buff = new BufferedReader(new InputStreamReader(inFile, "\\listaImoveis.csv"));
             linha = buff.readLine();
             nroImoveis = Integer.parseInt(linha);
+<<<<<<< HEAD
 
             for (int i = 1; i < nroImoveis; i++) {
                 for (int y = 0; y < linha.length(); y++) {
                     if (linha.charAt(y)) {
 
                     }
+=======
+            
+            for (int i = 1; i<nroImoveis;i++){
+                for(int y=0; y<linha.length();y++){
+                    String[] objetoLido = new listaStrings[y].split(';');
+                        
+                
+>>>>>>> origin/master
                 }
 
             }
