@@ -19,6 +19,12 @@ public class Terreno extends Imovel {
         this.dimensaoLado = dimensaoLado;
     }
 
+    public Terreno(int codigo, double dimensaoFrente, double dimensaoLado, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(codigo, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.dimensaoFrente = dimensaoFrente;
+        this.dimensaoLado = dimensaoLado;
+    }
+
     public double getDimensaoFrente() {
         return dimensaoFrente;
     }
@@ -35,8 +41,13 @@ public class Terreno extends Imovel {
         this.dimensaoLado = dimensaoLado;
     }
 
+    /**
+     * Metodo que trasforma todos os atributos em string
+     *
+     * @return String com todos os atributos
+     */
     public String toString() {
-        //colocar ' super.toString() + ' depois do return
+        
         return super.toString() + "\nDimensão da Frente: " + getDimensaoFrente() + "\nDimensão do Lado: " + getDimensaoLado();
     }
 

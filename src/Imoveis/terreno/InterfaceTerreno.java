@@ -19,11 +19,13 @@ public class InterfaceTerreno extends InterfaceSistema {
     @Override
     public void principal() {
         listaTerrenos.setTipoImovel(Tipo.TERRENO);
+        //listaTerreno.lerArquivo();
         int opcao = -1;
         do {
-            System.out.println("##########################");
+            System.out.println("#############################################");
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
+            System.out.println("3 - editar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
@@ -34,18 +36,28 @@ public class InterfaceTerreno extends InterfaceSistema {
                     criarImovel();
                     break;
                 case 2:
-                    tr = (Terreno) listaTerrenos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                    tr = this.consultar();
                     if (tr != null) {
                         System.out.println("\n#############################################");
                         System.out.println(tr.toString());
-                    } else {
-                        this.exibeMensagem("terreno não encontrado");
+                    }
+                    break;
+                case 3:
+                    tr = consultar();
+                    if (tr != null) {
+                        this.editarImovel(tr, listaTerrenos);
+                    }
+                    break;
+               case 4:
+                    if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                        this.exibeMensagem("Imovel exlcuido com sucesso");
+                    }else{
+                        this.exibeMensagem("erro");
                     }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
-
         } while (opcao != 0);
 
     }
@@ -71,6 +83,36 @@ public class InterfaceTerreno extends InterfaceSistema {
         } else {
             this.exibeMensagem("Ocorreu algum erro");
         }
+    }
+
+    public Terreno consultar() {
+        System.out.println("=======================================");
+        System.out.println("1 - Pesquisar");
+        System.out.println("2 - Listar todos");
+        System.out.println("----------------------------------------");
+        int o = inInt("Opção:");
+        switch (o) {
+            case 1:
+                tr = (Terreno) listaTerrenos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                if (tr != null) {
+                    return tr;
+                } else {
+                    this.exibeMensagem("terreno não encontrado");
+                }
+                break;
+            case 2:
+                int imovelCod = this.listaImoveis(listaTerrenos);
+                tr = (Terreno) listaTerrenos.consultar(imovelCod);
+                if (tr != null) {
+                    return tr;
+                } else {
+                    this.exibeMensagem("terreno não encontrado");
+                }
+                break;
+            default:
+                this.exibeMensagem("Opção invalida!");
+        }
+        return null;
     }
 
     public static void main(String[] args) {
