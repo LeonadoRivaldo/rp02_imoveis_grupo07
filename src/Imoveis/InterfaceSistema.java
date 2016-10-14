@@ -29,12 +29,10 @@ public abstract class InterfaceSistema {
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
     protected abstract void criarImovel();
-
     /**
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
     public abstract void principal();
-
     /**
      * função para exibir mensagens no sistema
      *
@@ -45,7 +43,6 @@ public abstract class InterfaceSistema {
         System.out.println(mensagem.toUpperCase());
         System.out.println("===========================================================\n");
     }
-
     /**
      * Função para exibir uma lista com todos os imoveis na lista de imoveis que
      * deve ser passada pro parametro e retorna um inteiro com o codigo do
@@ -65,7 +62,6 @@ public abstract class InterfaceSistema {
         div();
         return inInt("Digite o codigo do imovel: ");
     }
-
     public void editarImovel(Imovel imovel, ImobiliariaCrud lista) {
         Terreno t = null;
         Apartamento a = null;

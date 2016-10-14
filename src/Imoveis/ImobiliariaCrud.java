@@ -81,24 +81,22 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public boolean editar(int codigo, Imovel im) {
-        for (Imovel imovel : this.listaImoveis) {
-            if (imovel.getCodigoObj() == codigo) {
-                int indice = this.listaImoveis.indexOf(imovel);
-                this.listaImoveis.set(indice, im);
-                return true;
-            }
+        Imovel imovel = this.consultar(codigo);
+        if (imovel != null) {
+            int indice = this.listaImoveis.indexOf(imovel);
+            this.listaImoveis.set(indice, im);
+            return true;
         }
         return false;
     }
 
     @Override
     public boolean excluir(int codigo) {
-        for (Imovel imovel : this.listaImoveis) {
-            if (imovel.getCodigoObj() == codigo) {
-                int indice = this.listaImoveis.indexOf(imovel);
-                this.listaImoveis.remove(indice);
-                return true;
-            }
+        Imovel imovel = this.consultar(codigo);
+        if (imovel != null) {
+            int indice = this.listaImoveis.indexOf(imovel);
+            this.listaImoveis.remove(indice);
+            return true;
         }
         return false;
     }
@@ -207,21 +205,22 @@ public class ImobiliariaCrud implements ListaImoveis {
             buff = new BufferedReader(new InputStreamReader(inFile, "\\listaImoveis.csv"));
             linha = buff.readLine();
             nroImoveis = Integer.parseInt(linha);
-            
-            for (int i = 1; i<nroImoveis;i++){
-                for(int y=0; y<linha.length();y++){
-                    if(linha.charAt(y))
+
+            for (int i = 1; i < nroImoveis; i++) {
+                for (int y = 0; y < linha.length(); y++) {
+                    if (linha.charAt(y)) {
+
+                    }
                 }
 
-                
             }
 
-            
-
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImobiliariaCrud.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ImobiliariaCrud.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
