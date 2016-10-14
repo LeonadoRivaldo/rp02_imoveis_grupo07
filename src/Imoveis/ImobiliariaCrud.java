@@ -273,7 +273,9 @@ public class ImobiliariaCrud implements ListaImoveis {
                     } else if (tipoImovel.getTipo() == 3) {
                         sc = new SalaComercial();
                     } else if (tipoImovel.getTipo() == 4) {
-                        t = new Terreno();
+                        dimensaoFrente = Double.parseDouble(conteudo[9].trim());
+                        dimensaoLado = Double.parseDouble (conteudo[10].trim());
+                          t = new Terreno(dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
                     }
                 }
             }
