@@ -5,20 +5,26 @@
  */
 package Imoveis;
 
-import Imoveis.Imovel;
 import Imoveis.apartamento.Apartamento;
 import Imoveis.chacara.Chacara;
 import Imoveis.salaComercial.SalaComercial;
 import Imoveis.terreno.Terreno;
+import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,6 +65,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
         listaImoveis.add(imovel);
+        escreverArquivo();
         return true;
     }
 
@@ -167,7 +174,6 @@ public class ImobiliariaCrud implements ListaImoveis {
             //escreve as informações de cada conta
             buff.write("codigo," + objProp);
             for (Imovel imovel : listaImoveis) {
-                //escreve o numero e saldo
                 buff.write("\n");
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
@@ -189,7 +195,35 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     @Override
     public boolean lerArquivo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FileInputStream inFile;
+        BufferedReader buff;
+        String linha, aux;
+        Imovel imovel;
+        int nroImoveis, nroBanheiros, nroSala, andar, numero, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
+        String nomeEdificio, logradouro, bairro, cidade, descricao;
+        double areaTotal, valor, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade;
+        try {
+            inFile = new FileInputStream(new File(dirName("apartamento")));
+            buff = new BufferedReader(new InputStreamReader(inFile, "\\listaImoveis.csv"));
+            linha = buff.readLine();
+            nroImoveis = Integer.parseInt(linha);
+            
+            for (int i = 1; i<nroImoveis;i++){
+                for(int y=0; y<linha.length();y++){
+                    if(linha.charAt(y))
+                }
+
+                
+            }
+
+            
+
+        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     private String dirName(String tipo) {
