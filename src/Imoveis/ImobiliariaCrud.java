@@ -96,6 +96,7 @@ public class ImobiliariaCrud implements ListaImoveis {
         if (imovel != null) {
             int indice = this.listaImoveis.indexOf(imovel);
             this.listaImoveis.remove(indice);
+            this.escreverArquivo();
             return true;
         }
         return false;
