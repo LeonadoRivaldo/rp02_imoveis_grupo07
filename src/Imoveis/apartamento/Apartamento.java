@@ -28,6 +28,14 @@ public class Apartamento extends Predio {
         this.numeroDoApartamento = numeroDoApartamento;
     }
 
+    public Apartamento(int codigo,int numeroDeQuartos, int anoDeConstrucao, int numeroDeVagasNaGaragem, int numeroDoApartamento, String nomeEdificio, int andar, double valorCondominio, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(codigo, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.numeroDeQuartos = numeroDeQuartos;
+        this.anoDeConstrucao = anoDeConstrucao;
+        this.numeroDeVagasNaGaragem = numeroDeVagasNaGaragem;
+        this.numeroDoApartamento = numeroDoApartamento;
+    }
+
     public int getNumeroDeQuartos() {
         return numeroDeQuartos;
     }

@@ -23,6 +23,7 @@ public class InterfaceApartamento extends InterfaceSistema {
     @Override
     public void principal() {
         listaApartamentos.setTipoImovel(Tipo.APARTAMENTO);
+        //listaApartamentos.lerArquivo();
         int opcao = -1;
         do {
             System.out.println("#############################################");

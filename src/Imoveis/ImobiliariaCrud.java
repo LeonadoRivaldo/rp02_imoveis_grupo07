@@ -19,9 +19,12 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -167,13 +170,14 @@ public class ImobiliariaCrud implements ListaImoveis {
             //escreve o número de contas na primeira linha do arquivo
             //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
-            buff.write("codigo," + objProp);
+            buff.write("codigo;" + objProp);
             for (Imovel imovel : listaImoveis) {
-                buff.write("\n");
+                buff.newLine();
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
                 buff.write("\n");
             }
+            this.gravaCodigo(dir);
             // fecha o arquivo
             buff.close();
             outFile.close();
@@ -198,30 +202,79 @@ public class ImobiliariaCrud implements ListaImoveis {
         String nomeEdificio, logradouro, bairro, cidade, descricao;
         double areaTotal, valor, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade;
         try {
-            inFile = new FileInputStream(new File(dirName("apartamento")));
-            buff = new BufferedReader(new InputStreamReader(inFile, "\\listaImoveis.csv"));
-            linha = buff.readLine();
-            nroImoveis = Integer.parseInt(linha);
-<<<<<<< HEAD
-
-            for (int i = 1; i < nroImoveis; i++) {
-                for (int y = 0; y < linha.length(); y++) {
-                    if (linha.charAt(y)) {
-
-                    }
-=======
-            
-            for (int i = 1; i<nroImoveis;i++){
-                for(int y=0; y<linha.length();y++){
-                    String[] objetoLido = new listaStrings[y].split(';');
-                    codigoObj=listaStrings[0];
-                        
-                
->>>>>>> origin/master
-                }
-
+            String dir = null;
+            String objProp;
+            Terreno t = null;
+            Apartamento a = null;
+            SalaComercial sc = null;
+            Chacara ch = null;
+            if (tipoImovel.getTipo() == 1) {
+                dir = dirName("apartamento");
+            } else if (tipoImovel.getTipo() == 2) {
+                dir = dirName("chacara");
+            } else if (tipoImovel.getTipo() == 3) {
+                dir = dirName("sala_comercial");
+            } else if (tipoImovel.getTipo() == 4) {
+                dir = dirName("terreno");
             }
 
+            inFile = new FileInputStream(new File(dir + "\\listaImoveis.csv"));
+            buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
+            String line;
+            String[] objetoLinha;
+            String att = buff.readLine();
+            String[] atts = att.split(";");
+            /*
+             codigo
+             Nome Edificio
+             Logradouro
+             Numero
+             Bairro
+             Cidade
+             Descricao
+             Area Total
+             Valor
+            
+             Andar
+             Valor Condominio
+            
+             Numero de quartos
+             Ano de construcao
+             Numero de vagas na garagem
+             Numero do apartamento
+             */
+
+            while ((line = buff.readLine()) != null) {
+                if (!line.equalsIgnoreCase("")) {
+                    String[] conteudo = line.split(";");
+                    //Atributos do imovel
+                    codigoObj = Integer.parseInt(conteudo[0].trim());
+                    logradouro = conteudo[2];
+                    numero = Integer.parseInt(conteudo[3].trim());
+                    bairro = conteudo[4];
+                    cidade = conteudo[5];
+                    descricao = conteudo[6];
+                    areaTotal = Double.parseDouble(conteudo[7].trim().replace("m²", ""));
+                    valor = Double.parseDouble(conteudo[8].trim().replace("R$", ""));
+                    if (tipoImovel.getTipo() == 1) {
+                        nomeEdificio = conteudo[1];
+                        andar = Integer.parseInt(conteudo[9].trim());
+                        valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
+                        numeroDeQuartos = Integer.parseInt(conteudo[11].trim());
+                        anoDeConstrucao = Integer.parseInt(conteudo[12].trim());
+                        numeroDeVagasNaGaragem = Integer.parseInt(conteudo[13].trim());
+                        numeroDoApartamento = Integer.parseInt(conteudo[14].trim());
+                        a = new Apartamento(codigoObj, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                        this.incluir(a);
+                    } else if (tipoImovel.getTipo() == 2) {
+                        ch = new Chacara();
+                    } else if (tipoImovel.getTipo() == 3) {
+                        sc = new SalaComercial();
+                    } else if (tipoImovel.getTipo() == 4) {
+                        t = new Terreno();
+                    }
+                }
+            }
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(ImobiliariaCrud.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -260,7 +313,7 @@ public class ImobiliariaCrud implements ListaImoveis {
         propsaux += im.getCodigoObj() + ";";
         for (int x = 0; x < props.length; x++) {
             if (x != 0) {
-                propsaux += props[x].split(":")[1];
+                propsaux += props[x].split(":")[1].trim();
             }
             if (x != props.length - 1 && x != 0) {
                 propsaux += ";";
@@ -268,6 +321,27 @@ public class ImobiliariaCrud implements ListaImoveis {
 
         }
         return propsaux;
+    }
+
+    private void gravaCodigo(String dir) throws FileNotFoundException, IOException {
+        String fileName = "\\ultimoCod.csv";
+        /*
+         escreve o ultimo codigo em um arquivo para continuar a contagem ao
+         reiniciar o programa
+         */
+        FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
+        BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
+        int i = Imovel.getCodigoClasse();
+        buffCont.write(Integer.toString(i));
+        outFileCont.close();
+        buffCont.close();
+    }
+
+    private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException{
+            FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
+            BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
+            Imovel.setUltimoCodigo(Integer.parseInt(buff.readLine()));
+            System.out.println("DEU ERRO! ARQUIVO DE CODIGO N ENCONTRADO");
     }
 
 }

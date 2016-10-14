@@ -11,7 +11,7 @@ package Imoveis;
  */
 public abstract class Imovel {
 
-    protected static int codigoClasse = 0001;
+    protected static int codigoClasse = 1;
     protected int codigoObj;
     protected String logradouro;
     protected int numero;
@@ -27,6 +27,17 @@ public abstract class Imovel {
     public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
         codigoObj = codigoClasse;
         codigoClasse++;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.descricao = descricao;
+        this.areaTotal = areaTotal;
+        this.valor = valor;
+    }
+
+    public Imovel(int codigo, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        this.codigoObj = codigo;
         this.logradouro = logradouro;
         this.numero = numero;
         this.bairro = bairro;
@@ -108,5 +119,15 @@ public abstract class Imovel {
         str += "\nValor: R$" + valor;
         return str;
     }
+
+    public static void setUltimoCodigo(int codigo) {
+        codigoClasse = codigo;
+    }
+
+    public static int getCodigoClasse() {
+        return codigoClasse;
+    }
+    
+    
 
 }

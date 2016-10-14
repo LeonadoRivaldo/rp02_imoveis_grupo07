@@ -24,6 +24,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
     @Override
     public void principal() {
         listaSalaComercial.setTipoImovel(Tipo.SALACOMERCIAL);
+        listaSalaComercial.lerArquivo();
         int opcao = -1;
         do {
             System.out.println("Sala Comercial");
