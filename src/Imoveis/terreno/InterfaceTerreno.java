@@ -19,7 +19,7 @@ public class InterfaceTerreno extends InterfaceSistema {
     @Override
     public void principal() {
         listaTerrenos.setTipoImovel(Tipo.TERRENO);
-        //listaTerreno.lerArquivo();
+        listaTerrenos.lerArquivo();
         int opcao = -1;
         do {
             System.out.println("#############################################");
