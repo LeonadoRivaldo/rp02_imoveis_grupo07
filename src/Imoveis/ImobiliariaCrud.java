@@ -173,13 +173,12 @@ public class ImobiliariaCrud implements ListaImoveis {
             //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
             buff.write("codigo;" + objProp);
-            for (Imovel imovel : listaImoveis) {
+            for (Imovel imovel : listaImoveis){
                 buff.newLine();
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
                 buff.write("\n");
             }
-            this.gravaCodigo(dir);
             // fecha o arquivo
             buff.close();
             outFile.close();
@@ -333,7 +332,6 @@ public class ImobiliariaCrud implements ListaImoveis {
         FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
         BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
         int i = Imovel.getCodigoClasse();
-        System.out.println(Imovel.getCodigoClasse());
         buffCont.write(Integer.toString(i));
         outFileCont.close();
         buffCont.close();
