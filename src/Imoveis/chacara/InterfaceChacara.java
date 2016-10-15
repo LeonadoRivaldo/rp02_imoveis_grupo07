@@ -23,8 +23,51 @@ public class InterfaceChacara extends InterfaceSistema {
     private Chacara chac = null;
 
     String logradouro, bairro, cidade, descricao;
-    int numero, nroQuartos, anoConstrucao;
+    int numero, numeroDeQuartos, anoDeConstrucao;
     double areaTotal, valor, areaConstruida, distanciaCidade;
+    
+    @Override
+    public void principal() {
+        listaChacaras.setTipoImovel(Tipo.CHACARA);
+        listaChacaras.lerArquivo();
+
+        int opcao = -1;
+        do {
+            System.out.println("Chacara!");
+            System.out.println("1. Incluir");
+            System.out.println("2. Consultar");
+            System.out.println("3. Editar");
+            System.out.println("4. Excluir");
+            System.out.println("0. Sair");
+            opcao = inInt("Opcao: ");
+
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    criarImovel();
+                    break;
+                case 2:
+                    chac = this.consultar();
+                    if (chac != null) {
+                        System.out.println(chac.toString());
+                    }
+                    break;
+                case 3:
+                    chac = consultar();
+                    if (chac != null) {
+                        this.editarImovel(chac, listaChacaras);
+                    }
+                    break;
+                case 4:
+                       this.excluir();
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida!");
+            }
+        } while (opcao != 0);
+
+    }
 
     @Override
     protected void criarImovel() {
@@ -36,10 +79,10 @@ public class InterfaceChacara extends InterfaceSistema {
         areaTotal = inDouble("\nInforme a Area Total do Imovel: ");
         valor = inDouble("\nInforme o valor do Imovel:");
         areaConstruida = inDouble("\nInforme a Area Construida do Imovel: ");
-        anoConstrucao = inInt("\nInforme o Ano da Construção: ");
-        nroQuartos = inInt("\nInforme o Número de Quartos: ");
+        anoDeConstrucao = inInt("\nInforme o Ano da Construção: ");
+        numeroDeQuartos = inInt("\nInforme o Número de Quartos: ");
         distanciaCidade = inDouble("\nInforme a Distancia da Cidade: ");
-        chac = new Chacara(distanciaCidade, anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        chac = new Chacara(distanciaCidade, anoDeConstrucao, numeroDeQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaChacaras.incluir(chac)) {
             this.exibeMensagem("\nChacara Incluida com Sucesso!");
             if (!listaChacaras.escreverArquivo()) {
@@ -50,38 +93,43 @@ public class InterfaceChacara extends InterfaceSistema {
         }
     }
 
-    @Override
-    public void principal() {
-        listaChacaras.setTipoImovel(Tipo.CHACARA);
-        int opcao;
-        boolean sair = false;
-        do {
-            System.out.println("\nChacara");
-            System.out.println("1. Incluir");
-            System.out.println("2. Consultar");
-            System.out.println("0. Sair");
-            opcao = inInt("Opcao: ");
-
-            switch (opcao) {
-                case 1:
-                    criarImovel();
-                    break;
-                case 2:
-                    chac = (Chacara) listaChacaras.consultar(inInt("\nDigite o Codigo do Imovel: "));
-                    if (chac != null) {
-                        System.out.println(chac.toString());
-                    } else {
-                        this.exibeMensagem("\nChacara Não Encontrada! ");
-                    }
-                    break;
-                case 0:
-                    break;
-                default:
-                    this.exibeMensagem("\nOpção invalida!");
-            }
-
-        } while (opcao != 0);
-
+    public Chacara consultar() {
+        System.out.println("\n1. Pesquisar");
+        System.out.println("2. Listar Todos");
+        int o = inInt("Opção:");
+        switch (o) {
+            case 1:
+                chac = (Chacara) listaChacaras.consultar(inInt("\nDigite o Codigo do Imovel: "));
+                if (chac != null) {
+                    return chac;
+                } else {
+                    this.exibeMensagem("Chacara Não Encontrada!");
+                }
+                break;
+            case 2:
+                int imovelCod = this.listaImoveis(listaChacaras);
+                chac = (Chacara) listaChacaras.consultar(imovelCod);
+                if (chac != null) {
+                    return chac;
+                } else {
+                    this.exibeMensagem("Chacara Não Encontrada!");
+                }
+                break;
+            default:
+                this.exibeMensagem("Opção Invalida!");
+        }
+        return null;
+    }
+    
+    public void excluir (){
+     int codigo = inInt("Informe o Codigo da Chacarra:");
+     if (listaChacaras.excluir(codigo)){
+         this.exibeMensagem("Chacara Excluida com Sucesso!");
+     }else{
+         this.exibeMensagem("Nenhuma Chacarra Encontrada! ");
+     }
+     
+ 
     }
 
     public static void main(String[] args) {

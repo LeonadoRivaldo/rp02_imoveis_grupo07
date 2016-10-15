@@ -19,10 +19,18 @@ public class Chacara extends Residencia {
         super();
     }
     
-    public Chacara(double distanciaCidade, int anoConstrucao, int nroQuartos, double areaConstruida, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
-        super(anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+    public Chacara(double distanciaCidade, int anoDeConstrucao, int numeroDeQuartos, double areaConstruida, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        super(anoDeConstrucao, numeroDeQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         this.distanciaCidade = distanciaCidade;
     }
+
+    public Chacara(int codigoObj, String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor, double areaConstruida, int numeroDeQuartos, int anoDeConstrucao, double distanciaCidade) {
+        super(anoDeConstrucao, numeroDeQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        this.distanciaCidade = distanciaCidade;
+    }
+
+     
+    
 
     /**
      * @return the distanciaCidade

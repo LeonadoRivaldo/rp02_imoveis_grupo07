@@ -202,7 +202,7 @@ public class ImobiliariaCrud implements ListaImoveis {
         Imovel imovel;
         int nroImoveis, codigoObj, nroBanheiros, nroSala, andar, numero, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
         String nomeEdificio, logradouro, bairro, cidade, descricao;
-        double areaTotal, valor, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade;
+        double areaTotal, valor, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade, areaConstruida;
         try {
             String dir = null;
             String objProp;
@@ -269,7 +269,12 @@ public class ImobiliariaCrud implements ListaImoveis {
                         a = new Apartamento(codigoObj, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
                         this.incluir(a);
                     } else if (tipoImovel.getTipo() == 2) {
-                        ch = new Chacara();
+                        areaConstruida = Double.parseDouble(conteudo[9].trim());
+                        numeroDeQuartos = Integer.parseInt(conteudo[10].trim());
+                        anoDeConstrucao = Integer.parseInt(conteudo[11].trim());
+                        distanciaCidade = Double.parseDouble(conteudo[12].trim());
+                        ch = new Chacara(codigoObj, logradouro, numero, bairro, cidade, descricao, areaTotal, valor, areaConstruida, numeroDeQuartos, anoDeConstrucao, distanciaCidade);
+                        this.incluir(ch);
                     } else if (tipoImovel.getTipo() == 3) {
                         nomeEdificio = conteudo[1];
                         andar = Integer.parseInt(conteudo[9].trim());
@@ -282,6 +287,10 @@ public class ImobiliariaCrud implements ListaImoveis {
                         dimensaoFrente = Double.parseDouble(conteudo[9].trim());
                         dimensaoLado = Double.parseDouble(conteudo[10].trim());
                         t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+<<<<<<< HEAD
+=======
+                        this.incluir(t);
+>>>>>>> b491587df3a1885d1380b052f8ebdb1a76c7fd17
                     }
                 }
             }
