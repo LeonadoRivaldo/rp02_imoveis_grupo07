@@ -282,10 +282,12 @@ public class ImobiliariaCrud implements ListaImoveis {
                         nroBanheiros = Integer.parseInt(conteudo[11].trim());
                         nroSala = Integer.parseInt(conteudo[12].trim());
                         sc = new SalaComercial(codigoObj, nroSala, nroBanheiros, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                        this.incluir(sc);
                     } else if (tipoImovel.getTipo() == 4) {
                         dimensaoFrente = Double.parseDouble(conteudo[9].trim());
                         dimensaoLado = Double.parseDouble (conteudo[10].trim());
                           t = new Terreno(codigoObj,dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                          this.incluir(t);
                     }
                 }
             }
