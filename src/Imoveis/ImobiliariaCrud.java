@@ -287,10 +287,8 @@ public class ImobiliariaCrud implements ListaImoveis {
                         dimensaoFrente = Double.parseDouble(conteudo[9].trim());
                         dimensaoLado = Double.parseDouble(conteudo[10].trim());
                         t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
-<<<<<<< HEAD
-=======
                         this.incluir(t);
->>>>>>> b491587df3a1885d1380b052f8ebdb1a76c7fd17
+
                     }
                 }
             }
