@@ -25,6 +25,7 @@ public abstract class Imovel {
     }
 
     public Imovel(String logradouro, int numero, String bairro, String cidade, String descricao, double areaTotal, double valor) {
+        ;
         codigoObj = codigoClasse;
         codigoClasse++;
         this.logradouro = logradouro;

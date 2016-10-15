@@ -58,9 +58,12 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     int codigo = inInt("Informe o código do Imovel que deseja Excluir:");
                     if(listaSalaComercial.excluir(codigo)){
                         this.exibeMensagem("Sala Comercial excluir com Sucesso");
+                        break;
                     }else{
                         this.exibeMensagem("Não foi possivel Excluir");
+                        break;
                     }
+                    
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
