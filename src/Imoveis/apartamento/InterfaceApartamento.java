@@ -50,7 +50,9 @@ public class InterfaceApartamento extends InterfaceSistema {
                 case 3:
                     ap = consultar();
                     if (ap != null) {
-                        this.editarImovel(ap, listaApartamentos);
+                        if( this.editarImovel(ap, listaApartamentos) ){
+                            this.exibeMensagem("Imovel editado com sucesso");
+                        }
                     }
                     break;
                 case 4:

@@ -45,13 +45,15 @@ public class InterfaceTerreno extends InterfaceSistema {
                 case 3:
                     tr = consultar();
                     if (tr != null) {
-                        this.editarImovel(tr, listaTerrenos);
+                        if (this.editarImovel(tr, listaTerrenos)) {
+                            this.exibeMensagem("Imovel editado com sucesso");
+                        }
                     }
                     break;
-               case 4:
+                case 4:
                     if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
                         this.exibeMensagem("Imovel exlcuido com sucesso");
-                    }else{
+                    } else {
                         this.exibeMensagem("erro");
                     }
                     break;

@@ -29,10 +29,12 @@ public abstract class InterfaceSistema {
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
     protected abstract void criarImovel();
+
     /**
      * metodo abstrato somente para definir um padrao nas interfaces.
      */
     public abstract void principal();
+
     /**
      * função para exibir mensagens no sistema
      *
@@ -43,6 +45,7 @@ public abstract class InterfaceSistema {
         System.out.println(mensagem.toUpperCase());
         System.out.println("===========================================================\n");
     }
+
     /**
      * Função para exibir uma lista com todos os imoveis na lista de imoveis que
      * deve ser passada pro parametro e retorna um inteiro com o codigo do
@@ -62,7 +65,8 @@ public abstract class InterfaceSistema {
         div();
         return inInt("Digite o codigo do imovel: ");
     }
-    public void editarImovel(Imovel imovel, ImobiliariaCrud lista) {
+
+    public boolean editarImovel(Imovel imovel, ImobiliariaCrud lista) {
         Terreno t = null;
         Apartamento a = null;
         SalaComercial sc = null;
@@ -79,7 +83,6 @@ public abstract class InterfaceSistema {
          */
 
         //Acrescentar os que faltam
-        
         //ATRIBUTOS DE IMOVEL
         if (atributo.equalsIgnoreCase("logradouro")) {
             String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
@@ -102,7 +105,7 @@ public abstract class InterfaceSistema {
         } else if (atributo.equalsIgnoreCase("valor")) {
             double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
             imovel.setValor(valor);
-        //ATRIBUTOS DE PREDIO
+            //ATRIBUTOS DE PREDIO
         } else if (atributo.equalsIgnoreCase("Nome Edificio")) {
             String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
             if (imovel instanceof Predio) {
@@ -121,7 +124,7 @@ public abstract class InterfaceSistema {
                 p = (Predio) imovel;
                 p.setValorCondominio(valorCondominio);
             }
-        //ATRIBUTO DE APARTAMENTO & RESIDENCIA
+            //ATRIBUTO DE APARTAMENTO & RESIDENCIA
         } else if (atributo.equalsIgnoreCase("numero de quartos")) {
             int numeroDeQuartos = inInt("----------------------------------------\nQuantidade de quartos do imovel:");
             if (imovel instanceof Apartamento) {
@@ -201,7 +204,8 @@ public abstract class InterfaceSistema {
         if (inString("Deseja editar outro atributo??").equalsIgnoreCase("sim")) {
             this.editarImovel(imovel, lista);
         } else {
-            lista.editar(imovel.getCodigoObj(), imovel);
+            return lista.editar(imovel.getCodigoObj(), imovel);
         }
+        return false;
     }
 }

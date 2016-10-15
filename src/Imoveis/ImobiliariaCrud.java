@@ -65,7 +65,9 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
         listaImoveis.add(imovel);
-        this.escreverArquivo();
+        if (!this.escreverArquivo()) {
+            return false;
+        }
         return true;
     }
 
@@ -85,7 +87,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         if (imovel != null) {
             int indice = this.listaImoveis.indexOf(imovel);
             this.listaImoveis.set(indice, im);
-            this.escreverArquivo();
+            if (!this.escreverArquivo()) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -97,7 +101,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         if (imovel != null) {
             int indice = this.listaImoveis.indexOf(imovel);
             this.listaImoveis.remove(indice);
-            this.escreverArquivo();
+            if (!this.escreverArquivo()) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -173,7 +179,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
             buff.write("codigo;" + objProp);
-            for (Imovel imovel : listaImoveis){
+            for (Imovel imovel : listaImoveis) {
                 buff.newLine();
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
@@ -182,6 +188,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             // fecha o arquivo
             buff.close();
             outFile.close();
+            this.gravaCodigo(dir);
             return true;
 
         } catch (FileNotFoundException ex) {
@@ -345,7 +352,6 @@ public class ImobiliariaCrud implements ListaImoveis {
 >>>>>>> 373a7b0d75ac6a8cf0871c493a81691433714065
                     }
                 }
-                this.setUltimoCodigo(dir);
                 return true;
             }
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
@@ -413,7 +419,9 @@ public class ImobiliariaCrud implements ListaImoveis {
     private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
         BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
-        Imovel.setUltimoCodigo(Integer.parseInt(buff.readLine()));
+        int cod = Integer.parseInt(buff.readLine());
+        buff.close();
+        Imovel.setUltimoCodigo(cod + 1);
     }
 
 }
