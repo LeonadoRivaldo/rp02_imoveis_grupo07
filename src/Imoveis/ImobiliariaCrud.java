@@ -285,15 +285,9 @@ public class ImobiliariaCrud implements ListaImoveis {
                         this.incluir(sc);
                     } else if (tipoImovel.getTipo() == 4) {
                         dimensaoFrente = Double.parseDouble(conteudo[9].trim());
-<<<<<<< HEAD
                         dimensaoLado = Double.parseDouble(conteudo[10].trim());
                         t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
                         this.incluir(t);
-=======
-                        dimensaoLado = Double.parseDouble (conteudo[10].trim());
-                          t = new Terreno(codigoObj,dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
-                          this.incluir(t);
->>>>>>> origin/master
                     }
                 }
             }
