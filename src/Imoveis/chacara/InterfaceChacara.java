@@ -23,7 +23,7 @@ public class InterfaceChacara extends InterfaceSistema {
     private Chacara chac = null;
 
     String logradouro, bairro, cidade, descricao;
-    int numero, nroQuartos, anoConstrucao;
+    int numero, numeroDeQuartos, anoDeConstrucao;
     double areaTotal, valor, areaConstruida, distanciaCidade;
     
     @Override
@@ -79,10 +79,10 @@ public class InterfaceChacara extends InterfaceSistema {
         areaTotal = inDouble("\nInforme a Area Total do Imovel: ");
         valor = inDouble("\nInforme o valor do Imovel:");
         areaConstruida = inDouble("\nInforme a Area Construida do Imovel: ");
-        anoConstrucao = inInt("\nInforme o Ano da Construção: ");
-        nroQuartos = inInt("\nInforme o Número de Quartos: ");
+        anoDeConstrucao = inInt("\nInforme o Ano da Construção: ");
+        numeroDeQuartos = inInt("\nInforme o Número de Quartos: ");
         distanciaCidade = inDouble("\nInforme a Distancia da Cidade: ");
-        chac = new Chacara(distanciaCidade, anoConstrucao, nroQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        chac = new Chacara(distanciaCidade, anoDeConstrucao, numeroDeQuartos, areaConstruida, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaChacaras.incluir(chac)) {
             this.exibeMensagem("\nChacara Incluida com Sucesso!");
             if (!listaChacaras.escreverArquivo()) {
