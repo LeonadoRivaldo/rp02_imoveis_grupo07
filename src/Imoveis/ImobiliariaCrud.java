@@ -277,15 +277,17 @@ public class ImobiliariaCrud implements ListaImoveis {
                         this.incluir(ch);
                     } else if (tipoImovel.getTipo() == 3) {
                         nomeEdificio = conteudo[1];
-                        andar = Integer.parseInt(conteudo[9].trim());                        
+                        andar = Integer.parseInt(conteudo[9].trim());
                         valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
                         nroBanheiros = Integer.parseInt(conteudo[11].trim());
                         nroSala = Integer.parseInt(conteudo[12].trim());
                         sc = new SalaComercial(codigoObj, nroSala, nroBanheiros, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                        this.incluir(sc);
                     } else if (tipoImovel.getTipo() == 4) {
                         dimensaoFrente = Double.parseDouble(conteudo[9].trim());
-                        dimensaoLado = Double.parseDouble (conteudo[10].trim());
-                          t = new Terreno(codigoObj,dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                        dimensaoLado = Double.parseDouble(conteudo[10].trim());
+                        t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                        this.incluir(t);
                     }
                 }
             }
@@ -351,11 +353,11 @@ public class ImobiliariaCrud implements ListaImoveis {
         buffCont.close();
     }
 
-    private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException{
-            FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
-            BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
-            Imovel.setUltimoCodigo(Integer.parseInt(buff.readLine()));
-            System.out.println("DEU ERRO! ARQUIVO DE CODIGO N ENCONTRADO");
+    private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+        FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
+        BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
+        Imovel.setUltimoCodigo(Integer.parseInt(buff.readLine()));
+        System.out.println("DEU ERRO! ARQUIVO DE CODIGO N ENCONTRADO");
     }
 
 }
