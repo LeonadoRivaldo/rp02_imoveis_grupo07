@@ -121,10 +121,12 @@ public abstract class Imovel {
     }
 
     public static void setUltimoCodigo(int codigo) {
+        
         codigoClasse = codigo;
     }
 
     public static int getCodigoClasse() {
+        System.out.println(codigoClasse);
         return codigoClasse;
     }
     

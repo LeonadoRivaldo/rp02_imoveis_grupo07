@@ -10,6 +10,7 @@ import static Imoveis.EntradasTeclado.inInt;
 import Imoveis.InterfaceSistema;
 import static Imoveis.EntradasTeclado.inString;
 import Imoveis.ImobiliariaCrud;
+import Imoveis.Imovel;
 import Imoveis.Tipo;
 
 /**
@@ -25,6 +26,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
     public void principal() {
         listaSalaComercial.setTipoImovel(Tipo.SALACOMERCIAL);
         listaSalaComercial.lerArquivo();
+        System.out.println(Imovel.getCodigoClasse());
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -40,6 +42,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     break;
                 case 1:
                     criarImovel();
+                    System.out.println(Imovel.getCodigoClasse());
                     break;
                 case 2:
                     sc = this.consultar();
