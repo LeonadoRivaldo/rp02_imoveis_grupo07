@@ -211,9 +211,135 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="lerArquivo OLD">
-    @Override
+    //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
+    public boolean lerArquivo() {
+        try {
+            String dir = null;
+            if (tipoImovel.getTipo() == 1) {
+                dir = dirName("apartamento");
+            } else if (tipoImovel.getTipo() == 2) {
+                dir = dirName("chacara");
+            } else if (tipoImovel.getTipo() == 3) {
+                dir = dirName("sala_comercial");
+            } else if (tipoImovel.getTipo() == 4) {
+                dir = dirName("terreno");
+            }
+            File files = new File(dir + "\\listaImoveis");
+            if (files.exists()) {
+                FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                this.listaImoveis = (List<Imovel>) in.readObject();
+                in.close();
+                fileIn.close();
+                return true;
+            }
+        } catch (IOException i) {
+            i.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
+    //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
+    private String dirName(String tipo) {
+        Properties p = System.getProperties();
+        return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Cria String das propriedades do objeto">
+    private String objProp(Imovel im) {
+        String prop = im.toString();
+        String[] props = prop.split("\n");
+        String propsaux = "";
+        for (int x = 0; x < props.length; x++) {
+            if (x != 0) {
+                propsaux += props[x].split(":")[0];
+            }
+            if (x != props.length - 1 && x != 0) {
+                propsaux += ";";
+            }
+
+        }
+        return propsaux;
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="cria string com os valores do objeto">
+    private String objToString(Imovel im) {
+        String prop = im.toString();
+        String[] props = prop.split("\n");
+        String propsaux = "";
+        propsaux += im.getCodigoObj() + ";";
+        for (int x = 0; x < props.length; x++) {
+            if (x != 0) {
+                propsaux += props[x].split(":")[1].trim();
+            }
+            if (x != props.length - 1 && x != 0) {
+                propsaux += ";";
+            }
+
+        }
+        return propsaux;
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="grava um arquivo com o ultimo codigo de imovel da lista">
+    private void gravaCodigo(String dir) throws FileNotFoundException, IOException {
+        String fileName = "\\ultimoCod.csv";
+        /*
+         escreve o ultimo codigo em um arquivo para continuar a contagem ao
+         reiniciar o programa
+         */
+        FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
+        BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
+        int i = Imovel.getCodigoClasse();
+        buffCont.write(Integer.toString(i));
+        outFileCont.close();
+        buffCont.close();
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
+    private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+        File file = new File(dir + "\\ultimoCod.csv");
+        if (file.exists()) {
+            FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
+            BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
+            int cod = Integer.parseInt(buff.readLine());
+            buff.close();
+            Imovel.setUltimoCodigo(cod);
+        }
+    }
+
+    public void setLastCod() {
+        try {
+            if (tipoImovel.getTipo() == 1) {
+                this.setUltimoCodigo(this.dirName("apartamento"));
+            } else if (tipoImovel.getTipo() == 2) {
+                this.setUltimoCodigo(this.dirName("chacara"));
+            } else if (tipoImovel.getTipo() == 3) {
+                this.setUltimoCodigo(this.dirName("sala_comercial"));
+            } else if (tipoImovel.getTipo() == 4) {
+                this.setUltimoCodigo(this.dirName("terreno"));
+            }
+        } catch (Exception e) {
+            if (countcodTrys < 10) {
+                countcodTrys++;
+                this.setLastCod();
+            }
+        }
+    }
+   //</editor-fold>
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">
     /*
+     @Deprecated
      public boolean lerArquivo() {
      FileInputStream inFile;
      BufferedReader buff;
@@ -325,121 +451,5 @@ public class ImobiliariaCrud implements ListaImoveis {
      }
             
      */
-
 //</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="lerArquivo serializado">
-    public boolean lerArquivo() {
-        try {
-            String dir = null;
-            if (tipoImovel.getTipo() == 1) {
-                dir = dirName("apartamento");
-            } else if (tipoImovel.getTipo() == 2) {
-                dir = dirName("chacara");
-            } else if (tipoImovel.getTipo() == 3) {
-                dir = dirName("sala_comercial");
-            } else if (tipoImovel.getTipo() == 4) {
-                dir = dirName("terreno");
-            }
-            File files = new File(dir + "\\listaImoveis");
-            if (files.exists()) {
-                FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
-                this.listaImoveis = (List<Imovel>) in.readObject();
-                in.close();
-                fileIn.close();
-                return true;
-            }
-        } catch (IOException i) {
-            i.printStackTrace();
-            return false;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ImobiliariaCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    //</editor-fold>
-
-    private String dirName(String tipo) {
-        Properties p = System.getProperties();
-        return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
-    }
-
-    private String objProp(Imovel im) {
-        String prop = im.toString();
-        String[] props = prop.split("\n");
-        String propsaux = "";
-        for (int x = 0; x < props.length; x++) {
-            if (x != 0) {
-                propsaux += props[x].split(":")[0];
-            }
-            if (x != props.length - 1 && x != 0) {
-                propsaux += ";";
-            }
-
-        }
-        return propsaux;
-    }
-
-    private String objToString(Imovel im) {
-        String prop = im.toString();
-        String[] props = prop.split("\n");
-        String propsaux = "";
-        propsaux += im.getCodigoObj() + ";";
-        for (int x = 0; x < props.length; x++) {
-            if (x != 0) {
-                propsaux += props[x].split(":")[1].trim();
-            }
-            if (x != props.length - 1 && x != 0) {
-                propsaux += ";";
-            }
-
-        }
-        return propsaux;
-    }
-
-    private void gravaCodigo(String dir) throws FileNotFoundException, IOException {
-        String fileName = "\\ultimoCod.csv";
-        /*
-         escreve o ultimo codigo em um arquivo para continuar a contagem ao
-         reiniciar o programa
-         */
-        FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
-        BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
-        int i = Imovel.getCodigoClasse();
-        buffCont.write(Integer.toString(i));
-        outFileCont.close();
-        buffCont.close();
-    }
-
-    private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
-        File file = new File(dir + "\\ultimoCod.csv");
-        if (file.exists()) {
-            FileInputStream inFile = new FileInputStream(new File(dir + "\\ultimoCod.csv"));
-            BufferedReader buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
-            int cod = Integer.parseInt(buff.readLine());
-            buff.close();
-            Imovel.setUltimoCodigo(cod);
-        }
-    }
-
-    public void setLastCod() {
-        try {
-            if (tipoImovel.getTipo() == 1) {
-                this.setUltimoCodigo(this.dirName("apartamento"));
-            } else if (tipoImovel.getTipo() == 2) {
-                this.setUltimoCodigo(this.dirName("chacara"));
-            } else if (tipoImovel.getTipo() == 3) {
-                this.setUltimoCodigo(this.dirName("sala_comercial"));
-            } else if (tipoImovel.getTipo() == 4) {
-                this.setUltimoCodigo(this.dirName("terreno"));
-            }
-        } catch (Exception e) {
-            if (countcodTrys < 10) {
-                countcodTrys++;
-                this.setLastCod();
-            }
-        }
-    }
-
 }
