@@ -25,11 +25,14 @@ public class InterfaceChacara extends InterfaceSistema {
     String logradouro, bairro, cidade, descricao;
     int numero, numeroDeQuartos, anoDeConstrucao;
     double areaTotal, valor, areaConstruida, distanciaCidade;
-    
+
     @Override
     public void principal() {
         listaChacaras.setTipoImovel(Tipo.CHACARA);
-        listaChacaras.lerArquivo();
+        if (!listaChacaras.lerArquivo()) {
+            this.exibeMensagem("Arquivo não encontrado");
+        }
+        listaChacaras.setLastCod();
 
         int opcao = -1;
         do {
@@ -60,7 +63,7 @@ public class InterfaceChacara extends InterfaceSistema {
                     }
                     break;
                 case 4:
-                       this.excluir();
+                    this.excluir();
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -120,16 +123,15 @@ public class InterfaceChacara extends InterfaceSistema {
         }
         return null;
     }
-    
-    public void excluir (){
-     int codigo = inInt("Informe o Codigo da Chacarra:");
-     if (listaChacaras.excluir(codigo)){
-         this.exibeMensagem("Chacara Excluida com Sucesso!");
-     }else{
-         this.exibeMensagem("Nenhuma Chacarra Encontrada! ");
-     }
-     
- 
+
+    public void excluir() {
+        int codigo = inInt("Informe o Codigo da Chacarra:");
+        if (listaChacaras.excluir(codigo)) {
+            this.exibeMensagem("Chacara Excluida com Sucesso!");
+        } else {
+            this.exibeMensagem("Nenhuma Chacarra Encontrada! ");
+        }
+
     }
 
     public static void main(String[] args) {

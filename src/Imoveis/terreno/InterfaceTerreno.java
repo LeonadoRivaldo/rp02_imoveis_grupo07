@@ -19,7 +19,11 @@ public class InterfaceTerreno extends InterfaceSistema {
     @Override
     public void principal() {
         listaTerrenos.setTipoImovel(Tipo.TERRENO);
-        listaTerrenos.lerArquivo();
+        
+        if( !listaTerrenos.lerArquivo() ){
+            this.exibeMensagem("Arquivo não encontrado");
+        }
+        listaTerrenos.setLastCod();
         int opcao = -1;
         do {
             System.out.println("#############################################");

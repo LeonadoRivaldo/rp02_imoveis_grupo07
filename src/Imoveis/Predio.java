@@ -78,7 +78,7 @@ public abstract class Predio extends Imovel {
     @Override
     public String toString() {
         String str = "";
-        str += "\nNome Edificio: " + nomeEdificio + "\n";
+        str += "\nNome Edificio: " + nomeEdificio;
         str += super.toString();
         str += "\nAndar: " + andar;
         str += "\nValor Condominio: R$" + valorCondominio;

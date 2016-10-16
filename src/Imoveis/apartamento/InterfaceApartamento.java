@@ -23,7 +23,10 @@ public class InterfaceApartamento extends InterfaceSistema {
     @Override
     public void principal() {
         listaApartamentos.setTipoImovel(Tipo.APARTAMENTO);
-        listaApartamentos.lerArquivo();
+        if (!listaApartamentos.lerArquivo()) {
+            this.exibeMensagem("Arquivo não encontrado");
+        }
+        listaApartamentos.setLastCod();
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -50,7 +53,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 case 3:
                     ap = consultar();
                     if (ap != null) {
-                        if( this.editarImovel(ap, listaApartamentos) ){
+                        if (this.editarImovel(ap, listaApartamentos)) {
                             this.exibeMensagem("Imovel editado com sucesso");
                         }
                     }
@@ -58,7 +61,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 case 4:
                     if (listaApartamentos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
                         this.exibeMensagem("Imovel exlcuido com sucesso");
-                    }else{
+                    } else {
                         this.exibeMensagem("erro");
                     }
                     break;

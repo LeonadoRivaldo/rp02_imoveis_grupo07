@@ -11,7 +11,7 @@ package Imoveis;
  */
 public abstract class Imovel {
 
-    protected static int codigoClasse = 10;
+    protected static int codigoClasse = 1;
     protected int codigoObj;
     protected String logradouro;
     protected int numero;
@@ -111,11 +111,11 @@ public abstract class Imovel {
     @Override
     public String toString() {
         String str = "";
-        str += "Logradouro: " + logradouro;
+        str += "\nLogradouro: " + logradouro;
         str += "\nNumero: " + numero;
         str += "\nBairro: " + bairro;
         str += "\nCidade: " + cidade;
-        str += "\nDescricao:" + descricao;
+        str += "\nDescricao: " + descricao;
         str += "\nArea Total: " + areaTotal + "m²";
         str += "\nValor: R$" + valor;
         return str;
