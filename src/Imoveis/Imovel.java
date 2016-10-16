@@ -5,11 +5,13 @@
  */
 package Imoveis;
 
+import java.io.Serializable;
+
 /**
  *
  * @author junio
  */
-public abstract class Imovel {
+public abstract class Imovel implements Serializable{
 
     protected static int codigoClasse = 1;
     protected int codigoObj;

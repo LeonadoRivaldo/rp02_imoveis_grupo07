@@ -10,6 +10,8 @@ import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
