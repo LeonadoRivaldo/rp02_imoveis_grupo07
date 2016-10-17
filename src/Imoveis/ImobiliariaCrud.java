@@ -54,6 +54,8 @@ public class ImobiliariaCrud implements ListaImoveis {
         this.tipoImovel = tipoImovel;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Incluir, Consultar, Editar, Excluir">
+    //<editor-fold defaultstate="collapsed" desc="Incluir">
     /**
      * metodo que inclui um objeto na lista geral de imoveis
      *
@@ -70,7 +72,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         listaImoveis.add(imovel);
         return true;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Consultar">
     @Override
     public Imovel consultar(int codigo) {
         for (Imovel imovel : listaImoveis) {
@@ -80,7 +84,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         }
         return null;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Editar">    
     @Override
     public boolean editar(int codigo, Imovel im) {
         Imovel imovel = this.consultar(codigo);
@@ -94,7 +100,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         }
         return false;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Excluir">
     @Override
     public boolean excluir(int codigo) {
         Imovel imovel = this.consultar(codigo);
@@ -108,33 +116,55 @@ public class ImobiliariaCrud implements ListaImoveis {
         }
         return false;
     }
+//</editor-fold>
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Ordenação">
+    //<editor-fold defaultstate="collapsed" desc="Por codigo">
     @Override
     public List<Imovel> ordenarCodigo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Por valor">
     @Override
     public List<Imovel> ordenarValor() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Area total">
     @Override
     public List<Imovel> ordenarArea() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    //</editor-fold>
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Pesquisa">
+    //<editor-fold defaultstate="collapsed" desc="Por valor">
     @Override
     public List<Imovel> pesquisaValor(double valor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Por bairro">
     @Override
     public List<Imovel> pesquisaBairro(String bairro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    //</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Escrever arquivo">
+    /**
+     * metodo que escreve dois arquivos, um arquivo .csv com a lista de imoveis em formato 
+     * de texto e um outro arquivo para o sistema que vai conter o objeto List listaImoveis
+     * para facilitar a montagem da lista ao iniciar o programa
+     * @return true caso consiga, false caso não encontre o arquivo ou algum erro aconteça
+     */
     @Override
     public boolean escreverArquivo() {
         String dir = null;
@@ -212,6 +242,11 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
+    /**
+     * metodo que lê o arquivo listaImoveis que contem o objeto List listaImoveis
+     * e monta a lista, o arquivo que vai ser lido depende do tipo de imovel da lista
+     * @return 
+     */
     public boolean lerArquivo() {
         try {
             String dir = null;
@@ -245,6 +280,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
+    /**
+     * Recebendo o dipo da lista por parametro o metodo retorna uma string
+     * com o diretorio que deve ser usa para separar os arquivos do sistema
+     * @param tipo string determinada pelo tipo de imovel
+     * @return 
+     */
     private String dirName(String tipo) {
         Properties p = System.getProperties();
         return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
@@ -252,6 +293,12 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Cria String das propriedades do objeto">
+    /**
+     * Recebe um imovel por parametro e retorna uma string separada por ";" com os
+     * nomes dos atributos desse imovel
+     * @param im imovel
+     * @return string separada por ; com os atributos do imovel
+     */
     private String objProp(Imovel im) {
         String prop = im.toString();
         String[] props = prop.split("\n");
@@ -270,6 +317,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="cria string com os valores do objeto">
+        /**
+     * Recebe um imovel por parametro e retorna uma string separada por ";" com os
+     * valores dos atributos desse imovel
+     * @param im imovel
+     * @return string separada por ; com os valores dos atributos do imovel
+     */
     private String objToString(Imovel im) {
         String prop = im.toString();
         String[] props = prop.split("\n");
@@ -289,6 +342,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="grava um arquivo com o ultimo codigo de imovel da lista">
+    /**
+     * Cria um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
+     * @param dir caminho diretorio aonde o arquivo com o valor deve ser criado
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     private void gravaCodigo(String dir) throws FileNotFoundException, IOException {
         String fileName = "\\ultimoCod.csv";
         /*
@@ -305,6 +364,13 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
+    /**
+     * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel e seta o ultimo codigo
+     * dentro da classe imovel
+     * @param dir caminho diretorio aonde o arquivo com o valor deve ser lido
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         File file = new File(dir + "\\ultimoCod.csv");
         if (file.exists()) {
@@ -315,7 +381,10 @@ public class ImobiliariaCrud implements ListaImoveis {
             Imovel.setUltimoCodigo(cod);
         }
     }
-
+    
+    /**
+     * metodo de acesso para o metodo setUltimoCodigo
+     */
     public void setLastCod() {
         try {
             if (tipoImovel.getTipo() == 1) {
@@ -449,7 +518,6 @@ public class ImobiliariaCrud implements ListaImoveis {
      }
      return false;
      }
-            
      */
 //</editor-fold>
 }
