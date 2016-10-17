@@ -10,6 +10,7 @@ import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ public class InterfaceApartamento extends InterfaceSistema {
 
     private ImobiliariaCrud listaApartamentos = new ImobiliariaCrud();
     private Apartamento ap = null;
+    private List<Imovel> listaOrdenada;
 
     @Override
     public void principal() {
@@ -36,6 +38,7 @@ public class InterfaceApartamento extends InterfaceSistema {
             System.out.println("2 - Consultar");
             System.out.println("3 - editar");
             System.out.println("4 - excluir");
+            System.out.println("5 - Ordernar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
@@ -43,12 +46,12 @@ public class InterfaceApartamento extends InterfaceSistema {
                 case 0:
                     break;
                 case 1:
-                    criarImovel();
+                    this.criarImovel();
                     break;
                 case 2:
                     ap = this.consultar();
                     if (ap != null) {
-                        System.out.println("\n#############################################");
+                        System.out.print("#############################################");
                         System.out.println(ap.toString());
                     }
                     break;
@@ -66,6 +69,9 @@ public class InterfaceApartamento extends InterfaceSistema {
                     } else {
                         this.exibeMensagem("erro");
                     }
+                    break;
+                case 5:
+                    this.Ordenar();
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -101,7 +107,7 @@ public class InterfaceApartamento extends InterfaceSistema {
         }
     }
 
-    public Apartamento consultar() {
+    private Apartamento consultar() {
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
         System.out.println("2 - Listar todos");
@@ -129,6 +135,33 @@ public class InterfaceApartamento extends InterfaceSistema {
                 this.exibeMensagem("Opção invalida!");
         }
         return null;
+    }
+
+    private void Ordenar() {
+        System.out.println("=======================================");
+        System.out.println("1 - Ordernar por valor");
+        System.out.println("2 - Ordernar por codigo");
+        System.out.println("3 - Ordernar por Area total");
+        System.out.println("----------------------------------------");
+        int opcao = inInt("Digite a opção desejada: ");
+
+        switch (opcao) {
+            case 1:
+                this.listaOrdenada = this.listaApartamentos.ordenarValor();
+                int codImovel = this.listaImoveis2(listaOrdenada);
+                System.out.print("=============================================");
+                System.out.println(listaApartamentos.consultar(codImovel).toString());;
+                System.out.println("===========================================");
+                break;
+            case 2:
+                System.out.println("TODO");
+                break;
+            case 3:
+                System.out.println("TODO");
+                break;
+            default:
+                this.exibeMensagem("Opção invalida");
+        }
     }
 
     public static void main(String[] args) {

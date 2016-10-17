@@ -123,14 +123,24 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Por codigo">
     @Override
     public List<Imovel> ordenarCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Por valor">
     @Override
     public List<Imovel> ordenarValor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Imovel> aux = new ArrayList<>();
+        aux.addAll(this.listaImoveis);
+        for (int i = 0; i < aux.size(); i++) {
+            Imovel imovel = aux.get(i);
+            for (int j = i - 1; j >= 0 && aux.get(j).getValor() > imovel.getValor(); j--) {
+                aux.set(j + 1, aux.get(j));
+                aux.set(j, imovel);
+            }
+        }
+        return aux;
     }
     //</editor-fold>
 
@@ -160,10 +170,13 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="Escrever arquivo">
     /**
-     * metodo que escreve dois arquivos, um arquivo .csv com a lista de imoveis em formato 
-     * de texto e um outro arquivo para o sistema que vai conter o objeto List listaImoveis
-     * para facilitar a montagem da lista ao iniciar o programa
-     * @return true caso consiga, false caso não encontre o arquivo ou algum erro aconteça
+     * metodo que escreve dois arquivos, um arquivo .csv com a lista de imoveis
+     * em formato de texto e um outro arquivo para o sistema que vai conter o
+     * objeto List listaImoveis para facilitar a montagem da lista ao iniciar o
+     * programa
+     *
+     * @return true caso consiga, false caso não encontre o arquivo ou algum
+     * erro aconteça
      */
     @Override
     public boolean escreverArquivo() {
@@ -243,9 +256,11 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
-     * metodo que lê o arquivo listaImoveis que contem o objeto List listaImoveis
-     * e monta a lista, o arquivo que vai ser lido depende do tipo de imovel da lista
-     * @return 
+     * metodo que lê o arquivo listaImoveis que contem o objeto List
+     * listaImoveis e monta a lista, o arquivo que vai ser lido depende do tipo
+     * de imovel da lista
+     *
+     * @return
      */
     public boolean lerArquivo() {
         try {
@@ -281,10 +296,11 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
-     * Recebendo o dipo da lista por parametro o metodo retorna uma string
-     * com o diretorio que deve ser usa para separar os arquivos do sistema
+     * Recebendo o dipo da lista por parametro o metodo retorna uma string com o
+     * diretorio que deve ser usa para separar os arquivos do sistema
+     *
      * @param tipo string determinada pelo tipo de imovel
-     * @return 
+     * @return
      */
     private String dirName(String tipo) {
         Properties p = System.getProperties();
@@ -294,8 +310,9 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="Cria String das propriedades do objeto">
     /**
-     * Recebe um imovel por parametro e retorna uma string separada por ";" com os
-     * nomes dos atributos desse imovel
+     * Recebe um imovel por parametro e retorna uma string separada por ";" com
+     * os nomes dos atributos desse imovel
+     *
      * @param im imovel
      * @return string separada por ; com os atributos do imovel
      */
@@ -317,9 +334,10 @@ public class ImobiliariaCrud implements ListaImoveis {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="cria string com os valores do objeto">
-        /**
-     * Recebe um imovel por parametro e retorna uma string separada por ";" com os
-     * valores dos atributos desse imovel
+    /**
+     * Recebe um imovel por parametro e retorna uma string separada por ";" com
+     * os valores dos atributos desse imovel
+     *
      * @param im imovel
      * @return string separada por ; com os valores dos atributos do imovel
      */
@@ -343,10 +361,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="grava um arquivo com o ultimo codigo de imovel da lista">
     /**
-     * Cria um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
+     * Cria um arquivo com o ultimo codigo de imovel dependendo do tipo de
+     * imovel
+     *
      * @param dir caminho diretorio aonde o arquivo com o valor deve ser criado
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     private void gravaCodigo(String dir) throws FileNotFoundException, IOException {
         String fileName = "\\ultimoCod.csv";
@@ -365,11 +385,12 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
     /**
-     * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel e seta o ultimo codigo
-     * dentro da classe imovel
+     * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
+     * e seta o ultimo codigo dentro da classe imovel
+     *
      * @param dir caminho diretorio aonde o arquivo com o valor deve ser lido
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     private void setUltimoCodigo(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         File file = new File(dir + "\\ultimoCod.csv");
@@ -381,7 +402,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             Imovel.setUltimoCodigo(cod);
         }
     }
-    
+
     /**
      * metodo de acesso para o metodo setUltimoCodigo
      */

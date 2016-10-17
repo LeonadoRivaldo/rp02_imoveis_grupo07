@@ -66,6 +66,16 @@ public abstract class InterfaceSistema {
         return inInt("Digite o codigo do imovel: ");
     }
 
+    public int listaImoveis2(List<Imovel> lista) {
+        int imovelCodig;
+        div();
+        for (Imovel imovel : lista) {
+            System.out.println(imovel.getCodigoObj() + " - Logradouro: " + imovel.getLogradouro() + " Valor:" + imovel.getValor());
+        }
+        div();
+        return inInt("Digite o codigo do imovel: ");
+    }
+
     public boolean editarImovel(Imovel imovel, ImobiliariaCrud lista) {
         Terreno t = null;
         Apartamento a = null;
