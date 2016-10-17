@@ -163,7 +163,13 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Por bairro">
     @Override
     public List<Imovel> pesquisaBairro(String bairro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Imovel> aux = new ArrayList<>();
+        for (Imovel im : this.listaImoveis) {
+            if (im.getBairro().equalsIgnoreCase(bairro)) {
+                aux.add(im);
+            }
+        }
+        return aux;
     }
     //</editor-fold>
     //</editor-fold>
