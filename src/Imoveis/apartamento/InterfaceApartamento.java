@@ -111,7 +111,7 @@ public class InterfaceApartamento extends InterfaceSistema {
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
         System.out.println("2 - Pesquisa por bairro");
-        System.out.println("3 - Listar todos");
+        System.out.println("6 - Listar todos");
         System.out.println("----------------------------------------");
         int o = inInt("Opção:");
         switch (o) {
@@ -142,7 +142,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                     }
                 } while (op != 2);
                 break;
-            case 3:
+            case 6:
                 int imovelCod = this.listaImoveis(listaApartamentos);
                 ap = (Apartamento) listaApartamentos.consultar(imovelCod);
                 if (ap != null) {
