@@ -25,8 +25,10 @@ public class InterfaceSalaComercial extends InterfaceSistema {
     @Override
     public void principal() {
         listaSalaComercial.setTipoImovel(Tipo.SALACOMERCIAL);
-        listaSalaComercial.lerArquivo();
-        System.out.println(Imovel.getCodigoClasse());
+        if (!listaSalaComercial.lerArquivo()) {
+            this.exibeMensagem("Arquivo não encontrado");
+        }
+        listaSalaComercial.setLastCod();
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -42,7 +44,6 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     break;
                 case 1:
                     criarImovel();
-                    System.out.println(Imovel.getCodigoClasse());
                     break;
                 case 2:
                     sc = this.consultar();
@@ -59,20 +60,21 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     break;
                 case 4:
                     int codigo = inInt("Informe o código do Imovel que deseja Excluir:");
-                    if(listaSalaComercial.excluir(codigo)){
+                    if (listaSalaComercial.excluir(codigo)) {
                         this.exibeMensagem("Sala Comercial excluir com Sucesso");
                         break;
-                    }else{
+                    } else {
                         this.exibeMensagem("Não foi possivel Excluir");
                         break;
                     }
-                    
+
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
         } while (opcao != 0);
 
     }
+
     public SalaComercial consultar() {
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
@@ -104,7 +106,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
     }
 
     @Override
-    protected void criarImovel(){
+    protected void criarImovel() {
         String nomeEdificio = inString("----------------------------------------\nDigite o nome do edificio do imovel:");
         String logradouro = inString("----------------------------------------\nDigite o endereço do imovel:");
         int numero = inInt("------------------------------------------------\nDigite o numero do endereço:");
@@ -120,7 +122,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
         if (listaSalaComercial.incluir(sc)) {
             this.exibeMensagem("Sala Comercial incluida com sucesso!");
-            if(!listaSalaComercial.escreverArquivo()){
+            if (!listaSalaComercial.escreverArquivo()) {
                 this.exibeMensagem("Erro ao escrever o arquivo");
             }
         } else {

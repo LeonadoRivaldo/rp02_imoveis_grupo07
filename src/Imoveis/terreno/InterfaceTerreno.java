@@ -19,7 +19,11 @@ public class InterfaceTerreno extends InterfaceSistema {
     @Override
     public void principal() {
         listaTerrenos.setTipoImovel(Tipo.TERRENO);
-        listaTerrenos.lerArquivo();
+        
+        if( !listaTerrenos.lerArquivo() ){
+            this.exibeMensagem("Arquivo não encontrado");
+        }
+        listaTerrenos.setLastCod();
         int opcao = -1;
         do {
             System.out.println("#############################################");
@@ -45,13 +49,15 @@ public class InterfaceTerreno extends InterfaceSistema {
                 case 3:
                     tr = consultar();
                     if (tr != null) {
-                        this.editarImovel(tr, listaTerrenos);
+                        if (this.editarImovel(tr, listaTerrenos)) {
+                            this.exibeMensagem("Imovel editado com sucesso");
+                        }
                     }
                     break;
-               case 4:
+                case 4:
                     if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
                         this.exibeMensagem("Imovel exlcuido com sucesso");
-                    }else{
+                    } else {
                         this.exibeMensagem("erro");
                     }
                     break;
