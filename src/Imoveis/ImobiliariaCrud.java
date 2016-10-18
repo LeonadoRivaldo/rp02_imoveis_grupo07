@@ -154,9 +154,40 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="Pesquisa">
     //<editor-fold defaultstate="collapsed" desc="Por valor">
+    /*
     @Override
     public List<Imovel> pesquisaValor(double valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Imovel> aux = this.ordenarValor();
+        int m, e = 0;
+        int d = this.listaImoveis.size();
+        while (e <= d) {
+            m = (e + d) / 2;
+            if (this.listaImoveis.get(m).getValor() == valor) {
+                aux.add(this.listaImoveis.get(m));
+            } else if (this.listaImoveis.get(m).getValor() < valor) {
+                e = m + 1;
+            } else {
+                d = m - 1;
+            }
+        }
+        if (aux.size() < 0) {
+            return aux;
+        }
+        return null;
+    }
+     */
+    @Override
+    public List<Imovel> pesquisaValor(double valor) {
+        List<Imovel> aux = new ArrayList();
+        for (int i = 0; i < this.listaImoveis.size(); i++) {
+            if (this.listaImoveis.get(i).getValor() <= valor) {
+                aux.add(this.listaImoveis.get(i));
+            }
+        }
+        if (aux.size() > 0) {
+            return aux; 
+        }
+        return null;
     }
     //</editor-fold>
 
@@ -430,7 +461,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
     }
-   //</editor-fold>
+    //</editor-fold>
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">

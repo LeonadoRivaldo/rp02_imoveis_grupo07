@@ -5,6 +5,7 @@ import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -30,6 +31,8 @@ public class InterfaceTerreno extends InterfaceSistema {
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
             System.out.println("3 - editar");
+            System.out.println("4 - excluir");
+            System.out.println("5 - pesquisa valor");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
@@ -59,6 +62,14 @@ public class InterfaceTerreno extends InterfaceSistema {
                         this.exibeMensagem("Imovel exlcuido com sucesso");
                     } else {
                         this.exibeMensagem("erro");
+                    }
+                    break;
+                case 5:
+                    List<Imovel> b = listaTerrenos.pesquisaValor(inDouble("digite o valor do imóvel: "));
+                    if(b != null){
+                        this.listaImoveis2(b);
+                    }else{
+                        this.exibeMensagem("imóvel com valor não encontrado");
                     }
                     break;
                 default:
