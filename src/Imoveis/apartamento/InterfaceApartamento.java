@@ -108,9 +108,11 @@ public class InterfaceApartamento extends InterfaceSistema {
     }
 
     private Apartamento consultar() {
+        int op = 0;
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
         System.out.println("2 - Pesquisa por bairro");
+        System.out.println("3 - Pesquisa por valor");
         System.out.println("6 - Listar todos");
         System.out.println("----------------------------------------");
         int o = inInt("Opção:");
@@ -124,9 +126,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int op = 0;
                 do {
-
                     List<Imovel> aux = listaApartamentos.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
                     if (aux.size() > 0) {
                         int codImovel = this.listaImoveis2(aux);
@@ -142,6 +142,24 @@ public class InterfaceApartamento extends InterfaceSistema {
                     }
                 } while (op != 2);
                 break;
+            case 3:
+                do {
+                    List<Imovel> aux = listaApartamentos.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
+                    if (aux.size() > 0) {
+                        int codImovel = this.listaImoveis2(aux);
+                        ap = (Apartamento) listaApartamentos.consultar(codImovel);
+                        if (ap != null) {
+                            return ap;
+                        } else {
+                            this.exibeMensagem("apartamento não encontrado");
+                        }
+                    } else {
+                        this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
+                        op = inInt("consultar novamente? 1- sim | 2-nao");
+                    }
+                } while (op != 2);
+                break;
+
             case 6:
                 int imovelCod = this.listaImoveis(listaApartamentos);
                 ap = (Apartamento) listaApartamentos.consultar(imovelCod);
