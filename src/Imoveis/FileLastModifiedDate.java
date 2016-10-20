@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-public class GetFileLastModified {
+public class FileLastModifiedDate {
 
     public static boolean lastModifiedIsEqual(String dir) throws FileNotFoundException, UnsupportedEncodingException, IOException {
         File file = new File(dir + "\\listaImoveis.csv");
