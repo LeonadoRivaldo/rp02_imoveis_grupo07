@@ -148,7 +148,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                // int ordenado = this.listaImoveis(listaSalaComercial);
                 List<Imovel> li = listaSalaComercial.ordenarArea();
                 if (li != null) {
-                   int im = this.listaImoveis2(li);
+                   int im = this.listarImoveis2(li);
                    sc = (SalaComercial) this.listaSalaComercial.consultar(im);
                     System.out.println(sc.toString());
                 } else {

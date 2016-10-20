@@ -11,8 +11,6 @@ import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -109,102 +107,132 @@ public class InterfaceApartamento extends InterfaceSistema {
     }
 
     private Apartamento consultar() {
-        int op = 0;
-        System.out.println("=======================================");
-        System.out.println("1 - Pesquisar");
-        System.out.println("2 - Pesquisa por bairro");
-        System.out.println("3 - Pesquisa por valor");
-        System.out.println("6 - Listar todos");
-        System.out.println("----------------------------------------");
-        int o = inInt("Opção:");
-        switch (o) {
-            case 1:
-                ap = (Apartamento) listaApartamentos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
-                if (ap != null) {
-                    return ap;
-                } else {
-                    this.exibeMensagem("apartamento não encontrado");
-                }
-                break;
-            case 2:
-                do {
-                    List<Imovel> aux = listaApartamentos.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
-                    if (aux.size() > 0) {
-                        int codImovel = this.listarImoveis2(aux);
-                        ap = (Apartamento) listaApartamentos.consultar(codImovel);
-                        if (ap != null) {
-                            return ap;
-                        } else {
-                            this.exibeMensagem("apartamento não encontrado");
-                        }
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Pesquisar");
+            System.out.println("2 - Pesquisa por bairro");
+            System.out.println("3 - Pesquisa por valor");
+            System.out.println("4 - Listar todos");
+            System.out.println("0 - sair");
+            System.out.println("----------------------------------------");
+            op = inInt("Opção:");
+            switch (op) {
+                case 0:
+                    break;
+                case 1:
+                    ap = (Apartamento) listaApartamentos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                    if (ap != null) {
+                        return ap;
                     } else {
-                        this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
-                        op = inInt("consultar novamente? 1- sim | 2-nao");
+                        this.exibeMensagem("apartamento não encontrado");
                     }
-                } while (op != 2);
-                break;
-            case 3:
-                do {
-                    List<Imovel> aux = listaApartamentos.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
-                    if (aux.size() > 0) {
-                        int codImovel = this.listarImoveis2(aux);
-                        ap = (Apartamento) listaApartamentos.consultar(codImovel);
-                        if (ap != null) {
-                            return ap;
+                    break;
+                case 2:
+                    do {
+                        List<Imovel> aux = listaApartamentos.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            ap = (Apartamento) listaApartamentos.consultar(codImovel);
+                            if (ap != null) {
+                                return ap;
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
                         } else {
-                            this.exibeMensagem("apartamento não encontrado");
+                            this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
                         }
-                    } else {
-                        this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
-                        op = inInt("consultar novamente? 1- sim | 2-nao");
-                    }
-                } while (op != 2);
-                break;
+                    } while (op != 2);
+                    break;
+                case 3:
+                    do {
+                        List<Imovel> aux = listaApartamentos.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            ap = (Apartamento) listaApartamentos.consultar(codImovel);
+                            if (ap != null) {
+                                return ap;
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
+                        } else {
+                            this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
+                        }
+                    } while (op != 2);
+                    break;
 
-            case 6:
-                int imovelCod = this.listarImoveis(listaApartamentos);
-                ap = (Apartamento) listaApartamentos.consultar(imovelCod);
-                if (ap != null) {
-                    return ap;
-                } else {
-                    this.exibeMensagem("apartamento não encontrado");
-                }
-                break;
-            default:
-                this.exibeMensagem("Opção invalida!");
-        }
+                case 4:
+                    int imovelCod = this.listarImoveis(listaApartamentos);
+                    ap = (Apartamento) listaApartamentos.consultar(imovelCod);
+                    if (ap != null) {
+                        return ap;
+                    } else {
+                        this.exibeMensagem("apartamento não encontrado");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida!");
+            }
+        } while (op != 0);
         return null;
     }
 
     private void Ordenar() {
-        System.out.println("=======================================");
-        System.out.println("1 - Ordernar por valor");
-        System.out.println("2 - Ordernar por codigo");
-        System.out.println("3 - Ordernar por Area total");
-        System.out.println("----------------------------------------");
-        int opcao = inInt("Digite a opção desejada: ");
-
-        switch (opcao) {
-            case 1:
-                this.listaOrdenada = this.listaApartamentos.ordenarValor();
-                codImovel = this.listarImoveis2(listaOrdenada);
-                System.out.print("=============================================");
-                System.out.println(listaApartamentos.consultar(codImovel).toString());
-                System.out.println("===========================================");
-                break;
-            case 2:
-                this.listaOrdenada = this.listaApartamentos.ordenarCodigo();
-                codImovel = this.listarImoveis2(listaOrdenada);
-                System.out.print("=============================================");
-                System.out.println(listaApartamentos.consultar(codImovel).toString());
-                System.out.println("===========================================");
-                break;
-            case 3:
-                System.out.println("TODO");
-                break;
-            default:
-                this.exibeMensagem("Opção invalida");
-        }
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Ordernar por valor");
+            System.out.println("2 - Ordernar por codigo");
+            System.out.println("3 - Ordernar por Area total");
+            System.out.println("0 - voltar");
+            System.out.println("----------------------------------------");
+            int opcao = inInt("Digite a opção desejada: ");
+            Imovel imo;
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    this.listaOrdenada = this.listaApartamentos.ordenarValor();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaApartamentos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaApartamentos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 2:
+                    this.listaOrdenada = this.listaApartamentos.ordenarCodigo();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaApartamentos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaApartamentos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 3:
+                    this.listaOrdenada = this.listaApartamentos.ordenarArea();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaApartamentos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaApartamentos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida");
+            }
+        } while (op != 0);
     }
 
     public static void main(String[] args) {

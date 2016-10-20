@@ -163,13 +163,12 @@ public class ImobiliariaCrud implements ListaImoveis {
             for (int j = i + 1; j < listaImoveis.size(); j++) {
                 if (listaImoveis.get(j).areaTotal < listaImoveis.get(menor).areaTotal) {
                     menor = j;
-                } else {
                 }
             }
             Imovel aux = listaImoveis.get(i);
             listaImoveis.set(i, listaImoveis.get(menor));
             listaImoveis.set(menor, aux);
-            
+
         }
         return listaImoveis;
     }
@@ -326,7 +325,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
-    
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
      * listaImoveis e monta a lista, o arquivo que vai ser lido depende do tipo
@@ -479,7 +477,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
 //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
     /**
      * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
@@ -524,7 +521,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">
+    //<editor-fold defaultstate="collapsed" desc="Ler Arquivo CSV">
     public boolean lerArquivoCsv() {
         FileInputStream inFile;
         BufferedReader buff;
