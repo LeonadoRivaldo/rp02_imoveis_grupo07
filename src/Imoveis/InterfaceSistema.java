@@ -55,7 +55,7 @@ public abstract class InterfaceSistema {
      * sistema
      * @return retorno é o codigo do imovel para que o imovel seja exibido
      */
-    public int listaImoveis(ImobiliariaCrud lista) {
+    public int listarImoveis(ImobiliariaCrud lista) {
         List<Imovel> list = lista.getListaImoveis();
         int imovelCodig;
         div();
@@ -66,7 +66,7 @@ public abstract class InterfaceSistema {
         return inInt("Digite o codigo do imovel: ");
     }
 
-    public int listaImoveis2(List<Imovel> lista) {
+    public int listarImoveis2(List<Imovel> lista) {
         int imovelCodig;
         div();
         for (Imovel imovel : lista) {

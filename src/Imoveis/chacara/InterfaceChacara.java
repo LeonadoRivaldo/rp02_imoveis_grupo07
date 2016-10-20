@@ -116,7 +116,7 @@ public class InterfaceChacara extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int imovelCod = this.listaImoveis(listaChacaras);
+                int imovelCod = this.listarImoveis(listaChacaras);
                 chac = (Chacara) listaChacaras.consultar(imovelCod);
                 if (chac != null) {
                     return chac;
@@ -152,14 +152,14 @@ public class InterfaceChacara extends InterfaceSistema {
         switch (opcao) {
             case 1:
                 this.listaOrdenada = this.listaChacaras.ordenarValor();
-                int codImovel = this.listaImoveis2(listaOrdenada);
+                int codImovel = this.listarImoveis2(listaOrdenada);
                 System.out.print("=============================================");
                 System.out.println(listaChacaras.consultar(codImovel).toString());
                 System.out.println("===========================================");
                 break;
             case 2:
                 this.listaOrdenada = this.listaChacaras.ordenarCodigo();
-                int codCodigo = this.listaImoveis2(listaOrdenada);
+                int codCodigo = this.listarImoveis2(listaOrdenada);
                 System.out.print("=============================================");
                 System.out.println(listaChacaras.consultar(codCodigo).toString());
                 System.out.println("===========================================");

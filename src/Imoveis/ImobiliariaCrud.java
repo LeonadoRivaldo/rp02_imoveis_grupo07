@@ -129,8 +129,8 @@ public class ImobiliariaCrud implements ListaImoveis {
             for (int j = 0; j < aux.size() - 1; j++) {
                 if (aux.get(j).getCodigoObj() > aux.get(j + 1).getCodigoObj()) {
                     Imovel a = aux.get(j);
-                    aux.set(j, aux.get(j+1));
-                    aux.set(j+1, a);
+                    aux.set(j, aux.get(j + 1));
+                    aux.set(j + 1, a);
                 }
             }
         }
@@ -166,26 +166,26 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Pesquisa">
     //<editor-fold defaultstate="collapsed" desc="Por valor">
     /*
-    @Override
-    public List<Imovel> pesquisaValor(double valor) {
-        List<Imovel> aux = this.ordenarValor();
-        int m, e = 0;
-        int d = this.listaImoveis.size();
-        while (e <= d) {
-            m = (e + d) / 2;
-            if (this.listaImoveis.get(m).getValor() == valor) {
-                aux.add(this.listaImoveis.get(m));
-            } else if (this.listaImoveis.get(m).getValor() < valor) {
-                e = m + 1;
-            } else {
-                d = m - 1;
-            }
-        }
-        if (aux.size() < 0) {
-            return aux;
-        }
-        return null;
-    }
+     @Override
+     public List<Imovel> pesquisaValor(double valor) {
+     List<Imovel> aux = this.ordenarValor();
+     int m, e = 0;
+     int d = this.listaImoveis.size();
+     while (e <= d) {
+     m = (e + d) / 2;
+     if (this.listaImoveis.get(m).getValor() == valor) {
+     aux.add(this.listaImoveis.get(m));
+     } else if (this.listaImoveis.get(m).getValor() < valor) {
+     e = m + 1;
+     } else {
+     d = m - 1;
+     }
+     }
+     if (aux.size() < 0) {
+     return aux;
+     }
+     return null;
+     }
      */
     @Override
     public List<Imovel> pesquisaValor(double valor) {
@@ -196,7 +196,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
         if (aux.size() > 0) {
-            return aux; 
+            return aux;
         }
         return null;
     }
@@ -230,7 +230,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     public boolean escreverArquivo() {
         String dir = null;
         String fileName = "\\listaImoveis.csv";
-        String fileNameSe = "\\listaImoveis";
         FileOutputStream outFile = null;
         BufferedWriter buff = null;
         String objProp = null;
@@ -284,11 +283,12 @@ public class ImobiliariaCrud implements ListaImoveis {
             outFile.close();
 
             //serializando a lista!
-            FileOutputStream outFileSe = new FileOutputStream(dir + fileNameSe);
-            ObjectOutputStream out = new ObjectOutputStream(outFileSe);
-            out.writeObject(this.listaImoveis);
-            outFileSe.close();
-            out.close();
+            try {
+                this.escreveArquivoBinario(dir);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+            this.gravaDataCriacao(dir);
             this.gravaCodigo(dir);
             return true;
 
@@ -300,9 +300,20 @@ public class ImobiliariaCrud implements ListaImoveis {
 
         return false;
     }
-    //</editor-fold>
 
+    private void escreveArquivoBinario(String dir) throws FileNotFoundException, IOException {
+        String fileNameSe = "\\listaImoveis";
+        FileOutputStream outFileSe = new FileOutputStream(dir + fileNameSe);
+        ObjectOutputStream out = new ObjectOutputStream(outFileSe);
+        out.writeObject(this.listaImoveis);
+        outFileSe.close();
+        out.close();
+    }
+
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
+    
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
      * listaImoveis e monta a lista, o arquivo que vai ser lido depende do tipo
@@ -311,6 +322,7 @@ public class ImobiliariaCrud implements ListaImoveis {
      * @return
      */
     public boolean lerArquivo() {
+        System.out.println("ainda não ta funcionando direito a comparação das datas");
         try {
             String dir = null;
             if (tipoImovel.getTipo() == 1) {
@@ -323,13 +335,21 @@ public class ImobiliariaCrud implements ListaImoveis {
                 dir = dirName("terreno");
             }
             File files = new File(dir + "\\listaImoveis");
-            if (files.exists()) {
+            if (files.exists() && GetFileLastModified.lastModifiedIsEqual(dir)) {
+                System.out.println("to aqui iguais");
+                System.out.println(GetFileLastModified.lastModifiedIsEqual(dir));
                 FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 this.listaImoveis = (List<Imovel>) in.readObject();
                 in.close();
                 fileIn.close();
                 return true;
+            } else {
+                System.out.println("to aqui");
+                if (this.lerArquivoCsv()) {
+                    this.escreveArquivoBinario(dir);
+                    return true;
+                }
             }
         } catch (IOException i) {
             i.printStackTrace();
@@ -339,8 +359,9 @@ public class ImobiliariaCrud implements ListaImoveis {
         }
         return false;
     }
-    //</editor-fold>
 
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -350,7 +371,7 @@ public class ImobiliariaCrud implements ListaImoveis {
      * @param tipo string determinada pelo tipo de imovel
      * @return
      */
-    private String dirName(String tipo) {
+    public String dirName(String tipo) {
         Properties p = System.getProperties();
         return p.getProperty("user.home") + "\\projetoRPII\\" + tipo;
     }
@@ -431,6 +452,23 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="grava data do csv">
+    private void gravaDataCriacao(String dir) throws FileNotFoundException, IOException {
+        String fileName = "\\datacriacao.csv";
+        /*
+         escreve o ultimo codigo em um arquivo para continuar a contagem ao
+         reiniciar o programa
+         */
+        File file = new File(dir + "\\listaImoveis.csv");
+        FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
+        BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
+        int i = Imovel.getCodigoClasse();
+        buffCont.write(Long.toString(file.lastModified()));
+        outFileCont.close();
+        buffCont.close();
+    }
+
+//</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
     /**
      * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
@@ -476,117 +514,115 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">
-    /*
-     @Deprecated
-     public boolean lerArquivo() {
-     FileInputStream inFile;
-     BufferedReader buff;
-     String linha, aux;
-     Imovel imovel;
-     int nroImoveis, codigoObj, nroBanheiros, nroSala, andar, numero = 0, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
-     String nomeEdificio, logradouro = null, bairro = null, cidade = null, descricao = null;
-     double areaTotal = 0, valor = 0, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade, areaConstruida;
-     try {
-     String dir = null;
-     String objProp;
-     Terreno t = null;
-     Apartamento a = null;
-     SalaComercial sc = null;
-     Chacara ch = null;
-     if (tipoImovel.getTipo() == 1) {
-     dir = dirName("apartamento");
-     } else if (tipoImovel.getTipo() == 2) {
-     dir = dirName("chacara");
-     } else if (tipoImovel.getTipo() == 3) {
-     dir = dirName("sala_comercial");
-     } else if (tipoImovel.getTipo() == 4) {
-     dir = dirName("terreno");
-     }
-     File files = new File(dir + "\\listaImoveis.csv");
-     if (files.exists()) {
-     inFile = new FileInputStream(new File(dir + "\\listaImoveis.csv"));
-     buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
-     String line;
-     String[] objetoLinha;
-     String att = buff.readLine();
-     String[] atts = att.split(";");
-     while ((line = buff.readLine()) != null) {
-     if (!line.equalsIgnoreCase("")) {
-     String[] conteudo = line.split(";");
-     //Atributos do imovel
-     codigoObj = Integer.parseInt(conteudo[0].trim());
-     if (tipoImovel.getTipo() == 1) {
-     nomeEdificio = conteudo[1];
-     logradouro = conteudo[2];
-     numero = Integer.parseInt(conteudo[3].trim());
-     bairro = conteudo[4];
-     cidade = conteudo[5];
-     descricao = conteudo[6];
-     areaTotal = Double.parseDouble(conteudo[7].trim().replace("m²", ""));
-     valor = Double.parseDouble(conteudo[8].trim().replace("R$", ""));
-     andar = Integer.parseInt(conteudo[9].trim());
-     valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
-     numeroDeQuartos = Integer.parseInt(conteudo[11].trim());
-     anoDeConstrucao = Integer.parseInt(conteudo[12].trim());
-     numeroDeVagasNaGaragem = Integer.parseInt(conteudo[13].trim());
-     numeroDoApartamento = Integer.parseInt(conteudo[14].trim());
-     a = new Apartamento(codigoObj, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
-     this.incluir(a);
-     } else if (tipoImovel.getTipo() == 2) {
-     logradouro = conteudo[1];
-     numero = Integer.parseInt(conteudo[2].trim());
-     bairro = conteudo[3];
-     cidade = conteudo[4];
-     descricao = conteudo[5];
-     areaTotal = Double.parseDouble(conteudo[6].trim().replace("m²", ""));
-     valor = Double.parseDouble(conteudo[7].trim().replace("R$", ""));
-     areaConstruida = Double.parseDouble(conteudo[8].trim());
-     numeroDeQuartos = Integer.parseInt(conteudo[9].trim());
-     anoDeConstrucao = Integer.parseInt(conteudo[10].trim());
-     distanciaCidade = Double.parseDouble(conteudo[11].trim());
-     ch = new Chacara(codigoObj, logradouro, numero, bairro, cidade, descricao, areaTotal, valor, areaConstruida, numeroDeQuartos, anoDeConstrucao, distanciaCidade);
-     this.incluir(ch);
-     } else if (tipoImovel.getTipo() == 3) {
-     nomeEdificio = conteudo[1];
-     logradouro = conteudo[2];
-     numero = Integer.parseInt(conteudo[3].trim());
-     bairro = conteudo[4];
-     cidade = conteudo[5];
-     descricao = conteudo[6];
-     areaTotal = Double.parseDouble(conteudo[7].trim().replace("m²", ""));
-     valor = Double.parseDouble(conteudo[8].trim().replace("R$", ""));
-     andar = Integer.parseInt(conteudo[9].trim());
-     valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
-     nroBanheiros = Integer.parseInt(conteudo[11].trim());
-     nroSala = Integer.parseInt(conteudo[12].trim());
-     sc = new SalaComercial(codigoObj, nroSala, nroBanheiros, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
-     this.incluir(sc);
-     } else if (tipoImovel.getTipo() == 4) {
-     logradouro = conteudo[1];
-     numero = Integer.parseInt(conteudo[2].trim());
-     bairro = conteudo[3];
-     cidade = conteudo[4];
-     descricao = conteudo[5];
-     areaTotal = Double.parseDouble(conteudo[6].trim().replace("m²", ""));
-     valor = Double.parseDouble(conteudo[7].trim().replace("R$", ""));
-     dimensaoFrente = Double.parseDouble(conteudo[8].trim());
-     dimensaoLado = Double.parseDouble(conteudo[9].trim());
-     t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
-     this.incluir(t);
-     }
-     }
-     }
-     return true;
-     }
-     } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-     Logger.getLogger(ImobiliariaCrud.class
-     .getName()).log(Level.SEVERE, null, ex);
-     } catch (IOException ex) {
-     Logger.getLogger(ImobiliariaCrud.class
-     .getName()).log(Level.SEVERE, null, ex);
-     }
-     return false;
-     }
-     */
+    public boolean lerArquivoCsv() {
+        System.out.println("csv");
+        FileInputStream inFile;
+        BufferedReader buff;
+        String linha, aux;
+        Imovel imovel;
+        int nroImoveis, codigoObj, nroBanheiros, nroSala, andar, numero = 0, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento;
+        String nomeEdificio, logradouro = null, bairro = null, cidade = null, descricao = null;
+        double areaTotal = 0, valor = 0, valorCondominio, dimensaoFrente, dimensaoLado, distanciaCidade, areaConstruida;
+        try {
+            String dir = null;
+            String objProp;
+            Terreno t = null;
+            Apartamento a = null;
+            SalaComercial sc = null;
+            Chacara ch = null;
+            if (tipoImovel.getTipo() == 1) {
+                dir = dirName("apartamento");
+            } else if (tipoImovel.getTipo() == 2) {
+                dir = dirName("chacara");
+            } else if (tipoImovel.getTipo() == 3) {
+                dir = dirName("sala_comercial");
+            } else if (tipoImovel.getTipo() == 4) {
+                dir = dirName("terreno");
+            }
+            File files = new File(dir + "\\listaImoveis.csv");
+            if (files.exists()) {
+                inFile = new FileInputStream(new File(dir + "\\listaImoveis.csv"));
+                buff = new BufferedReader(new InputStreamReader(inFile, "UTF-8"));
+                String line;
+                String[] objetoLinha;
+                String att = buff.readLine();
+                String[] atts = att.split(";");
+                while ((line = buff.readLine()) != null) {
+                    if (!line.equalsIgnoreCase("")) {
+                        String[] conteudo = line.split(";");
+                        //Atributos do imovel
+                        codigoObj = Integer.parseInt(conteudo[0].trim());
+                        if (tipoImovel.getTipo() == 1) {
+                            nomeEdificio = conteudo[1];
+                            logradouro = conteudo[2];
+                            numero = Integer.parseInt(conteudo[3].trim());
+                            bairro = conteudo[4];
+                            cidade = conteudo[5];
+                            descricao = conteudo[6];
+                            areaTotal = Double.parseDouble(conteudo[7].trim().replace("m²", ""));
+                            valor = Double.parseDouble(conteudo[8].trim().replace("R$", ""));
+                            andar = Integer.parseInt(conteudo[9].trim());
+                            valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
+                            numeroDeQuartos = Integer.parseInt(conteudo[11].trim());
+                            anoDeConstrucao = Integer.parseInt(conteudo[12].trim());
+                            numeroDeVagasNaGaragem = Integer.parseInt(conteudo[13].trim());
+                            numeroDoApartamento = Integer.parseInt(conteudo[14].trim());
+                            a = new Apartamento(codigoObj, numeroDeQuartos, anoDeConstrucao, numeroDeVagasNaGaragem, numeroDoApartamento, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                            this.incluir(a);
+                        } else if (tipoImovel.getTipo() == 2) {
+                            logradouro = conteudo[1];
+                            numero = Integer.parseInt(conteudo[2].trim());
+                            bairro = conteudo[3];
+                            cidade = conteudo[4];
+                            descricao = conteudo[5];
+                            areaTotal = Double.parseDouble(conteudo[6].trim().replace("m²", ""));
+                            valor = Double.parseDouble(conteudo[7].trim().replace("R$", ""));
+                            areaConstruida = Double.parseDouble(conteudo[8].trim());
+                            numeroDeQuartos = Integer.parseInt(conteudo[9].trim());
+                            anoDeConstrucao = Integer.parseInt(conteudo[10].trim());
+                            distanciaCidade = Double.parseDouble(conteudo[11].trim());
+                            ch = new Chacara(codigoObj, logradouro, numero, bairro, cidade, descricao, areaTotal, valor, areaConstruida, numeroDeQuartos, anoDeConstrucao, distanciaCidade);
+                            this.incluir(ch);
+                        } else if (tipoImovel.getTipo() == 3) {
+                            nomeEdificio = conteudo[1];
+                            logradouro = conteudo[2];
+                            numero = Integer.parseInt(conteudo[3].trim());
+                            bairro = conteudo[4];
+                            cidade = conteudo[5];
+                            descricao = conteudo[6];
+                            areaTotal = Double.parseDouble(conteudo[7].trim().replace("m²", ""));
+                            valor = Double.parseDouble(conteudo[8].trim().replace("R$", ""));
+                            andar = Integer.parseInt(conteudo[9].trim());
+                            valorCondominio = Double.parseDouble(conteudo[10].trim().replace("R$", ""));
+                            nroBanheiros = Integer.parseInt(conteudo[11].trim());
+                            nroSala = Integer.parseInt(conteudo[12].trim());
+                            sc = new SalaComercial(codigoObj, nroSala, nroBanheiros, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                            this.incluir(sc);
+                        } else if (tipoImovel.getTipo() == 4) {
+                            logradouro = conteudo[1];
+                            numero = Integer.parseInt(conteudo[2].trim());
+                            bairro = conteudo[3];
+                            cidade = conteudo[4];
+                            descricao = conteudo[5];
+                            areaTotal = Double.parseDouble(conteudo[6].trim().replace("m²", ""));
+                            valor = Double.parseDouble(conteudo[7].trim().replace("R$", ""));
+                            dimensaoFrente = Double.parseDouble(conteudo[8].trim());
+                            dimensaoLado = Double.parseDouble(conteudo[9].trim());
+                            t = new Terreno(codigoObj, dimensaoFrente, dimensaoLado, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+                            this.incluir(t);
+                        }
+                    }
+                }
+                return true;
+            }
+        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            Logger.getLogger(ImobiliariaCrud.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ImobiliariaCrud.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 //</editor-fold>
 }

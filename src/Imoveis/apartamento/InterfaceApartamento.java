@@ -23,6 +23,7 @@ public class InterfaceApartamento extends InterfaceSistema {
     private ImobiliariaCrud listaApartamentos = new ImobiliariaCrud();
     private Apartamento ap = null;
     private List<Imovel> listaOrdenada;
+    private int codImovel;
 
     @Override
     public void principal() {
@@ -129,7 +130,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 do {
                     List<Imovel> aux = listaApartamentos.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
                     if (aux.size() > 0) {
-                        int codImovel = this.listaImoveis2(aux);
+                        int codImovel = this.listarImoveis2(aux);
                         ap = (Apartamento) listaApartamentos.consultar(codImovel);
                         if (ap != null) {
                             return ap;
@@ -146,7 +147,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 do {
                     List<Imovel> aux = listaApartamentos.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
                     if (aux.size() > 0) {
-                        int codImovel = this.listaImoveis2(aux);
+                        int codImovel = this.listarImoveis2(aux);
                         ap = (Apartamento) listaApartamentos.consultar(codImovel);
                         if (ap != null) {
                             return ap;
@@ -161,7 +162,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                 break;
 
             case 6:
-                int imovelCod = this.listaImoveis(listaApartamentos);
+                int imovelCod = this.listarImoveis(listaApartamentos);
                 ap = (Apartamento) listaApartamentos.consultar(imovelCod);
                 if (ap != null) {
                     return ap;
@@ -186,13 +187,17 @@ public class InterfaceApartamento extends InterfaceSistema {
         switch (opcao) {
             case 1:
                 this.listaOrdenada = this.listaApartamentos.ordenarValor();
-                int codImovel = this.listaImoveis2(listaOrdenada);
+                codImovel = this.listarImoveis2(listaOrdenada);
                 System.out.print("=============================================");
                 System.out.println(listaApartamentos.consultar(codImovel).toString());
                 System.out.println("===========================================");
                 break;
             case 2:
-                System.out.println("TODO");
+                this.listaOrdenada = this.listaApartamentos.ordenarCodigo();
+                codImovel = this.listarImoveis2(listaOrdenada);
+                System.out.print("=============================================");
+                System.out.println(listaApartamentos.consultar(codImovel).toString());
+                System.out.println("===========================================");
                 break;
             case 3:
                 System.out.println("TODO");

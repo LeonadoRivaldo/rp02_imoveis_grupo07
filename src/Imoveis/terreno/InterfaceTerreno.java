@@ -69,7 +69,7 @@ public class InterfaceTerreno extends InterfaceSistema {
                 case 5:
                     List<Imovel> b = listaTerrenos.pesquisaValor(inDouble("digite o valor do imóvel: "));
                     if(b != null){
-                        this.listaImoveis2(b);
+                        this.listarImoveis2(b);
                     }else{
                         this.exibeMensagem("imóvel com valor não encontrado");
                     }
@@ -123,7 +123,7 @@ public class InterfaceTerreno extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int imovelCod = this.listaImoveis(listaTerrenos);
+                int imovelCod = this.listarImoveis(listaTerrenos);
                 tr = (Terreno) listaTerrenos.consultar(imovelCod);
                 if (tr != null) {
                     return tr;
@@ -148,7 +148,7 @@ public class InterfaceTerreno extends InterfaceSistema {
         switch (opcao) {
             case 1:
                 this.listaOrdenada = this.listaTerrenos.ordenarValor();
-                int codImovel = this.listaImoveis2(listaOrdenada);
+                int codImovel = this.listarImoveis2(listaOrdenada);
                 System.out.print("=============================================");
                 System.out.println(listaTerrenos.consultar(codImovel).toString());
                 System.out.println("===========================================");
