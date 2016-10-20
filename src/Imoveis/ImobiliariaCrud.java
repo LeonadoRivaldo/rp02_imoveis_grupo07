@@ -335,7 +335,6 @@ public class ImobiliariaCrud implements ListaImoveis {
      * @return
      */
     public boolean lerArquivo() {
-        System.out.println("ainda não ta funcionando direito a comparação das datas");
         try {
             String dir = null;
             if (tipoImovel.getTipo() == 1) {
@@ -348,9 +347,8 @@ public class ImobiliariaCrud implements ListaImoveis {
                 dir = dirName("terreno");
             }
             File files = new File(dir + "\\listaImoveis");
-            if (files.exists() && GetFileLastModified.lastModifiedIsEqual(dir)) {
-                System.out.println("to aqui iguais");
-                System.out.println(GetFileLastModified.lastModifiedIsEqual(dir));
+            if (files.exists() && FileLastModifiedDate.lastModifiedIsEqual(dir)) {
+                System.out.println(FileLastModifiedDate.lastModifiedIsEqual(dir));
                 FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 this.listaImoveis = (List<Imovel>) in.readObject();
@@ -358,9 +356,8 @@ public class ImobiliariaCrud implements ListaImoveis {
                 fileIn.close();
                 return true;
             } else {
-                System.out.println("to aqui");
                 if (this.lerArquivoCsv()) {
-                    this.escreveArquivoBinario(dir);
+                    this.escreverArquivo();
                     return true;
                 }
             }
@@ -482,6 +479,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
     /**
      * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
@@ -528,7 +526,6 @@ public class ImobiliariaCrud implements ListaImoveis {
 
     //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">
     public boolean lerArquivoCsv() {
-        System.out.println("csv");
         FileInputStream inFile;
         BufferedReader buff;
         String linha, aux;
