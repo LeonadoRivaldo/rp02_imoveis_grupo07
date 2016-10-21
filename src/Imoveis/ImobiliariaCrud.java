@@ -147,7 +147,20 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Area total">
     @Override
     public List<Imovel> ordenarArea() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < listaImoveis.size(); i++) {
+            int menor = i;
+            for (int j = i + 1; j < listaImoveis.size(); j++) {
+                if (listaImoveis.get(j).areaTotal < listaImoveis.get(menor).areaTotal) {
+                    menor = j;
+                } else {
+                }
+            }
+            Imovel aux = listaImoveis.get(i);
+            listaImoveis.set(i, listaImoveis.get(menor));
+            listaImoveis.set(menor, aux);
+            
+        }
+        return listaImoveis;
     }
     //</editor-fold>
     //</editor-fold>
@@ -430,7 +443,7 @@ public class ImobiliariaCrud implements ListaImoveis {
             }
         }
     }
-   //</editor-fold>
+    //</editor-fold>
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="lerArquivo Deprecated">

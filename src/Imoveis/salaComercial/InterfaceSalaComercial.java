@@ -12,6 +12,7 @@ import static Imoveis.EntradasTeclado.inString;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
+import java.util.List;
 
 /**
  *
@@ -79,6 +80,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         System.out.println("=======================================");
         System.out.println("1 - Pesquisar");
         System.out.println("2 - Listar todos");
+        System.out.println("3 - Ordenar");
         System.out.println("----------------------------------------");
         int o = inInt("Opção:");
         switch (o) {
@@ -99,6 +101,11 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     this.exibeMensagem("Sala Comercial não encontrado");
                 }
                 break;
+            case 3:
+                sc = this.ordenar();
+                if (sc != null) {
+                    return sc;
+                }
             default:
                 this.exibeMensagem("Opção invalida!");
         }
@@ -129,10 +136,36 @@ public class InterfaceSalaComercial extends InterfaceSistema {
             this.exibeMensagem("Ocorreu algum erro");
         }
     }
+        private SalaComercial ordenar() {
+        System.out.println("=======================================");
+        System.out.println("1 - Area");
+        System.out.println("2 - Valor");
+        System.out.println("3 - Código");
+        System.out.println("----------------------------------------");
+        int o = inInt("Opção:");
+        switch (o){
+            case 1:
+               // int ordenado = this.listaImoveis(listaSalaComercial);
+                List<Imovel> li = listaSalaComercial.ordenarArea();
+                if (li != null) {
+                   int im = this.listaImoveis2(li);
+                   sc = (SalaComercial) this.listaSalaComercial.consultar(im);
+                    System.out.println(sc.toString());
+                } else {
+                    this.exibeMensagem("Nenhuma Sala Comercial encontrada");
+                }
+                break;
+            default:
+                this.exibeMensagem("Opção invalida!");
+        }
+        return sc;
+    }
 
     public static void main(String[] args) {
         InterfaceSalaComercial i = new InterfaceSalaComercial();
         i.principal();
     }
+
+
 
 }
