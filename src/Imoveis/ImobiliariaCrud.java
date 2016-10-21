@@ -123,7 +123,18 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Por codigo">
     @Override
     public List<Imovel> ordenarCodigo() {
-        return null;
+        List<Imovel> aux = new ArrayList<>();
+        aux.addAll(this.listaImoveis);
+        for (int i = 0; i < aux.size(); i++) {
+            for (int j = 0; j < aux.size() - 1; j++) {
+                if (aux.get(j).getCodigoObj() > aux.get(j + 1).getCodigoObj()) {
+                    Imovel a = aux.get(j);
+                    aux.set(j, aux.get(j+1));
+                    aux.set(j+1, a);
+                }
+            }
+        }
+        return aux;
 
     }
     //</editor-fold>
