@@ -12,6 +12,7 @@ import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.InterfaceSistema;
 import Imoveis.Tipo;
+import java.util.List;
 
 /**
  *
@@ -21,6 +22,7 @@ public class InterfaceChacara extends InterfaceSistema {
 
     private ImobiliariaCrud listaChacaras = new ImobiliariaCrud();
     private Chacara chac = null;
+    private List<Imovel> listaOrdenada;
 
     String logradouro, bairro, cidade, descricao;
     int numero, numeroDeQuartos, anoDeConstrucao;
@@ -41,6 +43,7 @@ public class InterfaceChacara extends InterfaceSistema {
             System.out.println("2. Consultar");
             System.out.println("3. Editar");
             System.out.println("4. Excluir");
+            System.out.println("5. Ordenar");
             System.out.println("0. Sair");
             opcao = inInt("Opcao: ");
 
@@ -64,6 +67,9 @@ public class InterfaceChacara extends InterfaceSistema {
                     break;
                 case 4:
                     this.excluir();
+                    break;
+                case 5:
+                    this.Ordenar();
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -110,7 +116,7 @@ public class InterfaceChacara extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int imovelCod = this.listaImoveis(listaChacaras);
+                int imovelCod = this.listarImoveis(listaChacaras);
                 chac = (Chacara) listaChacaras.consultar(imovelCod);
                 if (chac != null) {
                     return chac;
@@ -132,6 +138,38 @@ public class InterfaceChacara extends InterfaceSistema {
             this.exibeMensagem("Nenhuma Chacarra Encontrada! ");
         }
 
+    }
+    
+    private void Ordenar() {
+        System.out.println("=======================================");
+        System.out.println("1 - Ordernar por valor");
+        System.out.println("2 - Ordernar por codigo");
+        System.out.println("3 - Ordernar por Area total");
+        System.out.println("----------------------------------------");
+        int opcao = inInt("Digite a opção desejada: ");
+        
+
+        switch (opcao) {
+            case 1:
+                this.listaOrdenada = this.listaChacaras.ordenarValor();
+                int codImovel = this.listarImoveis2(listaOrdenada);
+                System.out.print("=============================================");
+                System.out.println(listaChacaras.consultar(codImovel).toString());
+                System.out.println("===========================================");
+                break;
+            case 2:
+                this.listaOrdenada = this.listaChacaras.ordenarCodigo();
+                int codCodigo = this.listarImoveis2(listaOrdenada);
+                System.out.print("=============================================");
+                System.out.println(listaChacaras.consultar(codCodigo).toString());
+                System.out.println("===========================================");
+                break;
+            case 3:
+                System.out.println("TODO");
+                break;
+            default:
+                this.exibeMensagem("Opção invalida");
+        }
     }
 
     public static void main(String[] args) {

@@ -5,6 +5,7 @@ import Imoveis.InterfaceSistema;
 import Imoveis.ImobiliariaCrud;
 import Imoveis.Imovel;
 import Imoveis.Tipo;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,7 @@ public class InterfaceTerreno extends InterfaceSistema {
 
     private ImobiliariaCrud listaTerrenos = new ImobiliariaCrud();
     private Terreno tr = null;
+    private List<Imovel> listaOrdenada;
 
     @Override
     public void principal() {
@@ -30,6 +32,9 @@ public class InterfaceTerreno extends InterfaceSistema {
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
             System.out.println("3 - editar");
+            System.out.println("4 - excluir");
+            System.out.println("5 - pesquisar por valor");
+            System.out.println("6 - ordenar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
@@ -60,6 +65,17 @@ public class InterfaceTerreno extends InterfaceSistema {
                     } else {
                         this.exibeMensagem("erro");
                     }
+                    break;
+                case 5:
+                    List<Imovel> b = listaTerrenos.pesquisaValor(inDouble("digite o valor do imóvel: "));
+                    if(b != null){
+                        this.listarImoveis2(b);
+                    }else{
+                        this.exibeMensagem("imóvel com valor não encontrado");
+                    }
+                    break;
+                case 6:
+                    this.Ordenar();
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -107,7 +123,7 @@ public class InterfaceTerreno extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int imovelCod = this.listaImoveis(listaTerrenos);
+                int imovelCod = this.listarImoveis(listaTerrenos);
                 tr = (Terreno) listaTerrenos.consultar(imovelCod);
                 if (tr != null) {
                     return tr;
@@ -119,6 +135,33 @@ public class InterfaceTerreno extends InterfaceSistema {
                 this.exibeMensagem("Opção invalida!");
         }
         return null;
+    }
+    
+     private void Ordenar() {
+        System.out.println("=======================================");
+        System.out.println("1 - Ordernar por valor");
+        System.out.println("2 - Ordernar por codigo");
+        System.out.println("3 - Ordernar por Area total");
+        System.out.println("----------------------------------------");
+        int opcao = inInt("Digite a opção desejada: ");
+
+        switch (opcao) {
+            case 1:
+                this.listaOrdenada = this.listaTerrenos.ordenarValor();
+                int codImovel = this.listarImoveis2(listaOrdenada);
+                System.out.print("=============================================");
+                System.out.println(listaTerrenos.consultar(codImovel).toString());
+                System.out.println("===========================================");
+                break;
+            case 2:
+                System.out.println("TODO");
+                break;
+            case 3:
+                System.out.println("TODO");
+                break;
+            default:
+                this.exibeMensagem("Opção invalida");
+        }
     }
 
     public static void main(String[] args) {

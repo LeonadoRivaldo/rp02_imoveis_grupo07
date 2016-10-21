@@ -93,7 +93,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                 }
                 break;
             case 2:
-                int imovelCod = this.listaImoveis(listaSalaComercial);
+                int imovelCod = this.listarImoveis(listaSalaComercial);
                 sc = (SalaComercial) listaSalaComercial.consultar(imovelCod);
                 if (sc != null) {
                     return sc;
