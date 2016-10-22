@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author junio
+ * @author junior
  */
 public class InterfaceSalaComercial extends InterfaceSistema {
 
@@ -95,8 +95,8 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
         double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
         sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio,
-            andar, valorCondominio, logradouro, numero,
-            bairro, cidade, descricao, areaTotal, valor);
+                andar, valorCondominio, logradouro, numero,
+                bairro, cidade, descricao, areaTotal, valor);
         if (listaSalaComercial.incluir(sc)) {
             this.exibeMensagem("Sala Comercial incluido com sucesso!");
             if (!listaSalaComercial.escreverArquivo()) {
@@ -107,6 +107,11 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         }
     }
 
+    /**
+     * metodo de interface pra consulta por diferentes parametros
+     *
+     * @return um objeto ou uma lista que foi pesquisada
+     */
     private SalaComercial consultar() {
         int op = -1;
         do {
@@ -120,6 +125,8 @@ public class InterfaceSalaComercial extends InterfaceSistema {
             op = inInt("Opção:");
             switch (op) {
                 case 0:
+                    principal();
+
                     break;
                 case 1:
                     sc = (SalaComercial) listaSalaComercial.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
@@ -193,10 +200,12 @@ public class InterfaceSalaComercial extends InterfaceSistema {
             Imovel imo;
             switch (opcao) {
                 case 0:
+                    principal();
+
                     break;
                 case 1:
                     this.listaOrdenada = this.listaSalaComercial.ordenarValor();
-            int codImovel = this.listarImoveis2(listaOrdenada);
+                    int codImovel = this.listarImoveis2(listaOrdenada);
                     imo = listaSalaComercial.consultar(codImovel);
                     if (imo != null) {
                         System.out.print("=============================================");
@@ -240,7 +249,5 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         InterfaceSalaComercial i = new InterfaceSalaComercial();
         i.principal();
     }
-
-
 
 }
