@@ -34,7 +34,7 @@ public abstract class Residencia extends Imovel {
     }
 
     /**
-     * @param anoConstrucao the anoConstrucao to set
+     * @param anoDeConstrucao the anoConstrucao to set
      */
     public void setAnoConstrucao(int anoDeConstrucao) {
         this.anoDeConstrucao = anoDeConstrucao;
@@ -48,7 +48,7 @@ public abstract class Residencia extends Imovel {
     }
 
     /**
-     * @param nroQuartos the nroQuartos to set
+     * @param numeroDeQuartos the nroQuartos to set
      */
     public void setNroQuartos(int numeroDeQuartos) {
         this.numeroDeQuartos = numeroDeQuartos;

@@ -31,9 +31,9 @@ public class InterfaceChacara extends InterfaceSistema {
     @Override
     public void principal() {
         listaChacaras.setTipoImovel(Tipo.CHACARA);
-        if (!listaChacaras.lerArquivo()) {
+        /*if (!listaChacaras.lerArquivo()) {
             this.exibeMensagem("Arquivo não encontrado");
-        }
+        }*/
         listaChacaras.setLastCod();
 
         int opcao = -1;
