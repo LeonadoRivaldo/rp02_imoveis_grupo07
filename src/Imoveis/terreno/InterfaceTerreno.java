@@ -17,6 +17,7 @@ public class InterfaceTerreno extends InterfaceSistema {
     private ImobiliariaCrud listaTerrenos = new ImobiliariaCrud();
     private Terreno tr = null;
     private List<Imovel> listaOrdenada;
+    private int codImovel;
 
     @Override
     public void principal() {
@@ -28,13 +29,12 @@ public class InterfaceTerreno extends InterfaceSistema {
         listaTerrenos.setLastCod();
         int opcao = -1;
         do {
-            System.out.println("#############################################");
+           System.out.println("#############################################");
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
             System.out.println("3 - editar");
             System.out.println("4 - excluir");
-            System.out.println("5 - pesquisar por valor");
-            System.out.println("6 - ordenar");
+            System.out.println("5 - Ordernar");
             System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
@@ -42,12 +42,12 @@ public class InterfaceTerreno extends InterfaceSistema {
                 case 0:
                     break;
                 case 1:
-                    criarImovel();
+                    this.criarImovel();
                     break;
                 case 2:
                     tr = this.consultar();
                     if (tr != null) {
-                        System.out.println("\n#############################################");
+                        System.out.print("#############################################");
                         System.out.println(tr.toString());
                     }
                     break;
@@ -67,14 +67,6 @@ public class InterfaceTerreno extends InterfaceSistema {
                     }
                     break;
                 case 5:
-                    List<Imovel> b = listaTerrenos.pesquisaValor(inDouble("digite o valor do imóvel: "));
-                    if(b != null){
-                        this.listarImoveis2(b);
-                    }else{
-                        this.exibeMensagem("imóvel com valor não encontrado");
-                    }
-                    break;
-                case 6:
                     this.Ordenar();
                     break;
                 default:
@@ -107,63 +99,134 @@ public class InterfaceTerreno extends InterfaceSistema {
         }
     }
 
-    public Terreno consultar() {
-        System.out.println("=======================================");
-        System.out.println("1 - Pesquisar");
-        System.out.println("2 - Listar todos");
-        System.out.println("----------------------------------------");
-        int o = inInt("Opção:");
-        switch (o) {
-            case 1:
-                tr = (Terreno) listaTerrenos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
-                if (tr != null) {
-                    return tr;
-                } else {
-                    this.exibeMensagem("terreno não encontrado");
-                }
-                break;
-            case 2:
-                int imovelCod = this.listarImoveis(listaTerrenos);
-                tr = (Terreno) listaTerrenos.consultar(imovelCod);
-                if (tr != null) {
-                    return tr;
-                } else {
-                    this.exibeMensagem("terreno não encontrado");
-                }
-                break;
-            default:
-                this.exibeMensagem("Opção invalida!");
-        }
+      private Terreno consultar() {
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Pesquisar");
+            System.out.println("2 - Pesquisa por bairro");
+            System.out.println("3 - Pesquisa por valor");
+            System.out.println("4 - Listar todos");
+            System.out.println("0 - sair");
+            System.out.println("----------------------------------------");
+            op = inInt("Opção:");
+            switch (op) {
+                case 0:
+                    break;
+                case 1:
+                    tr = (Terreno) listaTerrenos.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                    if (tr != null) {
+                        return tr;
+                    } else {
+                        this.exibeMensagem("apartamento não encontrado");
+                    }
+                    break;
+                case 2:
+                    do {
+                        List<Imovel> aux = listaTerrenos.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            tr = (Terreno) listaTerrenos.consultar(codImovel);
+                            if (tr != null) {
+                                return tr;
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
+                        } else {
+                            this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
+                        }
+                    } while (op != 2);
+                    break;
+                case 3:
+                    do {
+                        List<Imovel> aux = listaTerrenos.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            tr = (Terreno) listaTerrenos.consultar(codImovel);
+                            if (tr != null) {
+                                return tr;
+                            } else {
+                                this.exibeMensagem("apartamento não encontrado");
+                            }
+                        } else {
+                            this.exibeMensagem("nemhum apartamento encontrado nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
+                        }
+                    } while (op != 2);
+                    break;
+
+                case 4:
+                    int imovelCod = this.listarImoveis(listaTerrenos);
+                    tr = (Terreno) listaTerrenos.consultar(imovelCod);
+                    if (tr != null) {
+                        return tr;
+                    } else {
+                        this.exibeMensagem("apartamento não encontrado");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida!");
+            }
+        } while (op != 0);
         return null;
     }
-    
-     private void Ordenar() {
-        System.out.println("=======================================");
-        System.out.println("1 - Ordernar por valor");
-        System.out.println("2 - Ordernar por codigo");
-        System.out.println("3 - Ordernar por Area total");
-        System.out.println("----------------------------------------");
-        int opcao = inInt("Digite a opção desejada: ");
-
-        switch (opcao) {
-            case 1:
-                this.listaOrdenada = this.listaTerrenos.ordenarValor();
-                int codImovel = this.listarImoveis2(listaOrdenada);
-                System.out.print("=============================================");
-                System.out.println(listaTerrenos.consultar(codImovel).toString());
-                System.out.println("===========================================");
-                break;
-            case 2:
-                System.out.println("TODO");
-                break;
-            case 3:
-                System.out.println("TODO");
-                break;
-            default:
-                this.exibeMensagem("Opção invalida");
-        }
+  
+    private void Ordenar() {
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Ordernar por valor");
+            System.out.println("2 - Ordernar por codigo");
+            System.out.println("3 - Ordernar por Area total");
+            System.out.println("0 - voltar");
+            System.out.println("----------------------------------------");
+            int opcao = inInt("Digite a opção desejada: ");
+            Imovel imo;
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    this.listaOrdenada = this.listaTerrenos.ordenarValor();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaTerrenos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaTerrenos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 2:
+                    this.listaOrdenada = this.listaTerrenos.ordenarCodigo();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaTerrenos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaTerrenos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 3:
+                    this.listaOrdenada = this.listaTerrenos.ordenarArea();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaTerrenos.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaTerrenos.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida");
+            }
+        } while (op != 0);
     }
-
     public static void main(String[] args) {
         InterfaceTerreno i = new InterfaceTerreno();
         i.principal();

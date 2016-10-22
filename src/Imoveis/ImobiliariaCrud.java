@@ -323,7 +323,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
@@ -369,7 +368,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -468,12 +466,14 @@ public class ImobiliariaCrud implements ListaImoveis {
          reiniciar o programa
          */
         File file = new File(dir + "\\listaImoveis.csv");
-        FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
-        BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
-        int i = Imovel.getCodigoClasse();
-        buffCont.write(Long.toString(file.lastModified()));
-        outFileCont.close();
-        buffCont.close();
+        if (file.exists()) {
+            FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
+            BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
+            int i = Imovel.getCodigoClasse();
+            buffCont.write(Long.toString(file.lastModified()));
+            outFileCont.close();
+            buffCont.close();
+        }
     }
 
 //</editor-fold>
