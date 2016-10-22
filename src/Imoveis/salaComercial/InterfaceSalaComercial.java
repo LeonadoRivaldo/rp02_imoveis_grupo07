@@ -22,6 +22,7 @@ public class InterfaceSalaComercial extends InterfaceSistema {
 
     private ImobiliariaCrud listaSalaComercial = new ImobiliariaCrud();
     private SalaComercial sc = null;
+    private List<Imovel> listaOrdenada;
 
     @Override
     public void principal() {
@@ -33,83 +34,50 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         int opcao = -1;
         do {
             System.out.println("#############################################");
-            System.out.println("1 - Incluir");
+            System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
-            System.out.println("3 - Editar");
-            System.out.println("4 - Excluir");
-            System.out.println("0 - Sair");
+            System.out.println("3 - editar");
+            System.out.println("4 - excluir");
+            System.out.println("5 - Ordernar");
+            System.out.println("0 - sair");
             opcao = inInt("Opcao: ");
 
             switch (opcao) {
                 case 0:
                     break;
                 case 1:
-                    criarImovel();
+                    this.criarImovel();
                     break;
                 case 2:
                     sc = this.consultar();
                     if (sc != null) {
-                        System.out.println("\n#############################################");
+                        System.out.print("#############################################");
                         System.out.println(sc.toString());
                     }
                     break;
                 case 3:
                     sc = consultar();
                     if (sc != null) {
-                        this.editarImovel(sc, listaSalaComercial);
+                        if (this.editarImovel(sc, listaSalaComercial)) {
+                            this.exibeMensagem("Imovel editado com sucesso");
+                        }
                     }
                     break;
                 case 4:
-                    int codigo = inInt("Informe o código do Imovel que deseja Excluir:");
-                    if (listaSalaComercial.excluir(codigo)) {
-                        this.exibeMensagem("Sala Comercial excluir com Sucesso");
-                        break;
+                    if (listaSalaComercial.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                        this.exibeMensagem("Imovel exlcuido com sucesso");
                     } else {
-                        this.exibeMensagem("Não foi possivel Excluir");
-                        break;
+                        this.exibeMensagem("erro");
                     }
-
+                    break;
+                case 5:
+                    this.Ordenar();
+                    break;
                 default:
                     this.exibeMensagem("Opção invalida!");
             }
         } while (opcao != 0);
 
-    }
-
-    public SalaComercial consultar() {
-        System.out.println("=======================================");
-        System.out.println("1 - Pesquisar");
-        System.out.println("2 - Listar todos");
-        System.out.println("3 - Ordenar");
-        System.out.println("----------------------------------------");
-        int o = inInt("Opção:");
-        switch (o) {
-            case 1:
-                sc = (SalaComercial) listaSalaComercial.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
-                if (sc != null) {
-                    return sc;
-                } else {
-                    this.exibeMensagem("Sala Comercial não encontrado");
-                }
-                break;
-            case 2:
-                int imovelCod = this.listarImoveis(listaSalaComercial);
-                sc = (SalaComercial) listaSalaComercial.consultar(imovelCod);
-                if (sc != null) {
-                    return sc;
-                } else {
-                    this.exibeMensagem("Sala Comercial não encontrado");
-                }
-                break;
-            case 3:
-                sc = this.ordenar();
-                if (sc != null) {
-                    return sc;
-                }
-            default:
-                this.exibeMensagem("Opção invalida!");
-        }
-        return null;
     }
 
     @Override
@@ -126,9 +94,11 @@ public class InterfaceSalaComercial extends InterfaceSistema {
         String descricao = inString("----------------------------------------\nEscreva uma discrição para o imovel:");
         double valor = inDouble("----------------------------------------\nDigite o valor do imovel:");
         double valorCondominio = inDouble("----------------------------------------\nDigite o valor do condominio:");
-        sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio, andar, valorCondominio, logradouro, numero, bairro, cidade, descricao, areaTotal, valor);
+        sc = new SalaComercial(nroBanheiros, nroSala, nomeEdificio,
+            andar, valorCondominio, logradouro, numero,
+            bairro, cidade, descricao, areaTotal, valor);
         if (listaSalaComercial.incluir(sc)) {
-            this.exibeMensagem("Sala Comercial incluida com sucesso!");
+            this.exibeMensagem("Sala Comercial incluido com sucesso!");
             if (!listaSalaComercial.escreverArquivo()) {
                 this.exibeMensagem("Erro ao escrever o arquivo");
             }
@@ -136,29 +106,134 @@ public class InterfaceSalaComercial extends InterfaceSistema {
             this.exibeMensagem("Ocorreu algum erro");
         }
     }
-        private SalaComercial ordenar() {
-        System.out.println("=======================================");
-        System.out.println("1 - Area");
-        System.out.println("2 - Valor");
-        System.out.println("3 - Código");
-        System.out.println("----------------------------------------");
-        int o = inInt("Opção:");
-        switch (o){
-            case 1:
-               // int ordenado = this.listaImoveis(listaSalaComercial);
-                List<Imovel> li = listaSalaComercial.ordenarArea();
-                if (li != null) {
-                   int im = this.listarImoveis2(li);
-                   sc = (SalaComercial) this.listaSalaComercial.consultar(im);
-                    System.out.println(sc.toString());
-                } else {
-                    this.exibeMensagem("Nenhuma Sala Comercial encontrada");
-                }
-                break;
-            default:
-                this.exibeMensagem("Opção invalida!");
-        }
-        return sc;
+
+    private SalaComercial consultar() {
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Pesquisar");
+            System.out.println("2 - Pesquisa por bairro");
+            System.out.println("3 - Pesquisa por valor");
+            System.out.println("4 - Listar todos");
+            System.out.println("0 - sair");
+            System.out.println("----------------------------------------");
+            op = inInt("Opção:");
+            switch (op) {
+                case 0:
+                    break;
+                case 1:
+                    sc = (SalaComercial) listaSalaComercial.consultar(inInt("------------------------\nDigite o codigo do imovel:"));
+                    if (sc != null) {
+                        return sc;
+                    } else {
+                        this.exibeMensagem("Sala Comercial não encontrada");
+                    }
+                    break;
+                case 2:
+                    do {
+                        List<Imovel> aux = listaSalaComercial.pesquisaBairro(inString("Digite o bairro que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            sc = (SalaComercial) listaSalaComercial.consultar(codImovel);
+                            if (sc != null) {
+                                return sc;
+                            } else {
+                                this.exibeMensagem("Sala Comercial não encontrada");
+                            }
+                        } else {
+                            this.exibeMensagem("nemhuma Sala Comercial encontrada nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
+                        }
+                    } while (op != 2);
+                    break;
+                case 3:
+                    do {
+                        List<Imovel> aux = listaSalaComercial.pesquisaValor(inDouble("Digite o valor do imovel que você quer pesquisar: "));
+                        if (aux.size() > 0) {
+                            int codImovel = this.listarImoveis2(aux);
+                            sc = (SalaComercial) listaSalaComercial.consultar(codImovel);
+                            if (sc != null) {
+                                return sc;
+                            } else {
+                                this.exibeMensagem("Sala Comercial não encontrada");
+                            }
+                        } else {
+                            this.exibeMensagem("nemhuma Sala Comercial encontrada nesse bairro");
+                            op = inInt("consultar novamente? 1- sim | 2-nao");
+                        }
+                    } while (op != 2);
+                    break;
+
+                case 4:
+                    int imovelCod = this.listarImoveis(listaSalaComercial);
+                    sc = (SalaComercial) listaSalaComercial.consultar(imovelCod);
+                    if (sc != null) {
+                        return sc;
+                    } else {
+                        this.exibeMensagem("Sala Comercial não encontrada");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida!");
+            }
+        } while (op != 0);
+        return null;
+    }
+
+    private void Ordenar() {
+        int op = -1;
+        do {
+            System.out.println("=======================================");
+            System.out.println("1 - Ordernar por valor");
+            System.out.println("2 - Ordernar por codigo");
+            System.out.println("3 - Ordernar por Area total");
+            System.out.println("0 - voltar");
+            System.out.println("----------------------------------------");
+            int opcao = inInt("Digite a opção desejada: ");
+            Imovel imo;
+            switch (opcao) {
+                case 0:
+                    break;
+                case 1:
+                    this.listaOrdenada = this.listaSalaComercial.ordenarValor();
+            int codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaSalaComercial.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaSalaComercial.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 2:
+                    this.listaOrdenada = this.listaSalaComercial.ordenarCodigo();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaSalaComercial.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaSalaComercial.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                case 3:
+                    this.listaOrdenada = this.listaSalaComercial.ordenarArea();
+                    codImovel = this.listarImoveis2(listaOrdenada);
+                    imo = listaSalaComercial.consultar(codImovel);
+                    if (imo != null) {
+                        System.out.print("=============================================");
+                        System.out.println(listaSalaComercial.consultar(codImovel).toString());
+                        System.out.println("===========================================");
+                    } else {
+                        this.exibeMensagem("imovel inexistente");
+                    }
+                    break;
+                default:
+                    this.exibeMensagem("Opção invalida");
+            }
+        } while (op != 0);
     }
 
     public static void main(String[] args) {
