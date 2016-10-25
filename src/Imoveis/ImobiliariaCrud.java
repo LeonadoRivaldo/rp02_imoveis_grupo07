@@ -323,6 +323,8 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
@@ -368,6 +370,8 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -520,6 +524,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
     //</editor-fold>
     //</editor-fold>
+    
 
     //<editor-fold defaultstate="collapsed" desc="Ler Arquivo CSV">
     public boolean lerArquivoCsv() {
