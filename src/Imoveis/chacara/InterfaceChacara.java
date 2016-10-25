@@ -42,8 +42,7 @@ public class InterfaceChacara extends InterfaceSistema {
         }
         listaChacaras.setLastCod();
         
-         
-        
+      
 
         int opcao = -1;
         do {
