@@ -48,29 +48,45 @@ public class InterfaceApartamento extends InterfaceSistema {
                     this.criarImovel();
                     break;
                 case 2:
-                    ap = this.consultar();
-                    if (ap != null) {
-                        System.out.print("#############################################");
-                        System.out.println(ap.toString());
+                    if (!listaApartamentos.isEmpty()) {
+                        ap = this.consultar();
+                        if (ap != null) {
+                            System.out.print("#############################################");
+                            System.out.println(ap.toString());
+                        }
+                    } else {
+                        this.exibeMensagem("Sua Lista de apartamentos está vazia");
                     }
                     break;
                 case 3:
-                    ap = consultar();
-                    if (ap != null) {
-                        if (this.editarImovel(ap, listaApartamentos)) {
-                            this.exibeMensagem("Imovel editado com sucesso");
+                    if (!listaApartamentos.isEmpty()) {
+                        ap = this.consultar();
+                        if (ap != null) {
+                            if (this.editarImovel(ap, listaApartamentos)) {
+                                this.exibeMensagem("Imovel editado com sucesso");
+                            }
                         }
+                    } else {
+                        this.exibeMensagem("Sua Lista de apartamentos está vazia");
                     }
                     break;
                 case 4:
-                    if (listaApartamentos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
-                        this.exibeMensagem("Imovel exlcuido com sucesso");
+                    if (!listaApartamentos.isEmpty()) {
+                        if (listaApartamentos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                            this.exibeMensagem("Imovel exlcuido com sucesso");
+                        } else {
+                            this.exibeMensagem("erro");
+                        }
                     } else {
-                        this.exibeMensagem("erro");
+                        this.exibeMensagem("Sua Lista de apartamentos está vazia");
                     }
                     break;
                 case 5:
-                    this.Ordenar();
+                    if (!listaApartamentos.isEmpty()) {
+                        this.Ordenar();
+                    } else {
+                        this.exibeMensagem("Sua Lista de apartamentos está vazia");
+                    }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");

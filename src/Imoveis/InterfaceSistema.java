@@ -40,7 +40,7 @@ public abstract class InterfaceSistema {
      *
      * @param mensagem mensagem que vai ser exibida para o usuario
      */
-    protected void exibeMensagem(String mensagem) {
+    public void exibeMensagem(String mensagem) {
         System.out.println("\n===========================================================");
         System.out.println(mensagem.toUpperCase());
         System.out.println("===========================================================\n");
