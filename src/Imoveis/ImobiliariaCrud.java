@@ -323,6 +323,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
@@ -367,6 +368,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -460,22 +462,17 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="grava data do csv">
     private void gravaDataCriacao(String dir) throws FileNotFoundException, IOException {
         String fileName = "\\datacriacao.csv";
-        /*
-         escreve o ultimo codigo em um arquivo para continuar a contagem ao
-         reiniciar o programa
-         */
-        File file = new File(dir + "\\listaImoveis.csv");
+        File file = new File(dir + fileName);
         if (file.exists()) {
             FileOutputStream outFileCont = new FileOutputStream(dir + fileName);
             BufferedWriter buffCont = new BufferedWriter(new FileWriter(dir + fileName));
-            int i = Imovel.getCodigoClasse();
             buffCont.write(Long.toString(file.lastModified()));
             outFileCont.close();
             buffCont.close();
         }
     }
+    //</editor-fold>
 
-//</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="lê e seta o ultimo codigo de imovel da lista dentro da classe imovel">
     /**
      * lê um arquivo com o ultimo codigo de imovel dependendo do tipo de imovel
@@ -519,11 +516,14 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Lista vazia">
     public boolean isEmpty() {
         return this.listaImoveis.isEmpty();
     }
+    //</editor-fold>
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Ler Arquivo CSV">
     public boolean lerArquivoCsv() {
         FileInputStream inFile;
