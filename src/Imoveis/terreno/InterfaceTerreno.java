@@ -51,7 +51,7 @@ public class InterfaceTerreno extends InterfaceSistema {
                             System.out.print("#############################################");
                             System.out.println(tr.toString());
                         }
-                    }else {
+                    } else {
                         this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
@@ -197,9 +197,9 @@ public class InterfaceTerreno extends InterfaceSistema {
             System.out.println("3 - Ordernar por Area total");
             System.out.println("0 - voltar");
             System.out.println("----------------------------------------");
-            int opcao = inInt("Digite a opção desejada: ");
+            op = inInt("Digite a opção desejada: ");
             Imovel imo;
-            switch (opcao) {
+            switch (op) {
                 case 0:
                     break;
                 case 1:

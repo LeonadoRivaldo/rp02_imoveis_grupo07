@@ -24,8 +24,6 @@ public class InterfaceChacara extends InterfaceSistema {
     private Chacara chac = null;
     private List<Imovel> listaOrdenada;
     private int codImovel;
-    
-    
 
     String logradouro, bairro, cidade, descricao;
     int numero, numeroDeQuartos, anoDeConstrucao;
@@ -42,9 +40,6 @@ public class InterfaceChacara extends InterfaceSistema {
         }
         listaChacaras.setLastCod();
 
-                
-        
-     
         int opcao = -1;
         do {
             System.out.println("\n#############################################");
@@ -83,7 +78,7 @@ public class InterfaceChacara extends InterfaceSistema {
                         }
                     } else {
                         this.exibeMensagem("Lista de Chacaras Vazia!");
-                    } 
+                    }
                     break;
                 case 4:
                     if (!listaChacaras.isEmpty()) {
@@ -139,6 +134,7 @@ public class InterfaceChacara extends InterfaceSistema {
 
     /**
      * Metodo que escolhe o tipo de consulta
+     *
      * @return dados da pesquisa
      */
     public Chacara consultar() {
@@ -161,9 +157,7 @@ public class InterfaceChacara extends InterfaceSistema {
                     chac = (Chacara) listaChacaras.consultar(inInt("\nDigite o codigo do Imovel: "));
                     if (chac != null) {
                         return chac;
-                    } 
-                    
-                    else {
+                    } else {
                         this.exibeMensagem("Chacara Não Encontrada!");
                     }
                     break;
@@ -206,10 +200,10 @@ public class InterfaceChacara extends InterfaceSistema {
                     codImovel = this.listarImoveis(listaChacaras);
                     chac = (Chacara) listaChacaras.consultar(codImovel);
                     if (chac != null) {
-                        if (chac.equals(0)){
-                        System.out.print("vazio");
-                    }else{
-                        return chac;
+                        if (chac.equals(0)) {
+                            System.out.print("vazio");
+                        } else {
+                            return chac;
                         }
                     } else {
                         this.exibeMensagem("Chacara Não Encontrada!");
@@ -223,7 +217,7 @@ public class InterfaceChacara extends InterfaceSistema {
     }
 
     /**
-     * Metodo que chama o metodo excluir e exibe mensagens 
+     * Metodo que chama o metodo excluir e exibe mensagens
      */
     public void excluir() {
         int codigo = inInt("Informe o Codigo da Chacarra:");
@@ -248,9 +242,9 @@ public class InterfaceChacara extends InterfaceSistema {
             System.out.println("3. Ordernar por Area total");
             System.out.println("0. Voltar");
             System.out.println("----------------------------------------");
-            int opcao = inInt("Digite a Opção Desejada: ");
+            op = inInt("Digite a Opção Desejada: ");
             Imovel imo;
-            switch (opcao) {
+            switch (op) {
                 case 0:
                     principal();
 
@@ -289,7 +283,7 @@ public class InterfaceChacara extends InterfaceSistema {
                         System.out.println("===========================================");
                     } else {
                         this.exibeMensagem("Imovel Inexistente!");
-                       
+
                     }
                     break;
                 default:

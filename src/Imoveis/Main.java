@@ -35,6 +35,8 @@ public class Main {
             op = inInt("Opção: ");
 
             switch (op) {
+                case 0:
+                    break;
                 case 1:
                     iTerreno.principal();
                     break;
@@ -48,7 +50,7 @@ public class Main {
                     iChacara.principal();
                     break;
                 default:
-                    throw new AssertionError();
+                    System.out.println("#######################################\nOPÇÃO INVALIDA\n#######################################");
             }
 
         } while (op != 0);

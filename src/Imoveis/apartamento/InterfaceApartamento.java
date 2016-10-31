@@ -204,9 +204,9 @@ public class InterfaceApartamento extends InterfaceSistema {
             System.out.println("3 - Ordernar por Area total");
             System.out.println("0 - voltar");
             System.out.println("----------------------------------------");
-            int opcao = inInt("Digite a opção desejada: ");
+            op = inInt("Digite a opção desejada: ");
             Imovel imo;
-            switch (opcao) {
+            switch (op) {
                 case 0:
                     break;
                 case 1:
