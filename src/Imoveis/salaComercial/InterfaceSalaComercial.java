@@ -49,29 +49,47 @@ public class InterfaceSalaComercial extends InterfaceSistema {
                     this.criarImovel();
                     break;
                 case 2:
-                    sc = this.consultar();
-                    if (sc != null) {
-                        System.out.print("#############################################");
-                        System.out.println(sc.toString());
+                    if (!this.listaSalaComercial.isEmpty()) {
+                        sc = this.consultar();
+                        if (sc != null) {
+                            System.out.print("#############################################");
+                            System.out.println(sc.toString());
+                        }
+                    } else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 3:
-                    sc = consultar();
-                    if (sc != null) {
-                        if (this.editarImovel(sc, listaSalaComercial)) {
-                            this.exibeMensagem("Imovel editado com sucesso");
+                    if (!this.listaSalaComercial.isEmpty()) {
+                        sc = consultar();
+                        if (sc != null) {
+                            if (this.editarImovel(sc, listaSalaComercial)) {
+                                this.exibeMensagem("Imovel editado com sucesso");
+                            }
+                        } else {
+                            this.exibeMensagem("Imovel não encontrado");
                         }
+                    } else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 4:
-                    if (listaSalaComercial.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
-                        this.exibeMensagem("Imovel exlcuido com sucesso");
+                    if (!this.listaSalaComercial.isEmpty()) {
+                        if (listaSalaComercial.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                            this.exibeMensagem("Imovel exlcuido com sucesso");
+                        } else {
+                            this.exibeMensagem("erro");
+                        }
                     } else {
-                        this.exibeMensagem("erro");
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 5:
-                    this.Ordenar();
+                    if (!this.listaSalaComercial.isEmpty()) {
+                        this.Ordenar();
+                    } else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
+                    }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");

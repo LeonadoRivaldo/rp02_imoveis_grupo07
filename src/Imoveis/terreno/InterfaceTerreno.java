@@ -22,14 +22,14 @@ public class InterfaceTerreno extends InterfaceSistema {
     @Override
     public void principal() {
         listaTerrenos.setTipoImovel(Tipo.TERRENO);
-        
-        if( !listaTerrenos.lerArquivo() ){
+
+        if (!listaTerrenos.lerArquivo()) {
             this.exibeMensagem("Arquivo não encontrado");
         }
         listaTerrenos.setLastCod();
         int opcao = -1;
         do {
-           System.out.println("#############################################");
+            System.out.println("#############################################");
             System.out.println("1 - incluir");
             System.out.println("2 - Consultar");
             System.out.println("3 - editar");
@@ -45,29 +45,45 @@ public class InterfaceTerreno extends InterfaceSistema {
                     this.criarImovel();
                     break;
                 case 2:
-                    tr = this.consultar();
-                    if (tr != null) {
-                        System.out.print("#############################################");
-                        System.out.println(tr.toString());
+                    if (!this.listaTerrenos.isEmpty()) {
+                        tr = this.consultar();
+                        if (tr != null) {
+                            System.out.print("#############################################");
+                            System.out.println(tr.toString());
+                        }
+                    }else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 3:
-                    tr = consultar();
-                    if (tr != null) {
-                        if (this.editarImovel(tr, listaTerrenos)) {
-                            this.exibeMensagem("Imovel editado com sucesso");
+                    if (!this.listaTerrenos.isEmpty()) {
+                        tr = consultar();
+                        if (tr != null) {
+                            if (this.editarImovel(tr, listaTerrenos)) {
+                                this.exibeMensagem("Imovel editado com sucesso");
+                            }
                         }
+                    } else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 4:
-                    if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
-                        this.exibeMensagem("Imovel exlcuido com sucesso");
+                    if (!this.listaTerrenos.isEmpty()) {
+                        if (listaTerrenos.excluir(inInt("------------------------\nDigite o codigo do imovel:"))) {
+                            this.exibeMensagem("Imovel exlcuido com sucesso");
+                        } else {
+                            this.exibeMensagem("erro");
+                        }
                     } else {
-                        this.exibeMensagem("erro");
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
                     }
                     break;
                 case 5:
-                    this.Ordenar();
+                    if (!this.listaTerrenos.isEmpty()) {
+                        this.Ordenar();
+                    } else {
+                        this.exibeMensagem("Lista de Sala Comercial  Vazia!");
+                    }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -99,7 +115,7 @@ public class InterfaceTerreno extends InterfaceSistema {
         }
     }
 
-      private Terreno consultar() {
+    private Terreno consultar() {
         int op = -1;
         do {
             System.out.println("=======================================");
@@ -171,7 +187,7 @@ public class InterfaceTerreno extends InterfaceSistema {
         } while (op != 0);
         return null;
     }
-  
+
     private void Ordenar() {
         int op = -1;
         do {
@@ -227,6 +243,7 @@ public class InterfaceTerreno extends InterfaceSistema {
             }
         } while (op != 0);
     }
+
     public static void main(String[] args) {
         InterfaceTerreno i = new InterfaceTerreno();
         i.principal();
