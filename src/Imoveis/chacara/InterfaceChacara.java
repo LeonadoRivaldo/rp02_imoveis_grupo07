@@ -25,7 +25,7 @@ public class InterfaceChacara extends InterfaceSistema {
     private List<Imovel> listaOrdenada;
     private int codImovel;
     
-
+    
 
     String logradouro, bairro, cidade, descricao;
     int numero, numeroDeQuartos, anoDeConstrucao;
@@ -41,9 +41,10 @@ public class InterfaceChacara extends InterfaceSistema {
             this.exibeMensagem("Arquivo Não Encontrado!");
         }
         listaChacaras.setLastCod();
-        
-      
 
+                
+        
+     
         int opcao = -1;
         do {
             System.out.println("\n#############################################");
@@ -62,26 +63,45 @@ public class InterfaceChacara extends InterfaceSistema {
                     criarImovel();
                     break;
                 case 2:
-                    chac = this.consultar();
-                    if (chac != null) {
-                        System.out.println(chac.toString());
-                    } 
-                    
+                    if (!listaChacaras.isEmpty()) {
+                        chac = this.consultar();
+                        if (chac != null) {
+                            System.out.print("#############################################");
+                            System.out.println(chac.toString());
+                        }
+                    } else {
+                        this.exibeMensagem("Lista de Chacaras Vazia!");
+                    }
                     break;
                 case 3:
-                    chac = consultar();
-                    if (chac != null) {
-                        this.editarImovel(chac, listaChacaras);
+                    if (!listaChacaras.isEmpty()) {
+                        chac = this.consultar();
+                        if (chac != null) {
+                            if (this.editarImovel(chac, listaChacaras)) {
+                                this.exibeMensagem("Imovel Editado com Sucesso!");
+                            }
+                        }
+                    } else {
+                        this.exibeMensagem("Lista de Chacaras Vazia!");
                     } 
-                    
-                    
-                    
                     break;
                 case 4:
-                    this.excluir();
+                    if (!listaChacaras.isEmpty()) {
+                        if (listaChacaras.excluir(inInt("\nDigite o codigo do imovel:"))) {
+                            this.exibeMensagem("Imovel Exlcuido com Sucesso!");
+                        } else {
+                            this.exibeMensagem("Erro!");
+                        }
+                    } else {
+                        this.exibeMensagem("Lista de Chacaras Vazia!)");
+                    }
                     break;
                 case 5:
-                    this.Ordenar();
+                    if (!listaChacaras.isEmpty()) {
+                        this.Ordenar();
+                    } else {
+                        this.exibeMensagem("Lista de Chacaras Vazia!");
+                    }
                     break;
                 default:
                     this.exibeMensagem("Opção invalida!");
@@ -141,7 +161,9 @@ public class InterfaceChacara extends InterfaceSistema {
                     chac = (Chacara) listaChacaras.consultar(inInt("\nDigite o codigo do Imovel: "));
                     if (chac != null) {
                         return chac;
-                    } else {
+                    } 
+                    
+                    else {
                         this.exibeMensagem("Chacara Não Encontrada!");
                     }
                     break;
@@ -184,7 +206,11 @@ public class InterfaceChacara extends InterfaceSistema {
                     codImovel = this.listarImoveis(listaChacaras);
                     chac = (Chacara) listaChacaras.consultar(codImovel);
                     if (chac != null) {
+                        if (chac.equals(0)){
+                        System.out.print("vazio");
+                    }else{
                         return chac;
+                        }
                     } else {
                         this.exibeMensagem("Chacara Não Encontrada!");
                     }
