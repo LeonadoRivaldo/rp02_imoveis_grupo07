@@ -20,6 +20,17 @@ public class ListaDuplamenteLigada<E> implements List {
     private No<E> Inicio, fim, atual;
     private int indice;
 
+    public ListaDuplamenteLigada(No<E> Inicio, No<E> fim, No<E> atual, int indice) {
+        this.Inicio = Inicio;
+        this.fim = fim;
+        this.atual = atual;
+        this.indice = indice;
+    }
+
+    
+    
+    
+    
     //<editor-fold defaultstate="collapsed" desc="Aluno 1">
     @Override
     public boolean add(Object e) {
