@@ -13,8 +13,28 @@ import java.util.ListIterator;
  *
  * @author leona_000
  */
-public class ListaDuplamenteLigada implements List{
-
+public class ListaDuplamenteLigada<E> implements List{
+    
+    private No<E> Inicio, fim, atual;
+    private int indice;
+    
+    //<editor-fold defaultstate="collapsed" desc="Aluno 1">
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Aluno 2">
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Aluno 3">
+    
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Aluno 4">
+    
+    //</editor-fold>
+    
+    
     @Override
     public int size() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
