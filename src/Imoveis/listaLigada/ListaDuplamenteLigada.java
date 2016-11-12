@@ -17,11 +17,11 @@ import java.util.ListIterator;
  */
 public class ListaDuplamenteLigada<E> implements List {
 
-    private No<E> Inicio, fim, atual;
+    private No<E> inicio, fim, atual;
     private int indice;
 
     public ListaDuplamenteLigada() {
-        this.Inicio = null;
+        this.inicio = null;
         this.fim = null;
         this.atual = null;
     }
@@ -39,8 +39,10 @@ public class ListaDuplamenteLigada<E> implements List {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
+    //asd
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
+    //asdas
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     public boolean addFirst(E e) {
@@ -57,7 +59,15 @@ public class ListaDuplamenteLigada<E> implements List {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Aluno 5">
+    @Override
+    public boolean isEmpty() {
+        return this.inicio == null;
+    }
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Metodos Extras">
+    //<editor-fold defaultstate="collapsed" desc="aux">
     private void decrementarLista(No n) {
         No aux = n;
         while (aux != this.fim) {
@@ -75,17 +85,13 @@ public class ListaDuplamenteLigada<E> implements List {
         }
         aux.decrementarIndice();
     }
+    //</editor-fold>
 
     //</editor-fold>
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean isEmpty() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
