@@ -4,37 +4,40 @@
  * and open the template in the editor.
  */
 package Imoveis.listaLigada;
+
 import Imoveis.Imovel;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
 /**
  *
  * @author leona_000
  */
-public class ListaDuplamenteLigada<E> implements List{
-    
+public class ListaDuplamenteLigada<E> implements List {
+
     private No<E> Inicio, fim, atual;
     private int indice;
-    
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 1">
-    
+    @Override
+    public boolean add(Object e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
-    
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
-    
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
-    
     //</editor-fold>
-    
-    
     @Override
     public int size() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -62,16 +65,6 @@ public class ListaDuplamenteLigada<E> implements List{
 
     @Override
     public Object[] toArray(Object[] ts) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean add(Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean remove(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
