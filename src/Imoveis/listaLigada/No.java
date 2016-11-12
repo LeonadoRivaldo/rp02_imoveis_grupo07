@@ -59,4 +59,8 @@ public class No<E> {
         this.indice--;
     }
 
+    public void incrementarIndice() {
+        this.indice--;
+    }
+
 }

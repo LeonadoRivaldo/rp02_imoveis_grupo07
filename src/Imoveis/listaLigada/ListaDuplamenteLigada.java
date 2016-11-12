@@ -43,12 +43,22 @@ public class ListaDuplamenteLigada<E> implements List {
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
+    public boolean addFirst(E e) {
+        return true;
+    }
+
+    public boolean removeFirst() {
+        return true;
+    }
+
+    public E getFirst() {
+        No aux = null;
+        return (E) aux.getImovel();
+    }
     //</editor-fold>
-    
-    
+
     //<editor-fold defaultstate="collapsed" desc="Metodos Extras">
-    
-    private void decrementarLista(No n){
+    private void decrementarLista(No n) {
         No aux = n;
         while (aux != this.fim) {
             aux.decrementarIndice();
@@ -56,10 +66,17 @@ public class ListaDuplamenteLigada<E> implements List {
         }
         aux.decrementarIndice();
     }
-    
-    
+
+    private void incrementarLista(No n) {
+        No aux = n;
+        while (aux != this.fim) {
+            aux.incrementarIndice();
+            aux = aux.getProximo();
+        }
+        aux.decrementarIndice();
+    }
+
     //</editor-fold>
-    
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
     @Override
