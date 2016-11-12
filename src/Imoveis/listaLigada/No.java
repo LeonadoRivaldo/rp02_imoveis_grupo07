@@ -11,24 +11,24 @@ package Imoveis.listaLigada;
  */
 public class No<E> {
 
-    private int Indice;
+    private int indice;
     private E imovel;
     private No proximo;
     private No anterior;
 
-    public No(int Indice, E imovel, No proximo, No anterior) {
-        this.Indice = Indice;
+    public No(int indice, E imovel, No proximo, No anterior) {
+        this.indice = indice;
         this.imovel = imovel;
         this.proximo = proximo;
         this.anterior = anterior;
     }
 
     public int getIndice() {
-        return Indice;
+        return indice;
     }
 
-    public void setIndice(int Indice) {
-        this.Indice = Indice;
+    public void setIndice(int indice) {
+        this.indice = indice;
     }
 
     public E getImovel() {
@@ -54,7 +54,9 @@ public class No<E> {
     public void setAnterior(No anterior) {
         this.anterior = anterior;
     }
-    
-    
+
+    public void decrementarIndice() {
+        this.indice--;
+    }
 
 }

@@ -20,17 +20,12 @@ public class ListaDuplamenteLigada<E> implements List {
     private No<E> Inicio, fim, atual;
     private int indice;
 
-    public ListaDuplamenteLigada(No<E> Inicio, No<E> fim, No<E> atual, int indice) {
-        this.Inicio = Inicio;
-        this.fim = fim;
-        this.atual = atual;
-        this.indice = indice;
+    public ListaDuplamenteLigada() {
+        this.Inicio = null;
+        this.fim = null;
+        this.atual = null;
     }
 
-    
-    
-    
-    
     //<editor-fold defaultstate="collapsed" desc="Aluno 1">
     @Override
     public boolean add(Object e) {
@@ -49,6 +44,24 @@ public class ListaDuplamenteLigada<E> implements List {
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     //</editor-fold>
+    
+    
+    //<editor-fold defaultstate="collapsed" desc="Metodos Extras">
+    
+    private void decrementarLista(No n){
+        No aux = n;
+        while (aux != this.fim) {
+            aux.decrementarIndice();
+            aux = aux.getProximo();
+        }
+        aux.decrementarIndice();
+    }
+    
+    
+    //</editor-fold>
+    
+    //PEGAR ASSINATURA AQUI
+    //<editor-fold defaultstate="collapsed" desc="Metodos do List">
     @Override
     public int size() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -153,5 +166,6 @@ public class ListaDuplamenteLigada<E> implements List {
     public List subList(int i, int i1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+//</editor-fold>
 
 }
