@@ -8,3 +8,4 @@ src/Imoveis/GravaCodigo.java
 nbproject/private/private.properties
 *.properties
 src_OLD_NEW/
+test/ListaDuplamenteLigadaTest.java

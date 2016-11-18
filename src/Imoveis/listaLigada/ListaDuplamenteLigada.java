@@ -103,7 +103,7 @@ public class ListaDuplamenteLigada<E> implements List {
             this.size++;
             this.incrementarLista(aux);
         } else {
-            throw new ListaVaziaException();
+            throw new IllegalArgumentException("Lista vazia");
         }
 
     }
@@ -137,7 +137,7 @@ public class ListaDuplamenteLigada<E> implements List {
                 return aux.getImovel();
             }
         } else {
-            throw new ListaVaziaException();
+            throw new IllegalArgumentException("Lista vazia");
         }
     }
     //</editor-fold>
@@ -159,12 +159,12 @@ public class ListaDuplamenteLigada<E> implements List {
             }
             return aux.getImovel();
         } else {
-            throw new ListaVaziaException();
+            throw new IllegalArgumentException("Lista vazia");
         }
     }
+    //</editor-fold>
+    //</editor-fold>
 
-    //</editor-fold>
-    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
     //asdas
     //</editor-fold>
