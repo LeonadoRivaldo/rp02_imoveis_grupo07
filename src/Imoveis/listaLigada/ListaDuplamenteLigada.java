@@ -24,17 +24,59 @@ public class ListaDuplamenteLigada<E> implements List {
         this.inicio = null;
         this.fim = null;
         this.atual = null;
+        this.indice = 0;
+        this.size = 0;
     }
 
     //<editor-fold defaultstate="collapsed" desc="Aluno 1">
     @Override
     public boolean add(Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Imovel im = (Imovel) e;
+        if (!this.isEmpty()) {
+            No aux1 = this.inicio;
+            //verifica se não tem um imovel com o mesmo codigo na lista
+            if (this.imovelExists(im)) {
+                return false;
+            }
+            //fim da verificação
+            aux = new No(indice, im, inicio, fim);
+            this.fim = aux;
+        } else {
+            this.inicio = new No(indice, im, inicio, inicio);
+            this.fim = inicio;
+        }
+        this.indice++;
+        this.size++;
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Imovel im = (Imovel) o;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        } else {
+            aux = this.inicio;
+            while (aux != this.fim) {
+                Imovel i = (Imovel) aux.getImovel();
+                if (i.getCodigoObj() == im.getCodigoObj()) {
+                    break;
+                }
+                aux = aux.getProximo();
+            }
+            if (this.aux != this.fim) {
+                No<E> anterior = aux.getAnterior();
+                No<E> proximo = aux.getProximo();
+                anterior.setProximo(proximo);
+                proximo.setAnterior(anterior);
+                this.indice--;
+                this.size--;
+                this.decrementarLista(proximo);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     //</editor-fold>
 
@@ -123,7 +165,6 @@ public class ListaDuplamenteLigada<E> implements List {
 
     //</editor-fold>
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
     //asdas
     //</editor-fold>
@@ -162,9 +203,9 @@ public class ListaDuplamenteLigada<E> implements List {
         return true;
     }
 
-    public E getFirst() {
+    public Imovel getFirst() {
         No aux = null;
-        return (E) aux.getImovel();
+        return (Imovel) aux.getImovel();
     }
     //</editor-fold>
 
@@ -276,8 +317,28 @@ public class ListaDuplamenteLigada<E> implements List {
         this.indice = 0;
     }
     //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Verifica se o imovel existe">
+    /**
+     * recebe um imovel por parametro e verifica se ele existe na lista;
+     *
+     * @param im
+     * @return true se existe | false se não
+     */
+    public boolean imovelExists(Imovel im) {
+        No aux1 = this.inicio;
+        while (aux1 != this.fim) {
+            Imovel i = (Imovel) aux1.getImovel();
+            if (i.getCodigoObj() == im.getCodigoObj()) {
+                return true;
+            }
+            aux1 = aux1.getProximo();
+        }
+        return false;
+    }
     //</editor-fold>
 
+    //</editor-fold>
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
     @Override

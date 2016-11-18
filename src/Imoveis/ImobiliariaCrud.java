@@ -7,6 +7,7 @@ package Imoveis;
 
 import Imoveis.apartamento.Apartamento;
 import Imoveis.chacara.Chacara;
+import Imoveis.listaLigada.ListaDuplamenteLigada;
 import Imoveis.salaComercial.SalaComercial;
 import Imoveis.terreno.Terreno;
 import java.io.BufferedReader;
@@ -35,6 +36,7 @@ import java.util.logging.Logger;
 public class ImobiliariaCrud implements ListaImoveis {
 
     private List<Imovel> listaImoveis;
+    private ListaDuplamenteLigada<Imovel> lista;
     private Tipo tipoImovel;
     private int countcodTrys = 0;
 
