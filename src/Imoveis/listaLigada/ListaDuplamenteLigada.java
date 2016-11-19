@@ -206,11 +206,38 @@ public class ListaDuplamenteLigada<E> implements List {
                 }
                 aux = aux.getProximo();
             }
+            aux = this.fim;
+            Imovel i = (Imovel) aux.getImovel();
+            if (i.getCodigoObj() == im.getCodigoObj()) {
+                return true;
+            }
             return false;
         }
     }
-    //</editor-fold>
 
+    @Override
+    public Object set(int i, Object e) {
+        E imovel = (E) e;
+        if (!this.isEmpty()) {
+            No<E> aux = this.inicio;
+            while (aux != this.fim) {
+                if (aux.getIndice() == i) {
+                    break;
+                }
+                aux = aux.getProximo();
+            }
+            if (aux.getIndice() == i) {
+                aux.setImovel(imovel);
+                return aux.getImovel();
+            } else {
+                return null;
+            }
+        } else {
+            throw new IllegalArgumentException("Lista vazia");
+        }
+    }
+
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     /**
      * Recebe um imovel, testa se o imovel já não existe na lista ,cria um novo
@@ -430,11 +457,6 @@ public class ListaDuplamenteLigada<E> implements List {
 
     @Override
     public boolean retainAll(Collection clctn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object set(int i, Object e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
