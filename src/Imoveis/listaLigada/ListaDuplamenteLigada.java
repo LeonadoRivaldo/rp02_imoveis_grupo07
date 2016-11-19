@@ -168,6 +168,29 @@ public class ListaDuplamenteLigada<E> implements List {
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
     //asdas
     //</editor-fold>
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        Imovel im = (Imovel) o;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        } else {
+            aux = this.inicio;
+            while (aux != this.fim) {
+                Imovel i = (Imovel) aux.getImovel();
+                if (i.getCodigoObj() == im.getCodigoObj()) {
+                    return true;
+                }
+                aux = aux.getProximo();
+            }
+            return false;
+        }
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     /**
      * Recebe um imovel, testa se o imovel já não existe na lista ,cria um novo
@@ -269,6 +292,7 @@ public class ListaDuplamenteLigada<E> implements List {
                     this.inicio.setAnterior(this.fim);
                     this.inicio.setProximo(this.fim);
                     this.indice--;
+                    //this.size--;
                     return true;
                 }
             } else {
@@ -276,6 +300,7 @@ public class ListaDuplamenteLigada<E> implements List {
                 this.fim = aux.getAnterior();
                 this.fim.setProximo(this.inicio);
                 this.indice--;
+                //this.size--;
                 return true;
             }
         } else {
@@ -341,16 +366,6 @@ public class ListaDuplamenteLigada<E> implements List {
     //</editor-fold>
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
-    @Override
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public Iterator iterator() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
