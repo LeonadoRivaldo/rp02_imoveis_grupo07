@@ -33,16 +33,19 @@ public class ListaDuplamenteLigada<E> implements List {
     public boolean add(Object e) {
         Imovel im = (Imovel) e;
         if (!this.isEmpty()) {
-            No aux1 = this.inicio;
             //verifica se não tem um imovel com o mesmo codigo na lista
             if (this.imovelExists(im)) {
                 return false;
             }
             //fim da verificação
             aux = new No(indice, im, inicio, fim);
+            this.fim.setProximo(aux);
             this.fim = aux;
+            this.inicio.setAnterior(fim);
         } else {
             this.inicio = new No(indice, im, inicio, inicio);
+            this.inicio.setAnterior(inicio);
+            this.inicio.setProximo(inicio);
             this.fim = inicio;
         }
         this.indice++;
@@ -57,21 +60,20 @@ public class ListaDuplamenteLigada<E> implements List {
             throw new IllegalArgumentException("Lista vazia");
         } else {
             aux = this.inicio;
-            while (aux != this.fim) {
+            while (aux != this.inicio) {
                 Imovel i = (Imovel) aux.getImovel();
                 if (i.getCodigoObj() == im.getCodigoObj()) {
                     break;
                 }
                 aux = aux.getProximo();
             }
-            if (this.aux != this.fim) {
-                No<E> anterior = aux.getAnterior();
-                No<E> proximo = aux.getProximo();
-                anterior.setProximo(proximo);
-                proximo.setAnterior(anterior);
-                this.indice--;
+            if (this.aux != this.inicio) {
+                //No<E> anterior = aux.getAnterior();
+                //No<E> proximo = aux.getProximo();
+                aux.getAnterior().setProximo(aux.getProximo());
+                aux.getProximo().setAnterior(aux.getAnterior());
                 this.size--;
-                this.decrementarLista(proximo);
+                this.decrementarLista(aux.getProximo());
                 return true;
             } else {
                 return false;
@@ -154,7 +156,11 @@ public class ListaDuplamenteLigada<E> implements List {
     public Object get(int i) {
         if (!this.isEmpty()) {
             No<E> aux = this.inicio;
-            while (aux.getIndice() != i) {
+            while (aux != this.fim) {
+
+                if (aux.getIndice() == i) {
+                    break;
+                }
                 aux = aux.getProximo();
             }
             return aux.getImovel();
@@ -166,8 +172,30 @@ public class ListaDuplamenteLigada<E> implements List {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Aluno 3">
-    //asdas
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        Imovel im = (Imovel) o;
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        } else {
+            aux = this.inicio;
+            while (aux != this.fim) {
+                Imovel i = (Imovel) aux.getImovel();
+                if (i.getCodigoObj() == im.getCodigoObj()) {
+                    return true;
+                }
+                aux = aux.getProximo();
+            }
+            return false;
+        }
+    }
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     /**
      * Recebe um imovel, testa se o imovel já não existe na lista ,cria um novo
@@ -180,18 +208,11 @@ public class ListaDuplamenteLigada<E> implements List {
      * @return
      */
     public boolean addFirst(Imovel im) {
-        if (this.indexOf(im) == -1) {
+        if (!this.imovelExists(im)) {
             aux = new No(0, im, this.inicio, this.fim);
             this.incrementarLista(this.inicio);
             this.inicio = aux;
-            /*
-             apenas um teste para ver se a lista não está vazia
-             se estiver ele apenas vai dizer que o fim é o inicio;
-             */
-            if (this.isEmpty()) {
-                this.fim = this.inicio;
-                this.inicio.setProximo(fim);
-            }
+
             this.size++;
             return true;
         } else {
@@ -200,12 +221,23 @@ public class ListaDuplamenteLigada<E> implements List {
     }
 
     public boolean removeFirst() {
-        return true;
+        if (this.isEmpty()) {
+            return false;
+        } else {
+            aux = inicio;
+            inicio = aux.getProximo();
+            inicio.setAnterior(fim);
+            this.decrementarLista(inicio);
+            return true;
+        }
+
     }
 
     public Imovel getFirst() {
-        No aux = null;
-        return (Imovel) aux.getImovel();
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        return (Imovel) inicio.getImovel();
     }
     //</editor-fold>
 
@@ -288,6 +320,9 @@ public class ListaDuplamenteLigada<E> implements List {
     //<editor-fold defaultstate="collapsed" desc="Metodos Extras">
     //<editor-fold defaultstate="collapsed" desc="aux">
     private void decrementarLista(No n) {
+        if (this.size == 1) {
+            this.fim = inicio;
+        }
         this.indice--;
         No aux = n;
         while (aux != this.fim) {
@@ -337,20 +372,10 @@ public class ListaDuplamenteLigada<E> implements List {
         return false;
     }
     //</editor-fold>
-
     //</editor-fold>
+
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
-    @Override
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public Iterator iterator() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
