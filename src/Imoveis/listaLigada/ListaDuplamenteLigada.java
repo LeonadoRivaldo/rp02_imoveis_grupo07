@@ -66,7 +66,7 @@ public class ListaDuplamenteLigada<E> implements List {
     public boolean remove(Object o) {
         Imovel im = (Imovel) o;
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("Lista Vazia!");
+            throw new IllegalArgumentException("Lista vazia");
         } else {
             aux = this.inicio;
             while (aux != this.fim) {
@@ -96,6 +96,7 @@ public class ListaDuplamenteLigada<E> implements List {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
     //<editor-fold defaultstate="collapsed" desc="Adicionar em uma posição especifica">
     @Override
