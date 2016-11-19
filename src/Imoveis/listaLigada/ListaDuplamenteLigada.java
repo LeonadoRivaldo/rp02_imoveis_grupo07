@@ -53,6 +53,15 @@ public class ListaDuplamenteLigada<E> implements List {
         return true;
     }
 
+    private void removeNo(No aux) {
+        //No<E> anterior = aux.getAnterior();
+        //No<E> proximo = aux.getProximo();
+        aux.getAnterior().setProximo(aux.getProximo());
+        aux.getProximo().setAnterior(aux.getAnterior());
+        this.size--;
+        this.decrementarLista(aux.getProximo());
+    }
+
     @Override
     public boolean remove(Object o) {
         Imovel im = (Imovel) o;
@@ -60,28 +69,33 @@ public class ListaDuplamenteLigada<E> implements List {
             throw new IllegalArgumentException("Lista vazia");
         } else {
             aux = this.inicio;
-            while (aux != this.inicio) {
+            while (aux != this.fim) {
                 Imovel i = (Imovel) aux.getImovel();
                 if (i.getCodigoObj() == im.getCodigoObj()) {
                     break;
                 }
                 aux = aux.getProximo();
             }
-            if (this.aux != this.inicio) {
-                //No<E> anterior = aux.getAnterior();
-                //No<E> proximo = aux.getProximo();
-                aux.getAnterior().setProximo(aux.getProximo());
-                aux.getProximo().setAnterior(aux.getAnterior());
-                this.size--;
-                this.decrementarLista(aux.getProximo());
+            Imovel imov = (Imovel) aux.getImovel();
+            if (im.getCodigoObj() == imov.getCodigoObj()) {
+                removeNo(aux);
                 return true;
             } else {
                 return false;
             }
         }
     }
-    //</editor-fold>
 
+    public No getLast() {
+        if (this.isEmpty()) {
+            throw new IllegalArgumentException("Lista vazia");
+        } else {
+            No ult = this.fim;
+            return ult;
+        }
+    }
+
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
     //<editor-fold defaultstate="collapsed" desc="Adicionar em uma posição especifica">
     @Override
