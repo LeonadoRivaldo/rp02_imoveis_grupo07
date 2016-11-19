@@ -301,6 +301,7 @@ public class ListaDuplamenteLigada<E> implements List {
                     this.inicio.setAnterior(this.fim);
                     this.inicio.setProximo(this.fim);
                     this.indice--;
+                    //this.size--;
                     return true;
                 }
             } else {
@@ -308,6 +309,7 @@ public class ListaDuplamenteLigada<E> implements List {
                 this.fim = aux.getAnterior();
                 this.fim.setProximo(this.inicio);
                 this.indice--;
+                //this.size--;
                 return true;
             }
         } else {
