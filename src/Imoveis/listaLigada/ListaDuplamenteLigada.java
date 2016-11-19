@@ -66,7 +66,7 @@ public class ListaDuplamenteLigada<E> implements List {
     public boolean remove(Object o) {
         Imovel im = (Imovel) o;
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("Lista vazia");
+            throw new IllegalArgumentException("Lista Vazia!");
         } else {
             aux = this.inicio;
             while (aux != this.fim) {
@@ -88,7 +88,7 @@ public class ListaDuplamenteLigada<E> implements List {
 
     public No getLast() {
         if (this.isEmpty()) {
-            throw new IllegalArgumentException("Lista vazia");
+            throw new IllegalArgumentException("Lista Vazia!");
         } else {
             No ult = this.fim;
             return ult;
