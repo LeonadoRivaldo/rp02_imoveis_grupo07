@@ -41,7 +41,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     private int countcodTrys = 0;
 
     public ImobiliariaCrud() {
-        listaImoveis = new ArrayList<>();
+        listaImoveis = new ListaDuplamenteLigada();
     }
 
     public List<Imovel> getListaImoveis() {
@@ -66,8 +66,9 @@ public class ImobiliariaCrud implements ListaImoveis {
      */
     @Override
     public boolean incluir(Imovel imovel) {
-        for (Imovel i : listaImoveis) {
-            if (imovel.getCodigoObj() == i.getCodigoObj()) {
+
+        for (int x = 0; x < this.listaImoveis.size(); x++) {
+            if (imovel.getCodigoObj() == this.listaImoveis.get(x).getCodigoObj()) {
                 return false;
             }
         }
@@ -286,7 +287,8 @@ public class ImobiliariaCrud implements ListaImoveis {
             //buff.write(listaImoveis.size() + ",");
             //escreve as informações de cada conta
             buff.write("codigo;" + objProp);
-            for (Imovel imovel : listaImoveis) {
+            for (int x = 0; x < this.listaImoveis.size(); x++) {
+                Imovel imovel = this.listaImoveis.get(x);
                 buff.newLine();
                 buff.write(objToString(imovel));
                 //escreve uma linha em branco entre uma conta e a seguinte
@@ -316,16 +318,15 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     private void escreveArquivoBinario(String dir) throws FileNotFoundException, IOException {
-        String fileNameSe = "\\listaImoveis";
-        FileOutputStream outFileSe = new FileOutputStream(dir + fileNameSe);
-        ObjectOutputStream out = new ObjectOutputStream(outFileSe);
-        out.writeObject(this.listaImoveis);
-        outFileSe.close();
-        out.close();
+        String fileNameSe = "\\listaImoveis";//Nome arquivo
+        FileOutputStream outFileSe = new FileOutputStream(dir + fileNameSe);// Define que o arquivo acima é para escrita em bin
+        ObjectOutputStream out = new ObjectOutputStream(outFileSe);// Criar um mecanismo para escrita
+        out.writeObject(this.listaImoveis);//Grava a lista toda em .bin
+        outFileSe.close();// Fecha o arquivo
+        out.close();// Fecha o mecanismo
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
@@ -346,19 +347,14 @@ public class ImobiliariaCrud implements ListaImoveis {
             } else if (tipoImovel.getTipo() == 4) {
                 dir = dirName("terreno");
             }
-            File files = new File(dir + "\\listaImoveis");
-            if (files.exists() && FileLastModifiedDate.lastModifiedIsEqual(dir)) {
-                FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");
-                ObjectInputStream in = new ObjectInputStream(fileIn);
+            File files = new File(dir + "\\listaImoveis");// Pegando o .bin
+            if (files.exists()) {
+                FileInputStream fileIn = new FileInputStream(dir + "\\listaImoveis");//Abrir o arquivo .bin em modo de leitura
+                ObjectInputStream in = new ObjectInputStream(fileIn);//Abrindo o mecanismo pra ler o .bin
                 this.listaImoveis = (List<Imovel>) in.readObject();
-                in.close();
-                fileIn.close();
+                in.close(); // fecha o mecanismo
+                fileIn.close();// fecha o arquivo
                 return true;
-            } else {
-                if (this.lerArquivoCsv()) {
-                    this.escreverArquivo();
-                    return true;
-                }
             }
         } catch (IOException i) {
             i.printStackTrace();
@@ -370,7 +366,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -525,7 +520,6 @@ public class ImobiliariaCrud implements ListaImoveis {
     //</editor-fold>
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Ler Arquivo CSV">
     public boolean lerArquivoCsv() {
         FileInputStream inFile;

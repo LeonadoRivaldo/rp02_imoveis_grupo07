@@ -15,7 +15,7 @@ import java.util.ListIterator;
  *
  * @author leona_000
  */
-public class ListaDuplamenteLigada<E> implements List {
+public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
 
     private No<E> inicio, fim, atual, aux;
     private int indice = 0, size = 0;
@@ -485,5 +485,25 @@ public class ListaDuplamenteLigada<E> implements List {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 //</editor-fold>
+
+    @Override
+    public boolean hasNext() {
+        return this.atual != this.fim;
+    }
+
+    @Override
+    public E next() {
+        if (!hasNext()) {
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        No<E> aux = this.atual;
+        this.atual = this.atual.getProximo();
+        return aux.getImovel();
+    }
+
+    @Override
+    public void remove() {
+        throw new IllegalArgumentException();
+    }
 
 }
