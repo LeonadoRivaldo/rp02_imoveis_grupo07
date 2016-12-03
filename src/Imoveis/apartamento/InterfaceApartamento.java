@@ -65,7 +65,7 @@ public class InterfaceApartamento extends InterfaceSistema {
                             if (this.editarImovel(ap, listaApartamentos)) {
                                 this.exibeMensagem("Imovel editado com sucesso");
                             }
-                        } 
+                        }  
                     } else {
                         this.exibeMensagem("Sua Lista de apartamentos está vazia");
                     }
