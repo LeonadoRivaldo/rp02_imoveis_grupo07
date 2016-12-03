@@ -10,12 +10,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.io.Serializable;
 
 /**
  *
  * @author leona_000
  */
-public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
+public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable {
 
     private No<E> inicio, fim, atual, aux;
     private int indice = 0, size = 0;
@@ -96,7 +97,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
     //<editor-fold defaultstate="collapsed" desc="Adicionar em uma posição especifica">
     @Override
@@ -236,8 +236,8 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
             throw new IllegalArgumentException("Lista vazia");
         }
     }
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 4">
     /**
      * Recebe um imovel, testa se o imovel já não existe na lista ,cria um novo
@@ -416,8 +416,41 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
         return false;
     }
     //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="AddAll">
+    @Override
+    public boolean addAll(Collection clctn) {
+        ListaDuplamenteLigada<E> auxList = (ListaDuplamenteLigada) clctn;
+        for (int x = 0; x < clctn.size(); x++) {
+            this.add(auxList.get(x));
+        }
+        return true;
+    }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="IndexOf">
+    @Override
+    public int indexOf(Object o) {
+        this.aux = inicio;
+        Imovel im = (Imovel) o;
+        Imovel i = (Imovel) this.aux.getImovel();
+        while (aux != fim) {
+            i = (Imovel) this.aux.getImovel();
+            if (i.getCodigoObj() == im.getCodigoObj()) {
+                break;
+            }
+        }
+
+        if (i.getCodigoObj() == im.getCodigoObj()) {
+            return this.aux.getIndice();
+        } else {
+            return -1;
+        }
+
+    }
+    //</editor-fold>
+
+    //</editor-fold>
     //PEGAR ASSINATURA AQUI
     //<editor-fold defaultstate="collapsed" desc="Metodos do List">
     @Override
@@ -441,11 +474,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
     }
 
     @Override
-    public boolean addAll(Collection clctn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean addAll(int i, Collection clctn) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -457,11 +485,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E> {
 
     @Override
     public boolean retainAll(Collection clctn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int indexOf(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

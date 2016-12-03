@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package Imoveis.listaLigada;
-
+import java.io.Serializable;
 /**
  *
  * @author leona_000
  */
-public class No<E> {
+public class No<E> implements Serializable{
 
     private int indice;
     private E imovel;
@@ -60,7 +60,7 @@ public class No<E> {
     }
 
     public void incrementarIndice() {
-        this.indice--;
+        this.indice++;
     }
 
 }

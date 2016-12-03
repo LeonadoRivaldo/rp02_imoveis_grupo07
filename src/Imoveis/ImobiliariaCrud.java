@@ -80,7 +80,8 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Consultar">
     @Override
     public Imovel consultar(int codigo) {
-        for (Imovel imovel : listaImoveis) {
+        for (int x = 0; x < listaImoveis.size(); x++) {
+            Imovel imovel = listaImoveis.get(x);
             if (imovel.getCodigoObj() == codigo) {
                 return imovel;
             }
@@ -126,7 +127,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Por codigo">
     @Override
     public List<Imovel> ordenarCodigo() {
-        List<Imovel> aux = new ArrayList<>();
+        List<Imovel> aux = new ListaDuplamenteLigada();
         aux.addAll(this.listaImoveis);
         for (int i = 0; i < aux.size(); i++) {
             for (int j = 0; j < aux.size() - 1; j++) {
@@ -145,7 +146,7 @@ public class ImobiliariaCrud implements ListaImoveis {
     //<editor-fold defaultstate="collapsed" desc="Por valor">
     @Override
     public List<Imovel> ordenarValor() {
-        List<Imovel> aux = new ArrayList<>();
+        List<Imovel> aux = new ListaDuplamenteLigada();
         aux.addAll(this.listaImoveis);
         for (int i = 0; i < aux.size(); i++) {
             Imovel imovel = aux.get(i);
@@ -221,7 +222,8 @@ public class ImobiliariaCrud implements ListaImoveis {
     @Override
     public List<Imovel> pesquisaBairro(String bairro) {
         List<Imovel> aux = new ArrayList<>();
-        for (Imovel im : this.listaImoveis) {
+        for (int i = 0; i < this.listaImoveis.size(); i++) {
+            Imovel im = this.listaImoveis.get(i);
             if (im.getBairro().equalsIgnoreCase(bairro)) {
                 aux.add(im);
             }
@@ -241,92 +243,118 @@ public class ImobiliariaCrud implements ListaImoveis {
      * @return true caso consiga, false caso não encontre o arquivo ou algum
      * erro aconteça
      */
+    /*
+     public boolean escreverArquivo() {
+     String dir = null;
+     String fileName = "\\listaImoveis.csv";
+     FileOutputStream outFile = null;
+     BufferedWriter buff = null;
+     String objProp = null;
+     Imovel im;
+     //abre o arquivo para escrita
+     //A estrutura try-catch é usada pois o objeto BufferedWriter exige que as
+     //excessões sejam tratadas
+     try {
+
+     if (tipoImovel.getTipo() == 1) {
+     dir = dirName("apartamento");
+     im = new Apartamento();
+     objProp = objProp(im);
+     } else if (tipoImovel.getTipo() == 2) {
+     dir = dirName("chacara");
+     im = new Chacara();
+     objProp = objProp(im);
+     } else if (tipoImovel.getTipo() == 3) {
+     dir = dirName("sala_comercial");
+     im = new SalaComercial();
+     objProp = objProp(im);
+     } else if (tipoImovel.getTipo() == 4) {
+     dir = dirName("terreno");
+     im = new Terreno();
+     objProp = objProp(im);
+     }
+
+     File files = new File(dir);
+     if (!files.exists()) {
+     if (files.mkdirs()) {
+     } else {
+     return false;
+     }
+     }
+     outFile = new FileOutputStream(dir + fileName);
+
+     //Criação de um buffer para a escrita em uma stream
+     buff = new BufferedWriter(new FileWriter(dir + fileName));
+     //escreve o número de contas na primeira linha do arquivo
+     //buff.write(listaImoveis.size() + ",");
+     //escreve as informações de cada conta
+     buff.write("codigo;" + objProp);
+     for (int x = 0; x < this.listaImoveis.size(); x++) {
+     Imovel imovel = this.listaImoveis.get(x);
+     buff.newLine();
+     buff.write(objToString(imovel));
+     //escreve uma linha em branco entre uma conta e a seguinte
+     buff.write("\n");
+     }
+     // fecha o arquivo
+     buff.close();
+     outFile.close();
+
+     //serializando a lista!
+     try {
+     this.escreveArquivoBinario(dir);
+     } catch (Exception e) {
+     e.getMessage();
+     }
+     this.gravaCodigo(dir);
+     return true;
+
+     } catch (FileNotFoundException ex) {
+     ex.printStackTrace();
+     } catch (IOException e) {
+     e.printStackTrace();
+     }
+
+     return false;
+     }
+     */
     @Override
     public boolean escreverArquivo() {
+        String fileNameSe = "\\listaImoveis";//Nome arquivo
+        FileOutputStream outFileSe;
         String dir = null;
-        String fileName = "\\listaImoveis.csv";
-        FileOutputStream outFile = null;
-        BufferedWriter buff = null;
-        String objProp = null;
-        Imovel im;
-        //abre o arquivo para escrita
-        //A estrutura try-catch é usada pois o objeto BufferedWriter exige que as
-        //excessões sejam tratadas
-        try {
-
-            if (tipoImovel.getTipo() == 1) {
-                dir = dirName("apartamento");
-                im = new Apartamento();
-                objProp = objProp(im);
-            } else if (tipoImovel.getTipo() == 2) {
-                dir = dirName("chacara");
-                im = new Chacara();
-                objProp = objProp(im);
-            } else if (tipoImovel.getTipo() == 3) {
-                dir = dirName("sala_comercial");
-                im = new SalaComercial();
-                objProp = objProp(im);
-            } else if (tipoImovel.getTipo() == 4) {
-                dir = dirName("terreno");
-                im = new Terreno();
-                objProp = objProp(im);
-            }
-
-            File files = new File(dir);
-            if (!files.exists()) {
-                if (files.mkdirs()) {
-                } else {
-                    return false;
-                }
-            }
-            outFile = new FileOutputStream(dir + fileName);
-
-            //Criação de um buffer para a escrita em uma stream
-            buff = new BufferedWriter(new FileWriter(dir + fileName));
-            //escreve o número de contas na primeira linha do arquivo
-            //buff.write(listaImoveis.size() + ",");
-            //escreve as informações de cada conta
-            buff.write("codigo;" + objProp);
-            for (int x = 0; x < this.listaImoveis.size(); x++) {
-                Imovel imovel = this.listaImoveis.get(x);
-                buff.newLine();
-                buff.write(objToString(imovel));
-                //escreve uma linha em branco entre uma conta e a seguinte
-                buff.write("\n");
-            }
-            // fecha o arquivo
-            buff.close();
-            outFile.close();
-
-            //serializando a lista!
-            try {
-                this.escreveArquivoBinario(dir);
-            } catch (Exception e) {
-                e.getMessage();
-            }
-            this.gravaDataCriacao(dir);
-            this.gravaCodigo(dir);
-            return true;
-
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (tipoImovel.getTipo() == 1) {
+            dir = dirName("apartamento");
+        } else if (tipoImovel.getTipo() == 2) {
+            dir = dirName("chacara");
+        } else if (tipoImovel.getTipo() == 3) {
+            dir = dirName("sala_comercial");
+        } else if (tipoImovel.getTipo() == 4) {
+            dir = dirName("terreno");
         }
 
-        return false;
-    }
+        File files = new File(dir);
+        if (!files.exists()) {
+            if (files.mkdirs()) {
+            } else {
+                return false;
+            }
+        }
 
-    private void escreveArquivoBinario(String dir) throws FileNotFoundException, IOException {
-        String fileNameSe = "\\listaImoveis";//Nome arquivo
-        FileOutputStream outFileSe = new FileOutputStream(dir + fileNameSe);// Define que o arquivo acima é para escrita em bin
-        ObjectOutputStream out = new ObjectOutputStream(outFileSe);// Criar um mecanismo para escrita
-        out.writeObject(this.listaImoveis);//Grava a lista toda em .bin
-        outFileSe.close();// Fecha o arquivo
-        out.close();// Fecha o mecanismo
+        try {
+            outFileSe = new FileOutputStream(dir + fileNameSe); // Define que o arquivo acima é para escrita em bin
+            ObjectOutputStream out = new ObjectOutputStream(outFileSe);// Criar um mecanismo para escrita
+            out.writeObject(this.listaImoveis);//Grava a lista toda em .bin
+            outFileSe.close();// Fecha o arquivo
+            out.close();// Fecha o mecanismo
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
     }
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Ler arquivo">
     /**
      * metodo que lê o arquivo listaImoveis que contem o objeto List
@@ -364,8 +392,8 @@ public class ImobiliariaCrud implements ListaImoveis {
         }
         return false;
     }
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Funçoes auxiliares">
     //<editor-fold defaultstate="collapsed" desc="cria string com o caminho baseado no tipo da lista">
     /**
@@ -518,8 +546,8 @@ public class ImobiliariaCrud implements ListaImoveis {
         return this.listaImoveis.isEmpty();
     }
     //</editor-fold>
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Ler Arquivo CSV">
     public boolean lerArquivoCsv() {
         FileInputStream inFile;
@@ -631,4 +659,5 @@ public class ImobiliariaCrud implements ListaImoveis {
         return false;
     }
 //</editor-fold>
+
 }

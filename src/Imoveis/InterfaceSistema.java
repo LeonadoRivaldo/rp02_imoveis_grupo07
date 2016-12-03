@@ -59,7 +59,8 @@ public abstract class InterfaceSistema {
         List<Imovel> list = lista.getListaImoveis();
         int imovelCodig;
         div();
-        for (Imovel imovel : list) {
+        for (int x = 0; x < list.size(); x++) {
+            Imovel imovel = list.get(x);
             System.out.println(imovel.getCodigoObj() + " - Logradouro: " + imovel.getLogradouro() + " Valor:" + imovel.getValor());
         }
         div();
@@ -69,7 +70,8 @@ public abstract class InterfaceSistema {
     public int listarImoveis2(List<Imovel> lista) {
         int imovelCodig;
         div();
-        for (Imovel imovel : lista) {
+        for (int x = 0; x < lista.size(); x++) {
+            Imovel imovel = lista.get(x);
             System.out.println(imovel.getCodigoObj() + " - Logradouro: " + imovel.getLogradouro() + " Valor:" + imovel.getValor());
         }
         div();
