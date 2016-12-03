@@ -66,10 +66,11 @@ public class ImobiliariaCrud implements ListaImoveis {
      */
     @Override
     public boolean incluir(Imovel imovel) {
-
-        for (int x = 0; x < this.listaImoveis.size(); x++) {
-            if (imovel.getCodigoObj() == this.listaImoveis.get(x).getCodigoObj()) {
-                return false;
+        if (!this.listaImoveis.isEmpty()) {
+            for (int x = 0; x < this.listaImoveis.size(); x++) {
+                if (imovel.getCodigoObj() == this.listaImoveis.get(x).getCodigoObj()) {
+                    return false;
+                }
             }
         }
         listaImoveis.add(imovel);

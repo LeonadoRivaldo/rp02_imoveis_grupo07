@@ -95,8 +95,8 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
             return ult;
         }
     }
-
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
     //<editor-fold defaultstate="collapsed" desc="Adicionar em uma posição especifica">
     @Override
