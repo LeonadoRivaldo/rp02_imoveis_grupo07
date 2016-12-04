@@ -520,7 +520,7 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
         this.atual = this.atual.getProximo();
         return aux.getImovel();
     }
-
+ 
     @Override
     public void remove() {
         throw new IllegalArgumentException();
