@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 public class ImobiliariaCrud implements ListaImoveis {
 
     private List<Imovel> listaImoveis;
-    private ListaDuplamenteLigada<Imovel> lista;
+    //private ListaDuplamenteLigada<Imovel> lista;
     private Tipo tipoImovel;
     private int countcodTrys = 0;
 
@@ -333,7 +333,6 @@ public class ImobiliariaCrud implements ListaImoveis {
         } else if (tipoImovel.getTipo() == 4) {
             dir = dirName("terreno");
         }
-
         File files = new File(dir);
         if (!files.exists()) {
             if (files.mkdirs()) {
@@ -341,14 +340,13 @@ public class ImobiliariaCrud implements ListaImoveis {
                 return false;
             }
         }
-
         try {
             outFileSe = new FileOutputStream(dir + fileNameSe); // Define que o arquivo acima é para escrita em bin
             ObjectOutputStream out = new ObjectOutputStream(outFileSe);// Criar um mecanismo para escrita
             out.writeObject(this.listaImoveis);//Grava a lista toda em .bin
             outFileSe.close();// Fecha o arquivo
             out.close();// Fecha o mecanismo
-            return true;
+            return true; 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return false;

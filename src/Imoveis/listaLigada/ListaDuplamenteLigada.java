@@ -96,7 +96,7 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
         }
     }
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Aluno 2">
     //<editor-fold defaultstate="collapsed" desc="Adicionar em uma posição especifica">
     @Override
@@ -148,7 +148,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
                 No<E> proximo = aux.getProximo();
                 anterior.setProximo(proximo);
                 proximo.setAnterior(anterior);
-                this.indice--;
                 this.size--;
                 this.decrementarLista(proximo);
                 return aux.getImovel();
@@ -172,7 +171,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
         if (!this.isEmpty()) {
             No<E> aux = this.inicio;
             while (aux != this.fim) {
-
                 if (aux.getIndice() == i) {
                     break;
                 }
@@ -343,15 +341,15 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
                     this.inicio.setAnterior(this.fim);
                     this.inicio.setProximo(this.fim);
                     this.indice--;
-                    //this.size--;
+                    this.size--;
                     return true;
                 }
             } else {
-                No aux = this.fim;
-                this.fim = aux.getAnterior();
+                No aux1 = this.fim;
+                this.fim = aux1.getAnterior();
                 this.fim.setProximo(this.inicio);
                 this.indice--;
-                //this.size--;
+                this.size--;
                 return true;
             }
         } else {
@@ -446,7 +444,6 @@ public class ListaDuplamenteLigada<E> implements List, Iterator<E>, Serializable
         } else {
             return -1;
         }
-
     }
     //</editor-fold>
 
